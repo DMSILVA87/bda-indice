@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mes:Structure xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message" xmlns:str="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/structure" xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xml="http://www.w3.org/XML/1998/namespace" xsi:schemaLocation="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message ../../schemas/SDMXMessage.xsd">
+  <mes:Header>
+    <mes:ID>IDREF5622</mes:ID>
+    <mes:Test>false</mes:Test>
+    <mes:Prepared>2026-05-12T23:09:30.324665649Z</mes:Prepared>
+    <mes:Sender id="unknown"/>
+  </mes:Header>
+  <mes:Structures>
+    <str:Codelists>
+      <str:Codelist urn="urn:sdmx:org.sdmx.infomodel.codelist.Codelist=IMF.STA:CL_LS_INDICATOR(1.1.0)" agencyID="IMF.STA" id="CL_LS_INDICATOR" version="1.1.0" isFinal="true" isExternalReference="false" isPartial="false">
+        <com:Annotations>
+          <com:Annotation id="origin"/>
+          <com:Annotation id="isFinal"/>
+          <com:Annotation id="lastUpdatedAt"/>
+        </com:Annotations>
+        <com:Name xml:lang="en">Labor Statistics (LS) Indicator</com:Name>
+        <str:Code id="WR" urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF.STA:CL_LS_INDICATOR(1.1.0).WR">
+          <com:Name xml:lang="en">Wage rate</com:Name>
+          <com:Description xml:lang="en">A measure of the monetary compensation for labor services, typically expressed in terms of a fixed amount per hour, day, month, or other unit of time.</com:Description>
+        </str:Code>
+        <str:Code id="U" urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF.STA:CL_LS_INDICATOR(1.1.0).U">
+          <com:Name xml:lang="en">Unemployment rate</com:Name>
+          <com:Description xml:lang="en">The percentage of the labor force that is unemployed and actively seeking employment. It is calculated as the number of unemployed persons divided by the total labor force.</com:Description>
+        </str:Code>
+        <str:Code id="E" urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF.STA:CL_LS_INDICATOR(1.1.0).E">
+          <com:Name xml:lang="en">Employed persons</com:Name>
+          <com:Description xml:lang="en">Persons above the age of 15 who were in paid employment or self-employment during a specified reference period.</com:Description>
+        </str:Code>
+        <str:Code id="LF" urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF.STA:CL_LS_INDICATOR(1.1.0).LF">
+          <com:Name xml:lang="en">Labor force</com:Name>
+          <com:Description xml:lang="en">The sum of employed and unemployed persons in an economy, actively participating in the labor market.</com:Description>
+        </str:Code>
+        <str:Code id="UP" urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF.STA:CL_LS_INDICATOR(1.1.0).UP">
+          <com:Name xml:lang="en">Unemployed persons</com:Name>
+          <com:Description xml:lang="en">Persons of working age who are without work, are currently available for work, and are actively seeking employment.</com:Description>
+        </str:Code>
+      </str:Codelist>
+    </str:Codelists>
+  </mes:Structures>
+</mes:Structure>

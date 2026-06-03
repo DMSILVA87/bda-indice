@@ -1,0 +1,207 @@
+Economy_Code,Economy_Label,Economy_IsTarget,Economy_ValidFrom,Economy_ValidTo,Economy_Level,Economy_Hidden,Economy_Expand,Economy_Note,Economy_Order,Year,Direction_Code,Direction_Label,Direction_Hidden,Direction_Note,Direction_Order,Flow_Code,Flow_Label,Flow_Hidden,Flow_Note,Flow_Order,M5011_Value,M5011_Footnote_Code,M5011_Footnote_Text,M5011_MissingValue_Code,M5011_MissingValue_Label,M0100_Value,M0100_Footnote_Code,M0100_Footnote_Text,M0100_MissingValue_Code,M0100_MissingValue_Label
+024,"Angola",True,1940,2102,5,True,True,,38,1990,1,"Inward",False,,1,08,"Flow",False,,1,-0.16326016392823947,0,,,,-334500000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1990,2,"Outward",False,,2,08,"Flow",False,,1,0.00036904190189412906,0,,,,900000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1990,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.046655524286376746,0,,,,1024650000.0000001,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1990,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,3.9913019286271265E-05,0,,,,900000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1991,1,"Inward",False,,1,08,"Flow",False,,1,0.43134836109894775,0,,,,664100000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1991,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.06833938244126596,0,,,,1688750000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1991,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,3.559509470703502E-05,0,,,,900000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1992,1,"Inward",False,,1,08,"Flow",False,,1,0.1748793209383504,0,,,,288000000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1992,2,"Outward",False,,2,08,"Flow",False,,1,9.167728940959252E-05,0,,,,188900,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1992,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.0792697937973094,0,,,,1976750000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1992,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,4.2870887340024085E-05,0,,,,1089000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1993,1,"Inward",False,,1,08,"Flow",False,,1,0.13589120656655568,0,,,,302000000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1993,2,"Outward",False,,2,08,"Flow",False,,1,0.0008420075802873001,0,,,,2000000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1993,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.08443447759571314,0,,,,2278750000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1993,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.0001054176666716432,0,,,,3089000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1994,1,"Inward",False,,1,08,"Flow",False,,1,0.06647290587446322,0,,,,170100000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1994,2,"Outward",False,,2,08,"Flow",False,,1,-0.0006961981745205072,0,,,,-2000000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1994,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.08262691196604839,0,,,,2448850000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1994,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,3.305739653327213E-05,0,,,,1089000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1995,1,"Inward",False,,1,08,"Flow",False,,1,0.13675501149756925,0,,,,472000000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1995,2,"Outward",False,,2,08,"Flow",False,,1,-0.0002768213370174496,0,,,,-1000000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1995,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.08194380806423901,0,,,,2920850000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1995,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,2.2288494115610305E-06,0,,,,89000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1996,1,"Inward",False,,1,08,"Flow",False,,1,0.04598773306224534,0,,,,180630000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1996,2,"Outward",False,,2,08,"Flow",False,,1,-0.003148975029648256,0,,,,-12420960,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1996,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.07502382217251694,0,,,,3101480000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1996,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,,,,***,"Negative accumulation of flows; Value included in regional and global totals",,,,***,"Negative accumulation of flows; Value included in regional and global totals"
+024,"Angola",True,1940,2102,5,True,True,,38,1997,1,"Inward",False,,1,08,"Flow",False,,1,0.08564827462003996,0,,,,411650000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1997,2,"Outward",False,,2,08,"Flow",False,,1,0.0008539748538319973,0,,,,3973420,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1997,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.07443409350102077,0,,,,3513130000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1997,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,,,,***,"Negative accumulation of flows; Value included in regional and global totals",,,,***,"Negative accumulation of flows; Value included in regional and global totals"
+024,"Angola",True,1940,2102,5,True,True,,38,1998,1,"Inward",False,,1,08,"Flow",False,,1,0.1634607208446355,0,,,,1114000000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1998,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.07820580523455832,0,,,,4627130000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1998,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,,,,***,"Negative accumulation of flows; Value included in regional and global totals",,,,***,"Negative accumulation of flows; Value included in regional and global totals"
+024,"Angola",True,1940,2102,5,True,True,,38,1999,1,"Inward",False,,1,08,"Flow",False,,1,0.2291972419921102,0,,,,2471401000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1999,2,"Outward",False,,2,08,"Flow",False,,1,-8.19654203477126E-06,0,,,,-88290,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1999,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.10016823509971931,0,,,,7098531000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,1999,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,,,,***,"Negative accumulation of flows; Value included in regional and global totals",,,,***,"Negative accumulation of flows; Value included in regional and global totals"
+024,"Angola",True,1940,2102,5,True,True,,38,2000,1,"Inward",False,,1,08,"Flow",False,,1,0.06476086611021827,0,,,,878601000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2000,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.10813223137664382,0,,,,7977132000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2000,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,,,,***,"Negative accumulation of flows; Value included in regional and global totals",,,,***,"Negative accumulation of flows; Value included in regional and global totals"
+024,"Angola",True,1940,2102,5,True,True,,38,2001,1,"Inward",False,,1,08,"Flow",False,,1,0.27750825746557783,0,,,,2145501000.0000002,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2001,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.13589456649431467,0,,,,10122633000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2001,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,,,,***,"Negative accumulation of flows; Value included in regional and global totals",,,,***,"Negative accumulation of flows; Value included in regional and global totals"
+024,"Angola",True,1940,2102,5,True,True,,38,2002,1,"Inward",False,,1,08,"Flow",False,,1,0.2953532917690193,0,,,,1743504000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2002,2,"Outward",False,,2,08,"Flow",False,,1,0.020159972541066877,0,,,,100111000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2002,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.1624879585082679,0,,,,11866137000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2002,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.0012554367030206482,0,,,,91664000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2003,1,"Inward",False,,1,08,"Flow",False,,1,0.6508666969491715,0,,,,3576971780,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2003,2,"Outward",False,,2,08,"Flow",False,,1,0.018178941687243474,0,,,,95900000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2003,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.16962729260013776,0,,,,15443108800,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2003,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.0020416238960894876,0,,,,187564000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2004,1,"Inward",False,,1,08,"Flow",False,,1,0.31423332672583465,0,,,,2197227820,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2004,2,"Outward",False,,2,08,"Flow",False,,1,0.08625266634082095,0,,,,783236000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2004,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.1667898438646666,0,,,,17640336600,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2004,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.008924667441844768,0,,,,970800000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2005,1,"Inward",False,,1,08,"Flow",False,,1,-0.13666014973413343,0,,,,-1303836930,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2005,2,"Outward",False,,2,08,"Flow",False,,1,0.026168700839973177,0,,,,219362060,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2005,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.1425791941255737,0,,,,16336499700,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2005,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.00999372726214984,0,,,,1190162000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2006,1,"Inward",False,,1,08,"Flow",False,,1,-0.0026921128257605897,0,,,,-37714860,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2006,2,"Outward",False,,2,08,"Flow",False,,1,0.014004231697101742,0,,,,190585090,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2006,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.1154620686191515,0,,,,16298784800,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2006,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.00919089178474417,0,,,,1380747000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2007,1,"Inward",False,,1,08,"Flow",False,,1,-0.04733397484248122,0,,,,-893342150,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2007,2,"Outward",False,,2,08,"Flow",False,,1,0.04160798429315513,0,,,,911781460,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2007,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.0859322529774827,0,,,,15405442700,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2007,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.01230566909386369,0,,,,2292529000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2008,1,"Inward",False,,1,08,"Flow",False,,1,0.11526009557225349,0,,,,1678971010,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2008,2,"Outward",False,,2,08,"Flow",False,,1,0.14963644627002043,0,,,,2569643970,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2008,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.11504233656145174,0,,,,17084413700.000002,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2008,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.03160527344358151,0,,,,4862173000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2009,1,"Inward",False,,1,08,"Flow",False,,1,0.1904046237564603,0,,,,2205298180,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2009,2,"Outward",False,,2,08,"Flow",False,,1,0.0005239565514836427,0,,,,6753120,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2009,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.10307107347300344,0,,,,19289711800,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2009,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.024686192112616773,0,,,,4868926000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2010,1,"Inward",False,,1,08,"Flow",False,,1,-0.2309258254680257,0,,,,-3227211180,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2010,2,"Outward",False,,2,08,"Flow",False,,1,0.09325639903771688,0,,,,1340429380,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2010,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.15571839181114308,0,,,,32457882860,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2010,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.00868951623110873,0,,,,1869617170,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2011,1,"Inward",False,,1,08,"Flow",False,,1,-0.17930706703477667,0,,,,-3023770970,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2011,2,"Outward",False,,2,08,"Flow",False,,1,0.12243432506850976,0,,,,2092642449.9999998,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2011,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.19994433886765672,0,,,,43275218780,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2011,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.00781502296569169,0,,,,1719402620,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2012,1,"Inward",False,,1,08,"Flow",False,,1,-0.1005904313216237,0,,,,-1464627990,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2012,2,"Outward",False,,2,08,"Flow",False,,1,0.06487642394335427,0,,,,886475740,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2012,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.17408010246361777,0,,,,41810590790,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2012,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.010843466302655359,0,,,,2605878360,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2013,1,"Inward",False,,1,08,"Flow",False,,1,-0.4691969580838175,0,,,,-7120017420,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2013,2,"Outward",False,,2,08,"Flow",False,,1,0.058659070787809395,0,,,,921566190,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2013,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.13268731366812633,0,,,,34690573360,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2013,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.013316286325653072,0,,,,3527444550,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2014,1,"Inward",False,,1,08,"Flow",False,,1,0.24834986695541195,0,,,,3657514670,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2014,2,"Outward",False,,2,08,"Flow",False,,1,0.05918849099073542,0,,,,886792460,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2014,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.0965182753782497,0,,,,25478620900,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2014,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.016664510021025796,0,,,,4414237010,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2015,1,"Inward",False,,1,08,"Flow",False,,1,0.45199834459080446,0,,,,10028215160,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2015,2,"Outward",False,,2,08,"Flow",False,,1,-0.042109961895210636,0,,,,-784870220,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2015,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.119382342534526,0,,,,32311626480,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2015,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.013466887257911715,0,,,,3629366790,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2016,1,"Inward",False,,1,08,"Flow",False,,1,-0.00878450913423955,0,,,,-179517620,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2016,2,"Outward",False,,2,08,"Flow",False,,1,0.017641575151117986,0,,,,273005000,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2016,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.10149116773118855,0,,,,29184136760,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2016,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.015249512873944314,0,,,,4312762760,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2017,1,"Inward",False,,1,08,"Flow",False,,1,-0.41786542867755544,0,,,,-7397295410,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2017,2,"Outward",False,,2,08,"Flow",False,,1,0.07804841064167446,0,,,,1352005060,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2017,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.08774735464548294,0,,,,29436256970,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2017,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.01799702798591689,0,,,,6023093700,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2018,1,"Inward",False,,1,08,"Flow",False,,1,-0.49884478950859024,0,,,,-6456076410,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2018,2,"Outward",False,,2,08,"Flow",False,,1,0.000536844054286034,0,,,,5714170,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2018,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.06846826036025033,0,,,,22716534320,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2018,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.018981793635476394,0,,,,6069534160,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2019,1,"Inward",False,,1,08,"Flow",False,,1,-0.2470773556587568,0,,,,-4098478750,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2019,2,"Outward",False,,2,08,"Flow",False,,1,-0.17668773462831647,0,,,,-2349425840,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2019,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.05103202508875822,0,,,,18879115120,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2019,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.013491190918022753,0,,,,4839330620,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2020,1,"Inward",False,,1,08,"Flow",False,,1,-0.21489143188797755,0,,,,-1866468110,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2020,2,"Outward",False,,2,08,"Flow",False,,1,0.013955873185434649,0,,,,90514470,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2020,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.0523160067133966,0,,,,21595055060,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2020,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.012085638673336504,0,,,,4840112160,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2021,1,"Inward",False,,1,08,"Flow",False,,1,-0.25977083444480864,0,,,,-4355116550,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2021,2,"Outward",False,,2,08,"Flow",False,,1,-0.05523216865630141,0,,,,-1057370590,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2021,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.04485302950082732,0,,,,20860792220,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2021,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.012356818079046037,0,,,,5217894250,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2022,1,"Inward",False,,1,08,"Flow",False,,1,-0.4748853093099561,0,,,,-6598652650,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2022,2,"Outward",False,,2,08,"Flow",False,,1,0.002618004786209216,0,,,,41066360,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2022,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.032611421079968235,0,,,,14262139570,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2022,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.013316309329041834,0,,,,5258960610,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2023,1,"Inward",False,,1,08,"Flow",False,,1,-0.14568156972609447,0,,,,-2119632189.9999998,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2023,2,"Outward",False,,2,08,"Flow",False,,1,0.0021435653879134254,0,,,,33356160.000000004,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2023,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.025245555327544165,0,,,,12142507380,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2023,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.012424275971132047,0,,,,5292316770,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2024,1,"Inward",False,,1,08,"Flow",False,,1,-0.00904154612039104,0,,,,-136419150,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2024,2,"Outward",False,,2,08,"Flow",False,,1,0.0020550529232962254,0,,,,33063209.999999996,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2024,1,"Inward",False,,1,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.023845433810682715,0,,,,12139079550,0,,,
+024,"Angola",True,1940,2102,5,True,True,,38,2024,2,"Outward",False,,2,09,"Stock",False,"FDI stock is the value of the share of capital and reserves (including retained profits) attributable to the parent enterprise, plus the net indebtedness of affiliates to the parent enterprises.
+It is approximated by the accumulated value of past FDI flows.",2,0.012207125898754053,0,,,,5321695970,0,,,
