@@ -180,7 +180,9 @@ def extract_pdn_text() -> dict[str, Any]:
     reader = PdfReader(str(PDF_FILE))
     pages: list[str] = []
     for number, page in enumerate(reader.pages, start=1):
-        pages.append(f"===== PDF PAGE {number} =====\n{page.extract_text() or ''}")
+        page_text = page.extract_text() or ""
+        page_text = "\n".join(line.rstrip() for line in page_text.splitlines())
+        pages.append(f"===== PDF PAGE {number} =====\n{page_text}")
     PDF_TEXT_FILE.write_text("\n\n".join(pages), encoding="utf-8")
     return {
         "Estado": "OK",
@@ -668,7 +670,9 @@ def write_csv(path: Path, rows: list[dict[str, Any]], columns: list[str] | None 
     if columns is None:
         columns = list(rows[0]) if rows else []
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
+        writer = csv.DictWriter(
+            handle, fieldnames=columns, extrasaction="ignore", lineterminator="\n"
+        )
         writer.writeheader()
         for row in rows:
             writer.writerow({column: "" if row.get(column) is None else row.get(column) for column in columns})
