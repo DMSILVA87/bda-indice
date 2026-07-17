@@ -11,9 +11,9 @@ Saídas:
   01_Execucao_PDN_2025.xlsx
   02_Execucao_vs_Metas_PDN_2027.xlsx
 
-O script não preenche os separadores de domínio que estão vazios no HTML
-publicado pelo MINPLAN. Essa ausência é registada explicitamente nos
-ficheiros para evitar confundir "sem dados publicados" com zero execução.
+O HTML inicial só materializa o separador activo. Os restantes domínios são
+extraídos do bundle JavaScript lazy associado à página; a ausência no HTML
+não é tratada como zero execução.
 """
 
 from __future__ import annotations
@@ -42,6 +42,7 @@ SOURCE_DIR = ROOT / "fontes"
 DATA_DIR = ROOT / "dados"
 
 HTML_URL = "https://www.minplan.gov.ao/en/publicacoes/relatorios-balanco-pdn"
+BUNDLE_URL = "https://www.minplan.gov.ao/_next/static/chunks/c191322d36728caa.js"
 PDN_URL_REQUESTED = (
     "https://www.nepad.org/sites/default/files/2024-07/"
     "20231030%283%29_layout_Final_Angola_PDN%202023-2027-1.pdf"
@@ -49,6 +50,7 @@ PDN_URL_REQUESTED = (
 PDN_URL_MIRROR = "https://www.mpla.ao/wp-content/uploads/2023/12/PDN_Angola_2023-2027.pdf"
 
 HTML_FILE = SOURCE_DIR / "minplan_relatorios_balanco_pdn.html"
+BUNDLE_FILE = SOURCE_DIR / "minplan_indicadores_bundle.js"
 PDF_FILE = SOURCE_DIR / "PDN_Angola_2023-2027.pdf"
 PDF_TEXT_FILE = SOURCE_DIR / "PDN_Angola_2023-2027_texto.txt"
 
@@ -87,7 +89,7 @@ def slug(value: str) -> str:
 def parse_web_number(value: str) -> int | float | None:
     """Converte valores do quadro HTML sem transformar percentagens em fracções."""
     raw = clean_text(value)
-    if not raw or raw in {"-", "—", "–"}:
+    if not raw or raw.upper() in {"-", "—", "–", "NA", "N/A"}:
         return None
     raw = raw.replace(" ", "").replace("%", "")
     if not re.fullmatch(r"[-+]?\d+(?:[,.]\d+)?", raw):
@@ -145,6 +147,24 @@ def ensure_sources(refresh: bool = False) -> list[dict[str, str]]:
         }
     )
 
+    if refresh or not BUNDLE_FILE.exists() or BUNDLE_FILE.stat().st_size == 0:
+        try:
+            BUNDLE_FILE.write_bytes(fetch_url(BUNDLE_URL, timeout=180))
+            bundle_status = "descarregado"
+        except (HTTPError, URLError, TimeoutError, OSError) as exc:
+            bundle_status = f"falhou: {exc}"
+    else:
+        bundle_status = "já existente localmente"
+    manifest.append(
+        {
+            "Fonte": "MINPLAN — bundle JavaScript lazy dos indicadores",
+            "URL solicitada": BUNDLE_URL,
+            "URL usada": BUNDLE_URL,
+            "Ficheiro local": str(BUNDLE_FILE.relative_to(ROOT)),
+            "Estado": bundle_status,
+        }
+    )
+
     pdf_url_used = PDN_URL_REQUESTED
     if refresh or not PDF_FILE.exists() or PDF_FILE.stat().st_size == 0:
         try:
@@ -190,6 +210,107 @@ def extract_pdn_text() -> dict[str, Any]:
         "Título": "Plano de Desenvolvimento Nacional 2023-2027",
         "Data de extração": date.today().isoformat(),
     }
+
+
+def _find_matching_bracket(text: str, opener_index: int) -> int:
+    opener = text[opener_index]
+    closer = "]" if opener == "[" else "}"
+    depth = 0
+    in_string = False
+    escaped = False
+    for index in range(opener_index, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char == opener:
+            depth += 1
+        elif char == closer:
+            depth -= 1
+            if depth == 0:
+                return index
+    return -1
+
+
+def _decode_js_string(value: str) -> str:
+    return (
+        value.replace(r"\"", '"')
+        .replace(r"\'", "'")
+        .replace(r"\n", "\n")
+        .replace(r"\u0026", "&")
+    )
+
+
+def parse_bundle_indicators() -> list[dict[str, Any]]:
+    """Extrai indicadores dos sete domínios do bundle lazy do MINPLAN."""
+    if not BUNDLE_FILE.exists() or BUNDLE_FILE.stat().st_size == 0:
+        return []
+    source = BUNDLE_FILE.read_text(encoding="utf-8", errors="replace")
+    anchor = "indicadoresChave:["
+    anchor_start = source.find(anchor)
+    if anchor_start < 0:
+        return []
+    array_start = anchor_start + len("indicadoresChave:")
+    array_end = _find_matching_bracket(source, array_start)
+    if array_end < 0:
+        return []
+
+    indicator_fields = (
+        "nome", "unidade", "val2022", "val2023", "val2024", "meta2025", "val2025", "fonte"
+    )
+    field_pattern = re.compile(r'([A-Za-z0-9]+):"((?:\\.|[^"])*)"')
+    domain_pattern = re.compile(r'\{dominio:"((?:\\.|[^"])*)",indicadores:\[')
+    indicators: list[dict[str, Any]] = []
+    cursor = array_start + 1
+    while cursor < array_end:
+        match = domain_pattern.search(source, cursor, array_end)
+        if match is None:
+            break
+        domain = _decode_js_string(match.group(1))
+        indicators_start = match.end() - 1
+        indicators_end = _find_matching_bracket(source, indicators_start)
+        if indicators_end < 0 or indicators_end > array_end:
+            break
+        block = source[indicators_start + 1:indicators_end]
+        for object_match in re.finditer(r"\{([^{}]*)\}", block):
+            fields = {
+                key: _decode_js_string(value)
+                for key, value in field_pattern.findall(object_match.group(1))
+                if key in indicator_fields
+            }
+            if not all(field in fields for field in indicator_fields):
+                continue
+            record: dict[str, Any] = {
+                "ID": f"IMP-{slug(domain)}-{slug(fields['nome'])}",
+                "Domínio": domain,
+                "Indicador": fields["nome"],
+                "Unidade": fields["unidade"],
+                "2022_Base": parse_web_number(fields["val2022"]),
+                "2023": parse_web_number(fields["val2023"]),
+                "2024": parse_web_number(fields["val2024"]),
+                "Meta_2025": parse_web_number(fields["meta2025"]),
+                "2025": parse_web_number(fields["val2025"]),
+                "2022_Base_Original": fields["val2022"],
+                "2023_Original": fields["val2023"],
+                "2024_Original": fields["val2024"],
+                "Meta_2025_Original": fields["meta2025"],
+                "2025_Original": fields["val2025"],
+                "Fonte": fields["fonte"],
+                "Fonte URL": HTML_URL,
+                "Fonte Bundle URL": BUNDLE_URL,
+                "Estado": "Extraído do bundle JavaScript lazy",
+                "Observação": "* 2022 é o ano base; Meta 2025 é a meta anual publicada no bundle.",
+            }
+            indicators.append(record)
+        cursor = indicators_end + 1
+    return indicators
 
 
 def parse_html_source() -> dict[str, Any]:
@@ -272,6 +393,29 @@ def parse_html_source() -> dict[str, Any]:
                 }
             )
     domain_rows.sort(key=lambda row: DOMAINS.index(row["Domínio"]))
+
+    # Os separadores inactivos são montados pelo React apenas depois do clique.
+    # O bundle contém a mesma fonte de dados e é a única forma de obter todos
+    # os domínios numa captura HTTP sem executar um navegador.
+    bundle_indicators = parse_bundle_indicators()
+    if bundle_indicators:
+        indicators = bundle_indicators
+        counts = {domain: 0 for domain in DOMAINS}
+        for item in indicators:
+            counts[item["Domínio"]] = counts.get(item["Domínio"], 0) + 1
+        domain_rows = [
+            {
+                "Domínio": domain,
+                "Estado": "Dados extraídos do bundle JavaScript lazy",
+                "Nº indicadores": counts.get(domain, 0),
+                "Observação": (
+                    "O painel é lazy-loaded; os valores foram extraídos do bundle oficial "
+                    "associado à página."
+                ),
+                "Fonte URL": HTML_URL,
+            }
+            for domain in DOMAINS
+        ]
 
     # Tabela de estrutura programática — primeira tabela fora dos separadores.
     tables = soup.find_all("table")
@@ -583,10 +727,51 @@ def build_pdn_targets() -> list[dict[str, Any]]:
     add_meta(rows, policy, "Política Externa", "Adesão efectiva à Zona de Livre Comércio da SADC, CEEAC, Tripartida e Continental concluída", "Marco", None, None, None, 193, raw_base="-", raw_target="X", raw_long_term="-")
     add_meta(rows, policy, "Política Externa", "Número de novos quadros angolanos que trabalham em organizações internacionais", "N.º, anual", None, 16, 100, 193, raw_base="-")
 
+    # Grandes números apresentados no diagnóstico macroeconómico do PDN.
+    add_meta(
+        rows,
+        "Grandes números / quadro macroeconómico",
+        "Economia",
+        "Taxa de desemprego",
+        "%",
+        30.0,
+        25.0,
+        None,
+        13,
+        notes="A narrativa do PDN projecta a redução de 30% para 25% até 2027.",
+    )
+    add_meta(
+        rows,
+        "Grandes números / quadro macroeconómico",
+        "Economia",
+        "Crescimento real anual médio do PIB",
+        "%",
+        None,
+        3.0,
+        None,
+        13,
+        notes="Trajectória média projectada para 2023–2027; não é uma meta anual específica.",
+    )
+    add_meta(
+        rows,
+        "Grandes números / quadro macroeconómico",
+        "Economia",
+        "Crescimento médio anual do PIB não-petrolífero",
+        "%",
+        None,
+        4.6,
+        None,
+        13,
+        notes="Trajectória média projectada para 2023–2027; não é uma meta anual específica.",
+    )
+
     return rows
 
 
-def build_comparison(indicators: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def build_comparison(
+    indicators: list[dict[str, Any]],
+    targets: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
     mapping = {
         "Novas Camas em Hospitais (Cumulativo)": {
             "tipo": "Não comparável diretamente",
@@ -630,6 +815,41 @@ def build_comparison(indicators: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "paginas": "76–77",
             "observacao": "Partos institucionais são mencionados como intervenção, mas não existe meta numérica equivalente no quadro da Política de Saúde.",
         },
+        "Taxa de alfabetização da população maior que 15 anos": {
+            "tipo": "Comparável diretamente",
+            "target_phrase": "Taxa de alfabetização",
+            "observacao": "Correspondência de conceito e unidade com a meta da Educação.",
+        },
+        "Taxa de electrificação": {
+            "tipo": "Comparável diretamente",
+            "target_phrase": "Taxa de electrificação (on-grid)",
+            "observacao": "A meta PDN é a taxa de electrificação on-grid; o indicador MINPLAN usa a população como denominador.",
+        },
+        "% de produção total de energia de fontes renováveis": {
+            "tipo": "Comparável por conceito",
+            "target_phrase": "Produção de energias renováveis",
+            "observacao": "A unidade e o conceito são equivalentes em termos de quota de capacidade/produção, mas a descrição do denominador deve ser confirmada antes de uma avaliação formal.",
+        },
+        "Toneladas de carne produzidas": {
+            "tipo": "Correspondência de conceito, escala diferente",
+            "target_phrase": "Toneladas de produção de carne",
+            "observacao": "O indicador de execução está em toneladas; a meta PDN está em milhares de toneladas. A linha é apresentada para referência, sem cálculo automático.",
+        },
+        "Taxa de crescimento do PIB": {
+            "tipo": "Referência de trajectória, não meta anual",
+            "target_phrase": "Crescimento real anual médio do PIB",
+            "observacao": "O PDN publica uma média projectada para 2023–2027, não uma meta específica para o ano 2025.",
+        },
+        "Taxa de crescimento do PIB não petrolífero": {
+            "tipo": "Referência de trajectória, não meta anual",
+            "target_phrase": "Crescimento médio anual do PIB não-petrolífero",
+            "observacao": "O PDN publica uma média projectada para 2023–2027, não uma meta específica para o ano 2025.",
+        },
+        "Taxa de Desemprego": {
+            "tipo": "Comparável diretamente",
+            "target_phrase": "Taxa de desemprego",
+            "observacao": "A meta é uma redução para 25%; diferença positiva significa que a execução permanece acima do alvo.",
+        },
     }
     result: list[dict[str, Any]] = []
     for item in indicators:
@@ -642,6 +862,46 @@ def build_comparison(indicators: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "observacao": "Não foi localizado indicador PDN equivalente.",
             },
         )
+        target_row = None
+        target_phrase = info.get("target_phrase")
+        if target_phrase:
+            target_row = next(
+                (
+                    row for row in targets
+                    if target_phrase.casefold() in row["Indicador PDN"].casefold()
+                ),
+                None,
+            )
+        actual_2025 = item.get("2025")
+        annual_target = item.get("Meta_2025")
+        annual_difference = (
+            actual_2025 - annual_target
+            if actual_2025 is not None and annual_target is not None
+            else None
+        )
+        annual_ratio = (
+            actual_2025 / annual_target * 100
+            if actual_2025 is not None and annual_target not in (None, 0)
+            else None
+        )
+        pdn_target = target_row.get("Meta_2027") if target_row else None
+        comparable = info["tipo"] in {"Comparável diretamente", "Comparável por conceito"}
+        pdn_difference = (
+            actual_2025 - pdn_target
+            if comparable and actual_2025 is not None and pdn_target is not None
+            else None
+        )
+        pdn_ratio = (
+            actual_2025 / pdn_target * 100
+            if comparable and actual_2025 is not None and pdn_target not in (None, 0)
+            else None
+        )
+        reference = info.get("referencia", "")
+        if target_row:
+            reference = (
+                f"{target_row['Indicador PDN']} — {target_row['Eixo/Política']}, "
+                f"grupo {target_row['Domínio/Grupo']}"
+            )
         result.append(
             {
                 "ID_Implementação": item["ID"],
@@ -651,14 +911,23 @@ def build_comparison(indicators: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "2022_Base": item.get("2022_Base"),
                 "2023": item.get("2023"),
                 "2024": item.get("2024"),
-                "2025": item.get("2025"),
-                "Meta PDN 2027": None,
-                "Meta PDN 2027 original": "Sem valor numérico equivalente publicado",
+                "Meta MINPLAN 2025": annual_target,
+                "Meta MINPLAN 2025 original": item.get("Meta_2025_Original", ""),
+                "2025": actual_2025,
+                "Diferença 2025 vs meta MINPLAN": annual_difference,
+                "% do alvo MINPLAN 2025": annual_ratio,
+                "Indicador PDN equivalente": target_row["Indicador PDN"] if target_row else "",
+                "Meta PDN 2027": pdn_target,
+                "Meta PDN 2027 original": (
+                    target_row["Meta_2027_Original"]
+                    if target_row
+                    else "Sem valor numérico equivalente publicado"
+                ),
                 "Tipo de correspondência": info["tipo"],
-                "Referência/metas PDN": info["referencia"],
-                "Páginas PDN": info["paginas"],
-                "Diferença 2025 vs meta": None,
-                "Progresso 2025 vs meta": None,
+                "Referência/metas PDN": reference,
+                "Páginas PDN": str(target_row["Página PDF"]) if target_row else info.get("paginas", ""),
+                "Diferença 2025 vs meta PDN": pdn_difference,
+                "% do alvo PDN 2027": pdn_ratio,
                 "Observação": info["observacao"],
             }
         )
@@ -787,22 +1056,23 @@ def make_execution_workbook(
         ("Fonte do plano", PDN_URL_REQUESTED),
         ("Ficheiro PDF usado", str(PDF_FILE.relative_to(ROOT))),
         ("Páginas PDF", str(pdn_info.get("Páginas PDF", ""))),
-        ("Cobertura", "Todos os sete separadores de domínio foram verificados no HTML."),
-        ("Limitação principal", "Só Saúde contém tabela de indicadores no HTML publicado; os outros seis separadores estão vazios."),
-        ("Tratamento de ausência", "Sem dados publicados não foi convertido em zero."),
+        ("Cobertura", "Todos os sete separadores de domínio foram verificados no HTML e no bundle JavaScript lazy associado."),
+        ("Fonte técnica dos indicadores", BUNDLE_URL),
+        ("Tratamento de carregamento", "Os separadores inactivos são lazy-loaded; os 51 indicadores foram extraídos do bundle oficial."),
         ("Ano base", "2022* conforme a nota da página do MINPLAN."),
         ("Conteúdo", "Indicadores extraídos, acções de 2025, estrutura programática e resumo de implementação."),
     ]
     write_readme_sheet(wb, "Leia-me", readme_rows)
 
     indicator_columns = [
-        "ID", "Domínio", "Indicador", "Unidade", "2022_Base", "2023", "2024", "2025",
-        "2022_Base_Original", "2023_Original", "2024_Original", "2025_Original",
-        "Fonte", "Fonte URL", "Estado", "Observação",
+        "ID", "Domínio", "Indicador", "Unidade", "2022_Base", "2023", "2024",
+        "Meta_2025", "2025", "2022_Base_Original", "2023_Original", "2024_Original",
+        "Meta_2025_Original", "2025_Original", "Fonte", "Fonte URL", "Fonte Bundle URL",
+        "Estado", "Observação",
     ]
     write_table_sheet(
         wb, "Indicadores_Execução", parsed["indicators"], indicator_columns,
-        {"ID": 25, "Domínio": 28, "Indicador": 54, "Unidade": 24, "Fonte URL": 45, "Observação": 48},
+        {"ID": 25, "Domínio": 28, "Indicador": 64, "Unidade": 24, "Fonte URL": 45, "Fonte Bundle URL": 55, "Observação": 58},
     )
     write_table_sheet(
         wb, "Índice_Domínios", parsed["domains"],
@@ -848,9 +1118,9 @@ def make_comparison_workbook(
         ("Fonte das metas", PDN_URL_REQUESTED),
         ("Metas catalogadas", f"{len(targets)} indicadores/metas das páginas 'Metas da Política' do PDN."),
         ("Indicadores comparados", f"{len(comparison)} indicadores publicados no painel de execução do MINPLAN."),
-        ("Resultado de comparabilidade", "Os sete indicadores publicados na execução não têm valor-meta quantitativo equivalente no quadro de metas da Política de Saúde."),
-        ("Regra", "Não foi inferida uma meta a partir de um indicador diferente. Correspondências temáticas são identificadas, mas ficam sem cálculo de progresso."),
-        ("Implicação", "As colunas de diferença e progresso ficam vazias quando o PDN não publica meta numérica equivalente."),
+        ("Resultado de comparabilidade", "Os indicadores são comparados com a meta anual 2025 do MINPLAN e, quando existe equivalência, com a meta PDN 2027."),
+        ("Regra", "Não foi inferida uma meta a partir de um indicador diferente. Correspondências temáticas ou com escala diferente ficam sem cálculo automático."),
+        ("Implicação", "As colunas do alvo PDN ficam vazias quando não há meta numérica equivalente; o alvo anual do MINPLAN é preservado separadamente."),
         ("Páginas de saúde", "A Política de Saúde e as suas metas principais estão na página 74; prioridades de imunização, pré-natal, malária e tuberculose nas páginas 76–77."),
         ("Páginas PDF", str(pdn_info.get("Páginas PDF", ""))),
     ]
@@ -860,11 +1130,13 @@ def make_comparison_workbook(
         wb, "Comparação", comparison,
         [
             "ID_Implementação", "Domínio", "Indicador de execução", "Unidade execução",
-            "2022_Base", "2023", "2024", "2025", "Meta PDN 2027",
-            "Meta PDN 2027 original", "Tipo de correspondência", "Referência/metas PDN",
-            "Páginas PDN", "Diferença 2025 vs meta", "Progresso 2025 vs meta", "Observação",
+            "2022_Base", "2023", "2024", "Meta MINPLAN 2025", "Meta MINPLAN 2025 original",
+            "2025", "Diferença 2025 vs meta MINPLAN", "% do alvo MINPLAN 2025",
+            "Indicador PDN equivalente", "Meta PDN 2027", "Meta PDN 2027 original",
+            "Tipo de correspondência", "Referência/metas PDN", "Páginas PDN",
+            "Diferença 2025 vs meta PDN", "% do alvo PDN 2027", "Observação",
         ],
-        {"ID_Implementação": 30, "Domínio": 27, "Indicador de execução": 55, "Unidade execução": 24, "Tipo de correspondência": 38, "Referência/metas PDN": 68, "Observação": 75},
+        {"ID_Implementação": 30, "Domínio": 27, "Indicador de execução": 58, "Unidade execução": 24, "Meta MINPLAN 2025 original": 25, "Indicador PDN equivalente": 58, "Tipo de correspondência": 38, "Referência/metas PDN": 68, "Observação": 75},
     )
     comparison_ws.conditional_formatting.add(
         f"K2:K{max(2, comparison_ws.max_row)}",
@@ -922,9 +1194,13 @@ def write_analysis_markdown(parsed: dict[str, Any], targets: list[dict[str, Any]
         "",
         f"O painel foi capturado na página `{HTML_URL}` e identifica o período `{parsed['period']}`. O inventário verificou os sete domínios de `Implementation - Key Indicators by Domain`.",
         "",
-        f"Há dados numéricos em {len(populated)} domínio(s): {', '.join(row['Domínio'] for row in populated)}. A tabela contém {len(parsed['indicators'])} indicadores, com ano base 2022 e valores para 2023, 2024 e 2025.",
+        f"Há dados numéricos em {len(populated)} domínio(s): {', '.join(row['Domínio'] for row in populated)}. O bundle lazy contém {len(parsed['indicators'])} indicadores, com ano base 2022, valores para 2023, 2024, meta anual 2025 e execução 2025.",
         "",
-        f"Os painéis sem tabela no HTML são: {', '.join(row['Domínio'] for row in empty)}. Eles foram mantidos no inventário com estado `Sem dados publicados no HTML`; não foram convertidos em zero.",
+        (
+            f"Os painéis sem dados continuam a ser: {', '.join(row['Domínio'] for row in empty)}."
+            if empty
+            else "Todos os sete domínios têm dados no bundle JavaScript, embora os seis separadores inactivos não apareçam no HTML inicial por serem lazy-loaded."
+        ),
         "",
         "A secção `Main Actions` contém resultados narrativos de 2025 para os domínios Social, Fomento da produção nacional, Infra-estruturas e Construção e Obras públicas. Esses resultados foram preservados numa folha separada, sem os misturar com indicadores quantitativos.",
         "",
@@ -932,13 +1208,13 @@ def write_analysis_markdown(parsed: dict[str, Any], targets: list[dict[str, Any]
         "",
         f"Foram catalogadas {len(targets)} linhas de metas das páginas `Metas da Política` do PDF. A Política de Saúde (página 74) define metas para esperança de vida, mortalidade, despesa, profissionais e densidade de unidades; as prioridades de imunização, pré-natal, malária e tuberculose aparecem nas páginas 76–77.",
         "",
-        "Os sete indicadores publicados pelo MINPLAN não têm, no quadro de metas da Política de Saúde, um valor quantitativo equivalente que permita calcular automaticamente o progresso para 2027. Por isso, o segundo Excel distingue correspondência temática de comparabilidade numérica e deixa diferença/progresso vazios quando não há meta equivalente.",
+        "O segundo Excel preserva a meta anual 2025 publicada pelo MINPLAN e procura equivalências com as metas 2027 do PDN. Quando o conceito, escala ou período não é comparável, a referência é mantida sem cálculo automático; quando é comparável, a diferença e a percentagem do alvo são calculadas.",
         "",
         "## 4. Proveniência e limitação de acesso",
         "",
         f"A URL NEPAD indicada foi preservada como fonte solicitada. Como o ficheiro devolveu erro 403 no ambiente de extração, foi guardado um espelho acessível do documento no ficheiro `{PDF_FILE.relative_to(ROOT)}`. A URL usada e o fallback estão registados em `fontes/00_manifesto_fontes.csv` e nas folhas `Manifesto_Fontes`.",
         "",
-        "A ausência de tabelas nos seis domínios não prova ausência de execução; prova apenas que esses dados não estavam presentes no HTML recebido da página consultada. Para completar esses domínios será necessário obter os relatórios/documentos sectoriais que o MINPLAN ainda assinala como em desenvolvimento.",
+        "Os seis domínios inactivos não tinham dados no HTML inicial porque os componentes são lazy-loaded. A extração usa o bundle JavaScript oficial associado à página; se o site alterar o hash do bundle, o manifesto e o script devem ser actualizados.",
         "",
         "## Ficheiros entregues",
         "",
@@ -963,12 +1239,13 @@ def main() -> None:
     pdn_info = extract_pdn_text()
     parsed = parse_html_source()
     targets = build_pdn_targets()
-    comparison = build_comparison(parsed["indicators"])
+    comparison = build_comparison(parsed["indicators"], targets)
 
     indicator_columns = [
-        "ID", "Domínio", "Indicador", "Unidade", *YEAR_COLUMNS,
-        "2022_Base_Original", "2023_Original", "2024_Original", "2025_Original",
-        "Fonte", "Fonte URL", "Estado", "Observação",
+        "ID", "Domínio", "Indicador", "Unidade", "2022_Base", "2023", "2024",
+        "Meta_2025", "2025", "2022_Base_Original", "2023_Original", "2024_Original",
+        "Meta_2025_Original", "2025_Original", "Fonte", "Fonte URL", "Fonte Bundle URL",
+        "Estado", "Observação",
     ]
     write_csv(DATA_DIR / "indicadores_execucao.csv", parsed["indicators"], indicator_columns)
     write_csv(DATA_DIR / "dominios_cobertura.csv", parsed["domains"])
