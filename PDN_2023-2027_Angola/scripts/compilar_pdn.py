@@ -165,7 +165,8 @@ def ensure_sources(refresh: bool = False) -> list[dict[str, str]]:
         }
     )
 
-    pdf_url_used = PDN_URL_REQUESTED
+    # A cópia incluída no repositório foi obtida do espelho acessível.
+    pdf_url_used = PDN_URL_MIRROR
     if refresh or not PDF_FILE.exists() or PDF_FILE.stat().st_size == 0:
         try:
             PDF_FILE.write_bytes(fetch_url(PDN_URL_REQUESTED, timeout=300))
@@ -178,7 +179,7 @@ def ensure_sources(refresh: bool = False) -> list[dict[str, str]]:
             except (HTTPError, URLError, TimeoutError, OSError) as second_exc:
                 pdf_status = f"falhou: primária={first_exc}; espelho={second_exc}"
     else:
-        pdf_status = "já existente localmente"
+        pdf_status = "já existente localmente (espelho acessível)"
     manifest.append(
         {
             "Fonte": "PDN Angola 2023-2027 — AUDA-NEPAD / espelho",
