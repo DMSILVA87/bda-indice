@@ -14,23 +14,23 @@ Os dois motores de desenvolvimento são o desenvolvimento do capital humano e a 
 
 O painel foi capturado na página `https://www.minplan.gov.ao/en/publicacoes/relatorios-balanco-pdn` e identifica o período `Anual 2025`. O inventário verificou os sete domínios de `Implementation - Key Indicators by Domain`.
 
-Há dados numéricos em 1 domínio(s): Saúde. A tabela contém 7 indicadores, com ano base 2022 e valores para 2023, 2024 e 2025.
+Há dados numéricos em 7 domínio(s): Saúde, Protecção Social, Comunicação, Educação e Formação Profissional, Infraestruturas, Habitação e Serviços Comunitários, Fomento à Produção, Económico. O bundle lazy contém 51 indicadores, com ano base 2022, valores para 2023, 2024, meta anual 2025 e execução 2025.
 
-Os painéis sem tabela no HTML são: Protecção Social, Comunicação, Educação e Formação Profissional, Infraestruturas, Habitação e Serviços Comunitários, Fomento à Produção, Económico. Eles foram mantidos no inventário com estado `Sem dados publicados no HTML`; não foram convertidos em zero.
+Todos os sete domínios têm dados no bundle JavaScript, embora os seis separadores inactivos não apareçam no HTML inicial por serem lazy-loaded.
 
 A secção `Main Actions` contém resultados narrativos de 2025 para os domínios Social, Fomento da produção nacional, Infra-estruturas e Construção e Obras públicas. Esses resultados foram preservados numa folha separada, sem os misturar com indicadores quantitativos.
 
 ## 3. Comparação com metas
 
-Foram catalogadas 115 linhas de metas das páginas `Metas da Política` do PDF. A Política de Saúde (página 74) define metas para esperança de vida, mortalidade, despesa, profissionais e densidade de unidades; as prioridades de imunização, pré-natal, malária e tuberculose aparecem nas páginas 76–77.
+Foram catalogadas 118 linhas de metas das páginas `Metas da Política` do PDF. A Política de Saúde (página 74) define metas para esperança de vida, mortalidade, despesa, profissionais e densidade de unidades; as prioridades de imunização, pré-natal, malária e tuberculose aparecem nas páginas 76–77.
 
-Os sete indicadores publicados pelo MINPLAN não têm, no quadro de metas da Política de Saúde, um valor quantitativo equivalente que permita calcular automaticamente o progresso para 2027. Por isso, o segundo Excel distingue correspondência temática de comparabilidade numérica e deixa diferença/progresso vazios quando não há meta equivalente.
+O segundo Excel preserva a meta anual 2025 publicada pelo MINPLAN e procura equivalências com as metas 2027 do PDN. Quando o conceito, escala ou período não é comparável, a referência é mantida sem cálculo automático; quando é comparável, a diferença e a percentagem do alvo são calculadas.
 
 ## 4. Proveniência e limitação de acesso
 
 A URL NEPAD indicada foi preservada como fonte solicitada. Como o ficheiro devolveu erro 403 no ambiente de extração, foi guardado um espelho acessível do documento no ficheiro `fontes/PDN_Angola_2023-2027.pdf`. A URL usada e o fallback estão registados em `fontes/00_manifesto_fontes.csv` e nas folhas `Manifesto_Fontes`.
 
-A ausência de tabelas nos seis domínios não prova ausência de execução; prova apenas que esses dados não estavam presentes no HTML recebido da página consultada. Para completar esses domínios será necessário obter os relatórios/documentos sectoriais que o MINPLAN ainda assinala como em desenvolvimento.
+Os seis domínios inactivos não tinham dados no HTML inicial porque os componentes são lazy-loaded. A extração usa o bundle JavaScript oficial associado à página; se o site alterar o hash do bundle, o manifesto e o script devem ser actualizados.
 
 ## Ficheiros entregues
 

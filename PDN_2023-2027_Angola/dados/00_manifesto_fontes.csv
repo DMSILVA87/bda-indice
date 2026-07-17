@@ -1,3 +1,4 @@
 ﻿Fonte,URL solicitada,URL usada,Ficheiro local,Estado
 MINPLAN — página de relatórios de balanço,https://www.minplan.gov.ao/en/publicacoes/relatorios-balanco-pdn,https://www.minplan.gov.ao/en/publicacoes/relatorios-balanco-pdn,fontes/minplan_relatorios_balanco_pdn.html,já existente localmente
-PDN Angola 2023-2027 — AUDA-NEPAD / espelho,https://www.nepad.org/sites/default/files/2024-07/20231030%283%29_layout_Final_Angola_PDN%202023-2027-1.pdf,https://www.nepad.org/sites/default/files/2024-07/20231030%283%29_layout_Final_Angola_PDN%202023-2027-1.pdf,fontes/PDN_Angola_2023-2027.pdf,já existente localmente
+MINPLAN — bundle JavaScript lazy dos indicadores,https://www.minplan.gov.ao/_next/static/chunks/c191322d36728caa.js,https://www.minplan.gov.ao/_next/static/chunks/c191322d36728caa.js,fontes/minplan_indicadores_bundle.js,já existente localmente
+PDN Angola 2023-2027 — AUDA-NEPAD / espelho,https://www.nepad.org/sites/default/files/2024-07/20231030%283%29_layout_Final_Angola_PDN%202023-2027-1.pdf,https://www.mpla.ao/wp-content/uploads/2023/12/PDN_Angola_2023-2027.pdf,fontes/PDN_Angola_2023-2027.pdf,já existente localmente (espelho acessível)
