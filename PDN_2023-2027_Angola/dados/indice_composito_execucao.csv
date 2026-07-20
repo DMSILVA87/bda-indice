@@ -1,0 +1,61 @@
+﻿Nível,ID,Domínio,Nome,I_2022,I_2023,I_2024,I_2025
+Indicador,IMP-saude-novas_camas_em_hospitais_cumulativo,Saúde,Novas Camas em Hospitais (Cumulativo),100.0,109.77142857142856,133.6952380952381,139.1238095238095
+Indicador,IMP-saude-taxa_de_cobertura_da_4_a_consulta_pre_natal,Saúde,Taxa de cobertura da 4.ª consulta pré-natal,100.0,159.0909090909091,170.45454545454547,136.36363636363635
+Indicador,IMP-saude-taxa_de_imunizacao_bcg,Saúde,Taxa de imunização BCG,100.0,121.51898734177216,107.59493670886076,98.73417721518987
+Indicador,IMP-saude-taxa_de_vacinacao_contra_o_sarampo,Saúde,Taxa de vacinação contra o sarampo,100.0,107.57575757575756,103.03030303030303,115.15151515151516
+Indicador,IMP-saude-taxa_de_incidencia_da_malaria,Saúde,Taxa de incidência da malária,100.0,95.86466165413535,83.06188925081433,85.57046979865773
+Indicador,IMP-saude-taxa_de_sucesso_do_tratamento_para_a_tuberculose,Saúde,Taxa de sucesso do tratamento para a tuberculose,100.0,95.71428571428572,105.71428571428572,130.0
+Indicador,IMP-saude-partos_institucionais_realizados_por_profissionais_qualificados,Saúde,Partos institucionais realizados por profissionais qualificados,100.0,144.11764705882354,150.0,188.23529411764704
+Indicador,IMP-proteccao_social-pessoas_integradas_em_actividades_geradoras_de_renda_cumulativo,Protecção Social,Pessoas integradas em actividades geradoras de renda (cumulativo),100.0,101.47297297297297,103.48378378378378,105.18108108108109
+Indicador,IMP-proteccao_social-beneficiarios_de_transferencias_sociais_monetarias_cumulativo,Protecção Social,Beneficiários de transferências sociais monetárias (cumulativo),100.0,155.72252272310553,175.17697173690965,221.14918668308144
+Indicador,IMP-proteccao_social-familias_assistidas_com_cesta_basica_de_alimentos_cumulativo,Protecção Social,Famílias assistidas com cesta básica de alimentos (cumulativo),100.0,130.27308192457738,391.93324664065887,454.2999566536627
+Indicador,IMP-comunicacao-numero_de_assinantes_de_internet,Comunicação,Número de assinantes de Internet,100.0,110.00000000000001,120.0,166.66666666666669
+Indicador,IMP-comunicacao-numero_de_assinantes_de_servicos_moveis,Comunicação,Número de assinantes de serviços móveis,100.0,104.16666666666667,104.16666666666667,108.33333333333333
+Indicador,IMP-educacao_e_formacao_profissional-salas_de_aula_do_ensino_primario_cumulativo,Educação e Formação Profissional,Salas de aula do Ensino Primário (cumulativo),100.0,103.98473435104327,102.51983201119926,108.97273515098993
+Indicador,IMP-educacao_e_formacao_profissional-salas_de_aula_do_i_ciclo_do_ensino_secundario_cumulativo,Educação e Formação Profissional,Salas de aula do I Ciclo do Ensino Secundário (cumulativo),100.0,123.6401459605088,143.88705112028103,167.0088326569587
+Indicador,IMP-educacao_e_formacao_profissional-salas_de_aula_do_ii_ciclo_do_ensino_secundario_cumulativo,Educação e Formação Profissional,Salas de aula do II Ciclo do Ensino Secundário (cumulativo),100.0,97.27588518495948,116.85050886708514,148.91218233896032
+Indicador,IMP-educacao_e_formacao_profissional-taxa_de_alfabetizacao_da_populacao_maior_que_15_anos,Educação e Formação Profissional,Taxa de alfabetização da população maior que 15 anos,100.0,100.0,100.0,100.0
+Indicador,IMP-educacao_e_formacao_profissional-taxa_de_conclusao_do_ensino_primario,Educação e Formação Profissional,Taxa de conclusão do Ensino Primário,100.0,95.08196721311475,95.08196721311475,95.08196721311475
+Indicador,IMP-educacao_e_formacao_profissional-taxa_de_conclusao_do_i_ciclo_do_ensino_secundario_ensino_geral,Educação e Formação Profissional,Taxa de conclusão do I Ciclo do Ensino Secundário (Ensino Geral),100.0,95.45454545454545,102.27272727272727,102.27272727272727
+Indicador,IMP-educacao_e_formacao_profissional-taxa_de_conclusao_do_ii_ciclo_do_ensino_secundario_ensino_geral,Educação e Formação Profissional,Taxa de conclusão do II Ciclo do Ensino Secundário (Ensino Geral),100.0,80.0,66.66666666666666,66.66666666666666
+Indicador,IMP-educacao_e_formacao_profissional-professores_de_ensino_pre_escolar_com_a_qualificacao_minima_exigida_cumulativo,Educação e Formação Profissional,Professores de Ensino Pré-escolar com a qualificação mínima exigida (cumulativo),100.0,123.07692307692308,,
+Indicador,IMP-educacao_e_formacao_profissional-professores_de_ensino_primario_com_a_qualificacao_minima_exigida_cumulativo,Educação e Formação Profissional,Professores de Ensino Primário com a qualificação mínima exigida (cumulativo),100.0,101.23456790123457,,
+Indicador,IMP-educacao_e_formacao_profissional-professores_de_ensino_secundario_com_a_qualificacao_minima_exigida_cumulativo,Educação e Formação Profissional,Professores de Ensino Secundário com a qualificação mínima exigida (cumulativo),100.0,101.20481927710843,,
+Indicador,IMP-educacao_e_formacao_profissional-numero_de_pessoas_formadas_pelo_snefp_cumulativo,Educação e Formação Profissional,Número de pessoas formadas pelo SNEFP (cumulativo),100.0,188.49931133600813,340.8287921432421,523.0013773279837
+Indicador,IMP-educacao_e_formacao_profissional-kits_profissionais_distribuidos_cumulativo,Educação e Formação Profissional,Kits profissionais distribuídos (cumulativo),100.0,106.46705646901854,108.22901542204606,110.15186594984891
+Indicador,IMP-educacao_e_formacao_profissional-estudantes_matriculados_no_ensino_superior_cumulativo,Educação e Formação Profissional,Estudantes matriculados no Ensino Superior (cumulativo),100.0,104.49705397713088,107.11633045388724,102.84490937234733
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-estradas_nacionais_reabilitadas_cumulativo,"Infraestruturas, Habitação e Serviços Comunitários",Estradas Nacionais reabilitadas (cumulativo),100.0,104.74984167194428,106.82921680388431,109.12645134051087
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-equipamentos_sociais_construidos_ou_reabilitados_cumulativo,"Infraestruturas, Habitação e Serviços Comunitários",Equipamentos sociais construídos ou reabilitados (cumulativo),100.0,105.96026490066225,110.59602649006624,135.09933774834437
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-construcao_e_reabilitacao_de_pontes_cumulativo,"Infraestruturas, Habitação e Serviços Comunitários",Construção e reabilitação de pontes (cumulativo),100.0,112.53196930946292,137.0843989769821,152.1867007672634
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-taxa_de_electrificacao,"Infraestruturas, Habitação e Serviços Comunitários",Taxa de electrificação,100.0,100.0,102.32558139534885,111.62790697674419
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-numero_de_ligacoes_cumulativo,"Infraestruturas, Habitação e Serviços Comunitários",Número de ligações (cumulativo),100.0,100.0,100.0,100.0
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-numero_de_sedes_municipais_com_distribuicao_de_energia_pela_ende,"Infraestruturas, Habitação e Serviços Comunitários",Número de sedes municipais com distribuição de energia pela ENDE,100.0,100.0,102.22222222222221,106.66666666666667
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-de_producao_total_de_energia_de_fontes_renovaveis,"Infraestruturas, Habitação e Serviços Comunitários",% de produção total de energia de fontes renováveis,100.0,100.0,101.53846153846153,101.53846153846153
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-potencia_instalada_proveniente_de_fontes_renovaveis,"Infraestruturas, Habitação e Serviços Comunitários",Potência instalada proveniente de fontes renováveis,100.0,100.0,125.0,100.0
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-quantidade_de_agua_tratada_cumulativo,"Infraestruturas, Habitação e Serviços Comunitários",Quantidade de água tratada (cumulativo),100.0,100.3030303030303,100.37878787878789,100.37878787878789
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-taxa_de_cobertura_de_aguas_nas_areas_urbanas,"Infraestruturas, Habitação e Serviços Comunitários",Taxa de cobertura de águas nas áreas urbanas,100.0,100.0,100.0,104.16666666666667
+Indicador,IMP-infraestruturas_habitacao_e_servicos_comunitarios-taxa_de_cobertura_de_aguas_nas_areas_rurais,"Infraestruturas, Habitação e Serviços Comunitários",Taxa de cobertura de águas nas áreas rurais,100.0,100.0,100.0,42.857142857142854
+Indicador,IMP-fomento_a_producao-toneladas_de_carne_produzidas,Fomento à Produção,Toneladas de carne produzidas,100.0,106.86987829804788,104.1492427225733,111.78452441227395
+Indicador,IMP-fomento_a_producao-toneladas_de_raizes_e_tuberculos_produzidas,Fomento à Produção,Toneladas de raízes e tubérculos produzidas,100.0,106.35518352147626,112.84284698466134,124.83314840051752
+Indicador,IMP-fomento_a_producao-toneladas_de_fruta_produzidas,Fomento à Produção,Toneladas de fruta produzidas,100.0,106.71046755765212,113.43323818194229,119.71181546715879
+Indicador,IMP-fomento_a_producao-toneladas_de_cereais_produzidas,Fomento à Produção,Toneladas de cereais produzidas,100.0,105.30701381545701,110.46706803209962,118.06793768160175
+Indicador,IMP-fomento_a_producao-toneladas_de_horticolas_produzidas,Fomento à Produção,Toneladas de hortícolas produzidas,100.0,111.51367981751807,119.43116616654865,129.17053627597403
+Indicador,IMP-fomento_a_producao-ovos_produzidos,Fomento à Produção,Ovos produzidos,100.0,102.48700816629548,89.90348923533779,94.46919079435783
+Indicador,IMP-fomento_a_producao-litros_de_leite_produzidos,Fomento à Produção,Litros de leite produzidos,100.0,100.0,100.0,100.0
+Indicador,IMP-fomento_a_producao-unidades_industriais_no_subsector_da_industria_pesqueira_e_de_transformacao_de_carne_instaladas_cumulativo,Fomento à Produção,Unidades industriais no subsector da indústria pesqueira e de transformação de carne instaladas (cumulativo),100.0,200.0,800.0,1033.3333333333335
+Indicador,IMP-fomento_a_producao-toneladas_de_peixe_de_captura_industrial_e_semi_industrial_produzidas,Fomento à Produção,Toneladas de peixe de captura industrial e semi-industrial produzidas,100.0,103.28358208955224,111.64179104477611,81.49253731343283
+Indicador,IMP-economico-taxa_de_crescimento_do_pib,Económico,Taxa de crescimento do PIB,100.0,25.0,125.0,75.0
+Indicador,IMP-economico-taxa_de_crescimento_do_pib_nao_petrolifero,Económico,Taxa de crescimento do PIB não petrolífero,100.0,50.0,125.0,125.0
+Indicador,IMP-economico-taxa_de_inflacao,Económico,Taxa de inflação,100.0,70.0,50.0,87.5
+Indicador,IMP-economico-empregos_formais_bruto_gerados,Económico,Empregos Formais Bruto Gerados,100.0,99.33809134132319,116.61452884326542,114.20721159324212
+Indicador,IMP-economico-empregos_formais_liquidos_gerados,Económico,Empregos Formais Líquidos Gerados,100.0,103.15032266085011,123.56554366375462,121.0763649514596
+Indicador,IMP-economico-taxa_de_desemprego,Económico,Taxa de Desemprego,100.0,100.0,100.0,111.52416356877323
+Domínio,,Saúde,Saúde,100.00000000000004,117.09797540704075,118.73721786599904,124.03482749154095
+Domínio,,Protecção Social,Protecção Social,100.00000000000004,127.20929164529568,192.24444809039124,219.4430802715739
+Domínio,,Comunicação,Comunicação,100.00000000000004,107.04360482220943,111.80339887498948,134.37096247164254
+Domínio,,Educação e Formação Profissional,Educação e Formação Profissional,100.00000000000004,106.9709249950253,116.01022289564071,126.3988651698851
+Domínio,,"Infraestruturas, Habitação e Serviços Comunitários","Infraestruturas, Habitação e Serviços Comunitários",100.00000000000004,102.07015214834544,107.24459792040791,101.79063304112248
+Domínio,,Fomento à Produção,Fomento à Produção,100.00000000000004,113.04714956784333,134.20486415269028,139.70088938242088
+Domínio,,Económico,Económico,100.00000000000004,66.90096915626353,101.99369982162017,103.99605563656245
+Global,,,Índice compósito de execução,100.00000000000004,104.00862501333518,123.35547343892526,131.60202459865164
+Global,,,"Índice (painel completo, 48 ind.)",100.00000000000004,103.96446786858695,123.35547343892526,131.60202459865164

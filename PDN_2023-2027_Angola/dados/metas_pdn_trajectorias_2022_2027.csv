@@ -1,0 +1,109 @@
+﻿ID_Meta,Eixo/Política,Domínio/Grupo,Indicador,Unidade,Método,T_2022,T_2023,T_2024,T_2025,T_2026,T_2027
+PDN-META-001,Modernização do Estado,Administração Pública,% de funcionários públicos que beneficiaram de formação nos últimos 5 anos,%,Linear,11.2,16.2,21.200000000000003,26.200000000000003,31.200000000000003,36.2
+PDN-META-002,Modernização do Estado,Administração Pública,% de capacidade de atendimento ao cidadão da rede SIAC,%,Linear,13.5,14.66,15.82,16.98,18.14,19.3
+PDN-META-003,Modernização do Estado,Reforma do Estado,Classificação no indicador Direitos Fundamentais — Projecto de Justiça Mundial,Índice (0–1),Geométrica,0.38,0.38391835454081574,0.38787711303507233,0.3918766921064919,0.39591751267479536,0.39999999999999997
+PDN-META-004,Modernização do Estado,Reforma do Estado,Classificação no indicador Governo Aberto — Projecto de Justiça Mundial,Índice (0–1),Geométrica,0.38,0.3858190333894939,0.3917271750673774,0.39772578957077015,0.40381626233228374,0.41000000000000003
+PDN-META-005,Modernização do Estado,Reforma do Estado,Classificação no indicador Democraticidade Eleitoral — Índice Ibrahim,%,Linear,27.7,28.9,30.1,31.3,32.5,33.7
+PDN-META-006,Modernização do Estado,Reforma do Estado,Pontuação no indicador Estado de Direito — Banco Mundial,%,Linear,17.3,18.240000000000002,19.18,20.12,21.06,22.0
+PDN-META-007,Modernização do Estado,Reforma do Estado,Pontuação no indicador Estabilidade Política — Banco Mundial,%,Linear,20.8,21.8,22.8,23.8,24.8,25.8
+PDN-META-008,Modernização do Estado,Reforma do Estado,Pontuação no indicador Eficiência do Governo — Banco Mundial,%,Linear,13.0,13.9,14.8,15.7,16.6,17.5
+PDN-META-009,Modernização do Estado,Reforma do Estado,Pontuação no indicador Qualidade Regulatória — Banco Mundial,%,Linear,27.4,28.619999999999997,29.84,31.06,32.28,33.5
+PDN-META-010,Modernização do Estado,Reforma do Estado,Pontuação no indicador Voz e Participação — Banco Mundial,%,Linear,24.7,25.66,26.62,27.58,28.54,29.5
+PDN-META-011,Modernização do Estado,Reforma do Estado,Pontuação no indicador Controlo da Corrupção — Banco Mundial,%,Linear,27.9,29.38,30.86,32.339999999999996,33.82,35.3
+PDN-META-012,Modernização do Estado,Reforma do Estado,Pontuação no indicador Capacidade de Gestão — Bertelsmann,Pontos (0–10),Geométrica,4.3,4.377179293006939,4.4557438518904,4.535718540334333,4.617128668292813,4.7
+PDN-META-013,Modernização do Estado,Reforma do Estado,Pontuação no indicador Eficiência de Recursos — BTI Project,Pontos (0–10),Geométrica,4.0,4.058276976198625,4.117403003885964,4.177390453100367,4.23825187410229,4.3
+PDN-META-014,Modernização do Estado,Reforma do Estado,Pontuação no indicador Serviços Públicos Online — UNDESA,Índice (0–1),Geométrica,0.47,0.47393360307585813,0.4779001279243938,0.48189985008004566,0.48593304738330195,0.49
+PDN-META-015,Ordenamento do Território,Habitação e território,Défice habitacional,% de agregados familiares,Linear,32.0,31.88,31.759999999999998,31.64,31.52,31.4
+PDN-META-016,Ordenamento do Território,Habitação e território,% da população urbana a viver em assentamentos informais,%,Linear,49.0,48.1,47.2,46.3,45.4,44.5
+PDN-META-017,Ordenamento do Território,Habitação e território,% de títulos de propriedade para uso habitacional,% do total de propriedades,Linear,10.0,15.0,20.0,25.0,30.0,35.0
+PDN-META-020,"Educação, Juventude, Emprego e Inovação",Educação,Anos de escolaridade ajustados à aprendizagem,Anos,Geométrica,4.2,4.277115701624679,4.355647315496277,4.435620839011549,4.517062746902363,4.6
+PDN-META-021,"Educação, Juventude, Emprego e Inovação",Educação,Desempenho em Testes Harmonizados — componente Educação do Índice de Capital Humano,Pontuação,Geométrica,326.0,328.1708940557614,330.3562444949624,332.5561475853237,334.7707002356301,337.0
+PDN-META-022,"Educação, Juventude, Emprego e Inovação",Educação,Taxa de alfabetização (>=15 anos),%,Linear,76.0,76.4,76.8,77.2,77.6,78.0
+PDN-META-023,"Educação, Juventude, Emprego e Inovação",Educação,Taxa líquida de escolarização da 2.ª etapa do pré-escolar (3–5 anos),%,Linear,19.0,19.8,20.6,21.4,22.2,23.0
+PDN-META-024,"Educação, Juventude, Emprego e Inovação",Educação,Taxa líquida de escolarização na classe de iniciação (5 anos),%,Linear,48.0,50.0,52.0,54.0,56.0,58.0
+PDN-META-025,"Educação, Juventude, Emprego e Inovação",Educação,Taxa líquida de escolarização no ensino primário (1.ª–6.ª classes),%,Linear,64.0,65.2,66.4,67.6,68.8,70.0
+PDN-META-026,"Educação, Juventude, Emprego e Inovação",Educação,Taxa líquida de escolarização no 1.º ciclo do ensino secundário (7.ª–9.ª classes),%,Linear,23.0,23.8,24.6,25.4,26.2,27.0
+PDN-META-027,"Educação, Juventude, Emprego e Inovação",Educação,% da população entre 15–18 anos a frequentar o 2.º ciclo do ensino secundário,%,Linear,25.0,25.8,26.6,27.4,28.2,29.0
+PDN-META-028,Saúde,Saúde,Esperança média de vida,Anos,Geométrica,62.0,62.19872202513606,62.39808099290558,62.59807894483321,62.79871792898715,63.0
+PDN-META-029,Saúde,Saúde,Esperança de vida saudável (HALE),Anos,Geométrica,56.0,56.19858654592737,56.397877317144435,56.597874810966715,56.798581533565624,57.0
+PDN-META-030,Saúde,Saúde,Taxa de fecundidade,Filhos por mulher,Linear,5.4,5.24,5.08,4.92,4.76,4.6
+PDN-META-031,Saúde,Saúde,Taxa de mortalidade de menores de 5 anos,Por 1.000 nados-vivos,Linear,69.0,65.4,61.8,58.2,54.6,51.0
+PDN-META-032,Saúde,Saúde,Taxa de mortalidade de menores de 1 ano,Por 1.000 nados-vivos,Linear,47.0,45.0,43.0,41.0,39.0,37.0
+PDN-META-033,Saúde,Saúde,Taxa de mortalidade materna,Por 100.000 nascimentos,Linear,199.0,192.2,185.4,178.6,171.8,165.0
+PDN-META-034,Saúde,Saúde,Gastos correntes com a saúde,% do PIB,Linear,3.0,3.2,3.4,3.6,3.8,4.0
+PDN-META-035,Saúde,Saúde,Número de médicos por 10.000 habitantes,Por 10.000 habitantes,Linear,1.8,2.0,2.2,2.4,2.5999999999999996,2.8
+PDN-META-036,Saúde,Saúde,Número de enfermeiros e parteiras por 10.000 habitantes,Por 10.000 habitantes,Linear,14.1,15.4,16.7,18.0,19.3,20.6
+PDN-META-037,Saúde,Saúde,Número de hospitais por 100.000 habitantes,Por 100.000 habitantes,Linear,0.7,0.72,0.74,0.76,0.78,0.8
+PDN-META-038,Saúde,Saúde,Número de centros médicos por 100.000 habitantes,Por 100.000 habitantes,Linear,2.3,2.34,2.38,2.42,2.46,2.5
+PDN-META-039,Cultura,Cultura,% de exportações de bens culturais e criativos,% do total das exportações,Linear,0.01,0.0112,0.012400000000000001,0.013600000000000001,0.0148,0.016
+PDN-META-041,Desporto,Desporto,Classificação no Ranking Mundial de Desporto de Alta Competição,Posição no ranking,Geométrica,123.0,121.98333160262656,120.97506657623049,119.97513546193618,118.983469374987,118.0
+PDN-META-042,Desporto,Desporto,% da população envolvida na prática de desporto de recreação,%,Linear,36.0,36.36,36.72,37.08,37.44,37.8
+PDN-META-043,Desporto,Desporto,Número de medalhas olímpicas ganhas,N.º,Geométrica,0.0,0.0,0.0,0.0,0.0,0.0
+PDN-META-044,Desporto,Desporto,Número de medalhas de Jogos Paralímpicos ganhas,"N.º, cumulativo",Geométrica,8.0,8.190690044316877,8.38592542525895,8.585814486631532,8.790468154750565,9.0
+PDN-META-045,Desporto,Desporto,Classificação nos Jogos Africanos,Posição no ranking,Geométrica,16.0,15.34916153300245,14.724797485387633,14.125830946497691,13.551228811604872,13.0
+PDN-META-046,Desporto,Desporto,Classificação no ranking da SADC (Região 5),Posição no ranking,Geométrica,2.0,2.0,2.0,2.0,2.0,2.0
+PDN-META-047,Desporto,Desporto,Classificação no ranking da CPLP,Posição no ranking,Geométrica,3.0,3.0,3.0,3.0,3.0,3.0
+PDN-META-048,Desporto,Desporto,Número de monitores desportivos,"N.º, anual",Geométrica,7067.0,7383.879615666022,7714.967904152852,8060.901972971821,8422.347497114566,8800.0
+PDN-META-049,Desporto,Desporto,Número de atletas federados,"N.º, anual",Geométrica,63091.0,64323.68104547937,65580.4463907778,66861.76659841421,68168.12142482575,69500.0
+PDN-META-050,Desporto,Desporto,% de atletas federados do sexo feminino,%,Linear,20.0,21.6,23.2,24.8,26.4,28.0
+PDN-META-051,População e Promoção das Comunidades Vulneráveis,Protecção Social,"% da população que vive abaixo do limiar de pobreza (<2,15 USD/dia)",%,Linear,31.0,30.4,29.8,29.2,28.6,28.0
+PDN-META-052,População e Promoção das Comunidades Vulneráveis,Protecção Social,Volume de investimento em assistência social,"Biliões de Kz, anual",Geométrica,0.16,0.18492633989840232,0.21373594492637146,0.2470337874997523,0.2855190884598055,0.33
+PDN-META-053,População e Promoção das Comunidades Vulneráveis,Protecção Social,Número de segurados registados na protecção social obrigatória,"Milhões, anual",Geométrica,2.5,2.786414349912169,3.105641971758582,3.4614421423190542,3.858004822699414,4.3
+PDN-META-054,População e Promoção das Comunidades Vulneráveis,Protecção Social,% de excedente do sistema de segurança social,%,Linear,0.25,0.252,0.254,0.256,0.258,0.26
+PDN-META-055,População e Promoção das Comunidades Vulneráveis,Idosos,Número de instalações públicas de cuidados a terceira idade construídas e reabilitadas,"N.º, cumulativo",Geométrica,11.0,11.193100348931464,11.389590492840876,11.58952993814579,11.792979235873752,12.0
+PDN-META-056,Energética,Energia,Taxa de electrificação (on-grid),%,Linear,43.0,44.2,45.4,46.6,47.8,49.0
+PDN-META-057,Energética,Energia,Capacidade instalada de energia eléctrica,GW,Geométrica,6.0,6.64539805948974,7.360219228178333,8.151931096059227,9.028804514474343,10.0
+PDN-META-058,Energética,Energia,Produção de energias renováveis,% da capacidade instalada,Linear,64.0,65.8,67.6,69.4,71.2,73.0
+PDN-META-059,Energética,Petróleo e Gás,Contribuição do petróleo e do gás para o PIB,"Biliões de Kz, anual",Geométrica,15.4,15.065806803363937,14.738865885473187,14.419019865664321,14.106114778569173,13.8
+PDN-META-060,Energética,Petróleo e Gás,Contribuição do petróleo e do gás para o PIB,% do PIB,Linear,29.0,27.6,26.2,24.8,23.4,22.0
+PDN-META-061,Energética,Petróleo e Gás,Contribuição do sector do petróleo para o PIB,"Biliões de Kz, anual",Geométrica,13.2,12.818585817416922,12.448192602915322,12.088501905470045,11.73920447570271,11.4
+PDN-META-062,Energética,Petróleo e Gás,Contribuição do sector do petróleo para o PIB,% do PIB,Linear,27.0,25.8,24.6,23.4,22.2,21.0
+PDN-META-063,Energética,Petróleo e Gás,Contribuição do sector do gás para o PIB,"Biliões de Kz, anual",Geométrica,0.9,0.9831496177263357,1.0739813009282666,1.173204783836509,1.2815953719373026,1.4
+PDN-META-064,Energética,Petróleo e Gás,Contribuição do sector do gás para o PIB,% do PIB,Linear,2.0,1.8,1.6,1.4,1.2,1.0
+PDN-META-065,Comunicações e Aceleração Digital,Comunicações,Contribuição do sector das comunicações e tecnologias de informação para o PIB,"Biliões de Kz, anual",Geométrica,0.31,0.34110128535017453,0.375322860863036,0.41297777503769767,0.454410483504561,0.5
+PDN-META-066,Comunicações e Aceleração Digital,Comunicações,Contribuição do sector das comunicações e tecnologias de informação para o PIB,% do PIB,Linear,0.6,0.64,0.68,0.72,0.76,0.8
+PDN-META-067,Comunicações e Aceleração Digital,Comunicações,Cobertura de rede 3G,% da população,Linear,76.0,79.4,82.8,86.2,89.6,93.0
+PDN-META-068,Comunicações e Aceleração Digital,Comunicações,Cobertura de rede 4G,% da população,Linear,23.0,24.8,26.6,28.4,30.2,32.0
+PDN-META-069,Comunicações e Aceleração Digital,Comunicações,Cobertura de rede 5G,% da população,Linear,0.0,4.2,8.4,12.6,16.8,21.0
+PDN-META-070,Transportes e Logística,Transportes,Contribuição do sector dos transportes para o PIB,"Biliões de Kz, anual",Geométrica,0.85,0.8966020682141961,0.9457591396776164,0.9976112949028584,1.0523062944514647,1.11
+PDN-META-071,Transportes e Logística,Transportes,Subsector da aviação civil — número de passageiros,"Milhões, anual",Geométrica,2.2,2.5714991916268626,3.0057309511534567,3.513288505063161,4.106553886691756,4.8
+PDN-META-072,Transportes e Logística,Transportes,Subsector ferroviário — toneladas transportadas,"Milhões de toneladas, anual",Geométrica,0.5,0.7292539521671096,1.0636226535026982,1.5513020473626216,2.2625862980882414,3.3
+PDN-META-073,Transportes e Logística,Transportes,Subsector marítimo e portuário — toneladas de carga processadas nos portos,"Milhões de toneladas, anual",Geométrica,17.4,19.376826537101472,21.578241761432178,24.029761355569555,26.75979985717331,29.8
+PDN-META-074,Águas e Saneamento,Água,Abastecimento de água para responder às necessidades da população e economia angolanas,hm³,Geométrica,1344.0,1517.8317493168395,1714.14674050165,1935.852935804597,2186.2344106937735,2469.0
+PDN-META-075,Águas e Saneamento,Água,Capacidade de armazenamento de água,m³ per capita,Linear,317.0,323.6,330.2,336.8,343.4,350.0
+PDN-META-076,Águas e Saneamento,Água,% da população que utiliza serviços básicos de água potável,%,Linear,57.0,57.8,58.6,59.4,60.2,61.0
+PDN-META-077,Águas e Saneamento,Água,% da população que utiliza serviços básicos de saneamento,%,Linear,52.0,52.6,53.2,53.8,54.4,55.0
+PDN-META-078,Águas e Saneamento,Água,Densidade das estações hidrométricas,km²/estação,Geométrica,21500.0,19591.558185039168,17852.518703152335,16267.844601037628,14823.833676576927,13508.0
+PDN-META-079,Sustentabilidade Ambiental,Ambiente,Pontuação no Índice de Desempenho Ambiental (EPI),Pontuação,Geométrica,30.5,31.09622907682297,31.704113534368865,32.32388121778156,32.95576442623446,33.6
+PDN-META-080,Sustentabilidade Ambiental,Ambiente,Emissões de gases de efeito estufa,KtCO₂e,Geométrica,99992.2,96726.11296109241,93566.70748880421,90510.49899851756,87554.116724059,84694.3
+PDN-META-081,Sustentabilidade Ambiental,Ambiente,Pontuação na categoria Qualidade do Ar do EPI,Pontuação,Geométrica,23.1,23.598054976907644,24.106848428275136,24.626611884433608,25.157581867698326,25.7
+PDN-META-082,Sustentabilidade Ambiental,Ambiente,Pontuação na categoria Biodiversidade e Habitat do EPI,Pontuação,Geométrica,30.1,30.950553226475897,31.82514103072815,32.724442571815736,33.64915620019059,34.6
+PDN-META-083,Sustentabilidade Ambiental,Ambiente,Pontuação no Índice Mundial de Risco — Bündnis Entwicklung Hilft,Pontuação,Geométrica,11.0,10.835131400183485,10.672733859931103,10.512770342867361,10.355204367719987,10.2
+PDN-META-084,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Contribuição da agricultura para o PIB,"Biliões de Kz, anual",Geométrica,5.2,5.5951911442119515,6.020416142359202,6.4779575161920935,6.97027125522678,7.5
+PDN-META-085,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Contribuição da agricultura para o PIB,% do PIB,Linear,9.7,10.18,10.66,11.139999999999999,11.62,12.1
+PDN-META-086,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Contribuição da pecuária para o PIB,"Biliões de Kz, anual",Geométrica,0.4,0.43378870847907947,0.47043160900986947,0.5101698002503163,0.5532647468890367,0.6
+PDN-META-087,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Contribuição da pecuária para o PIB,% do PIB,Linear,0.7,0.74,0.78,0.82,0.86,0.9
+PDN-META-088,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Número de explorações agrícolas familiares,"Milhões, anual",Geométrica,3.1,3.1596591171235153,3.2204663665876625,3.2824438440575325,3.3456140704265622,3.4100000000000006
+PDN-META-089,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Área média de terreno agrícola por exploração familiar,Hectares,Geométrica,1.81,1.8333877350717238,1.857077672437251,1.8810737169734806,1.9053798240137887,1.9299999999999997
+PDN-META-090,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Número de explorações agrícolas comerciais,"Milhares, anual",Geométrica,5.88,6.1315385371001705,6.393837556453144,6.667357377100482,6.95257800991679,7.25
+PDN-META-091,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Área média de terreno agrícola por exploração comercial,Hectares,Geométrica,88.2,88.90852479995318,89.6227412936949,90.3426952035177,91.06843261900869,91.79999999999998
+PDN-META-092,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Área total de terra agrícola para agricultura familiar,Milhões de hectares,Geométrica,5.61,5.791825487420127,5.9795441134989975,6.173346880519871,6.373430981333425,6.58
+PDN-META-093,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Área total de terra agrícola para agricultura empresarial,Milhões de hectares,Geométrica,0.5,0.5219805748950964,0.5449274411356309,0.5688830780001808,0.5938918322052528,0.62
+PDN-META-094,"Apoio à Produção, Diversificação das Exportações e Substituição das Importações",Agricultura e Pecuária,Toneladas de produção de carne,Milhares de toneladas,Geométrica,320.0,383.19975801306555,458.8814204414749,549.510153968328,658.0379938324553,788.0
+PDN-META-095,Estabilidade e Crescimento Económico,Formalização da economia,Taxa de formalização,% de todos os empregos,Linear,22.0,23.8,25.6,27.4,29.2,31.0
+PDN-META-096,Estabilidade e Crescimento Económico,Formalização da economia,Número total de trabalhadores registados no INSS,"Milhões, anual",Geométrica,2.5,2.786414349912169,3.105641971758582,3.4614421423190542,3.858004822699414,4.3
+PDN-META-098,Estabilidade e Crescimento Económico,Apoio ao empresariado nacional e financiamento da economia,Stock de crédito ao sector privado,% do PIB não-petrolífero,Linear,10.9,11.22,11.540000000000001,11.86,12.18,12.5
+PDN-META-100,Estabilidade e Crescimento Económico,Ambiente de negócios,Classificação no ranking do Índice de Competitividade Global — Fórum Económico Mundial,Posição no ranking,Geométrica,136.0,130.8201766483006,125.8376368992101,121.04486682470126,116.43463867924588,112.0
+PDN-META-101,Estabilidade e Crescimento Económico,Ambiente de negócios,Investimento privado per capita,"Milhões de USD, anual",Geométrica,280.0,290.74333324674535,301.89887795510003,313.4824502861363,325.5104732519586,338.0
+PDN-META-102,Defesa e Segurança,Defesa,Classificação no Índice de Paz Global — Instituto para Economia e Paz,Posição no ranking,Geométrica,78.0,76.76127530241489,75.54222289811706,74.34253036972761,73.16189026139489,72.0
+PDN-META-103,Defesa e Segurança,Defesa,Classificação no Índice de Segurança e Protecção — Índice Ibrahim,Posição no ranking,Geométrica,28.0,27.149927450676213,26.32566287774935,25.526422757923388,24.75144735546108,24.0
+PDN-META-104,Defesa e Segurança,Defesa,Despesa militar,% do PIB,Linear,1.4,1.3199999999999998,1.24,1.16,1.08,1.0
+PDN-META-105,Defesa e Segurança,Defesa,Número de militares por 1.000 habitantes,Por 1.000 habitantes,Linear,3.5,3.42,3.34,3.2600000000000002,3.18,3.1
+PDN-META-106,Defesa e Segurança,Interior e Segurança Pública,Número de crimes por 100.000 habitantes,Por 100.000 habitantes,Linear,207.0,205.0,203.0,201.0,199.0,197.0
+PDN-META-107,Defesa e Segurança,Interior e Segurança Pública,Taxa de ocupação do sistema penitenciário,%,Linear,113.0,112.0,111.0,110.0,109.0,108.0
+PDN-META-108,Defesa e Segurança,Interior e Segurança Pública,Despesa com ordem e segurança,% do PIB,Linear,1.4,1.38,1.3599999999999999,1.34,1.32,1.3
+PDN-META-109,Defesa e Segurança,Interior e Segurança Pública,Rácio polícia/cidadão,Por 100.000 habitantes,Linear,404.0,396.6,389.2,381.8,374.4,367.0
+PDN-META-110,Política Externa,Política Externa,"Volume de investimento directo estrangeiro, em especial no sector do agronegócio","Mil milhões de USD, anual",Geométrica,6.0,7.107986715253464,8.42057919070329,9.975560837043123,11.817692317817542,14.0
+PDN-META-111,Política Externa,Política Externa,Volume de exportações não-petrolíferas,"Mil milhões de USD, anual",Geométrica,4.0,4.511412775837686,5.088211308497872,5.738755375829771,6.472473579981407,7.3
+PDN-META-112,Política Externa,Política Externa,Número de turistas internacionais recebidos por Angola,"Milhões, anual",Geométrica,0.12,0.12710686092585746,0.13463461745354394,0.14260819663728028,0.1510540018071843,0.16
+PDN-META-116,Grandes números / quadro macroeconómico,Economia,Taxa de desemprego,%,Linear,30.0,29.0,28.0,27.0,26.0,25.0
