@@ -1,22 +1,28 @@
 """
 Gera IGDA_BDA_Nota_Metodologica_v8.docx (a partir do modelo v7, mesmos estilos) com os resultados recalculados da v8.
+Uso: python3 gen_nota.py <saida.docx> [<construtor_v8.xlsx>] [<analysis.json>] [<v8_results.json>]
 """
 from __future__ import annotations
-import os
-import json, sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import json, os, sys
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 from docx.shared import Cm
 from docx_tools import DocBuilder, fmt
 import v8_plan as P
 
-SC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "")
-A = json.load(open(SC + "analysis.json"))
-R = json.load(open(SC + "v8_results.json"))
+REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+FILES = os.path.join(REPO, "Versão Final/Finalíssima/files")
+XLSX = sys.argv[2] if len(sys.argv) > 2 else os.path.join(FILES, "IGDA_BDA_Construtor_v8.xlsx")
+A = json.load(open(sys.argv[3] if len(sys.argv) > 3 else os.path.join(HERE, "analysis.json")))
+R = json.load(open(sys.argv[4] if len(sys.argv) > 4 else os.path.join(HERE, "v8_results.json")))
 V8, V7 = A["v8"], A["v7"]
 YEARS = list(range(2015, 2026))
 DIMS8 = ["Governança", "Macroeconomia", "Capital Humano", "Inclusão Social", "Infraestruturas", "Mercado Trabalho", "Saúde/Alimentar", "Diversificação"]
 DIM_LABEL = {"Governança": "Governança e Estado de Direito", "Macroeconomia": "Estabilidade Macroeconómica", "Capital Humano": "Capital Humano", "Inclusão Social": "Inclusão Social e Protecção",
-             "Infraestruturas": "Infraestruturas e Serviços", "Mercado Trabalho": "Mercado de Trabalho", "Saúde/Alimentar": "Segurança Alimentar e Saúde", "Diversificação": "Diversificação Produtiva e Setor Privado"}
+             "Infraestruturas": "Infraestruturas e Serviços", "Mercado Trabalho": "Mercado de Trabalho", "Saúde/Alimentar": "Segurança Alimentar e Saúde", "Diversificação": "Diversificação Produtiva e Sector Privado"}
+NOMES = P.NOMES_CURTOS
+META_CAT = R["meta_cat"]
+CAT_MARK = {"operacional": " (op.)", "transposta": " (t)", "convertida": " (c)", "minplan": " (m)", "pdn": "", "sem_meta": ""}
 
 
 def f1(x, sign=False):
@@ -27,13 +33,42 @@ def pct1(x):
     return fmt(x, 1, pct=True)
 
 
+def nome(i):
+    return NOMES.get(i, i)
+
+
+def lista(ids):
+    return ", ".join(f"{nome(i)} [{i}]" for i in ids)
+
+
 def build(template, out):
     igda = V8["igda"]; igda7 = V7["igda"]
     sub = V8["subindices"]; sub7 = V7["subindices"]
-    esc = V8["escala"]
+    esc_raw = V8["escala_raw"]
     cov = V8["coverage"]
     n_rows = cov["n_rows"]
     ind = V8["indicators"]
+    ind_by = {i["id"]: i for i in ind}
+    d23 = {d: sub[d][-1] - sub[d][8] for d in DIMS8}
+    sens = V8["sens_nacional"]
+    mc = R["meta_changes"]
+    by_cat = {}
+    for t in mc:
+        by_cat.setdefault(t[4], []).append(t[0])
+    cumpr = V8["metas_cumpridas"]
+    ids_u = [d["id"] for d in cumpr if d["no_ultimo"]]
+    ids_15 = [d["id"] for d in cumpr if d["em_2015"]]
+    ed = R["emprego_diffs"]
+    prev = [ed[str(y)]["diff"] for y in range(2019, 2025) if ed[str(y)]["diff"] is not None]
+    mean_prev = sum(prev) / len(prev)
+    d25 = ed["2025"]["diff"]
+    n_new = sum(1 for e in R["log"] if e["tipo"] == "novo indicador")
+    new_ids = [e["id"] for e in R["log"] if e["tipo"] == "novo indicador"]
+    tr = R["transposicoes"]
+
+    def dd(iid):
+        return f1(ind_by[iid]["d_23_25"], sign=True)
+
     b = DocBuilder(template)
 
     b.title("Índice Global de Desenvolvimento de Angola — IGDA-BDA")
@@ -70,7 +105,7 @@ def build(template, out):
         ("Infraestruturas e Serviços (activa) — ", "acesso a água potável, densidade rodoviária, electrificação, energia limpa para cozinhar e tráfego portuário de contentores."),
         ("Mercado de Trabalho (activa) — ", "emprego, desemprego total e juvenil, participação feminina na força de trabalho e produtividade do trabalho."),
         ("Segurança Alimentar e Saúde (activa) — ", "mortalidade materna e de menores de cinco anos, cobertura vacinal, desnutrição, incidência de malária, despesa em saúde e despesa directa das famílias."),
-        ("Diversificação Produtiva e Setor Privado (activa) — ", "o crescimento do PIB não petrolífero, o índice de capacidades produtivas da UNCTAD, a indústria transformadora no PIB, o peso dos combustíveis nas exportações e o crédito ao sector privado."),
+        ("Diversificação Produtiva e Sector Privado (activa) — ", "o crescimento do PIB não petrolífero, o índice de capacidades produtivas da UNCTAD, a indústria transformadora no PIB, o peso dos combustíveis nas exportações e o crédito ao sector privado."),
         ("Ambiente, Clima e Resiliência (inactiva) — ", "dimensão definida mas sem indicadores seleccionados nesta entrega."),
         ("Demografia, Território e Urbanização (inactiva) — ", "dimensão definida mas sem indicadores seleccionados nesta entrega."),
         ("Transformação Digital e Inovação (inactiva) — ", "dimensão definida mas sem indicadores seleccionados nesta entrega."),
@@ -87,16 +122,16 @@ def build(template, out):
     # 3
     b.h1("3. Base de dados e fontes")
     b.h2("3.1 Catálogo de indicadores potenciais")
-    b.para(f"A construção parte de um catálogo abrangente de {n_rows} indicadores candidatos (331 na v7, mais sete acrescentados na v8), organizados por dimensão e mantido na base potencial do construtor. Para cada candidato, o catálogo regista a unidade de medida, o sentido (se valores mais altos representam melhor ou pior desempenho), as fronteiras de normalização, a meta 2027 e — novidade da v8 — a origem documentada dessa meta, a fonte, um marcador de fonte nacional, o grupo temático para controlo de duplicação, a série anual de 2015 a 2025, a cobertura observada e o último ano com dados. É a partir deste catálogo que o motor de selecção escolhe, de forma automática e recalculável, os indicadores que entram no índice.")
+    b.para(f"A construção parte de um catálogo abrangente de {n_rows} indicadores candidatos (331 na v7, mais {n_new} acrescentados na v8), organizados por dimensão e mantido na base potencial do construtor. Para cada candidato, o catálogo regista a unidade de medida, o sentido (se valores mais altos representam melhor ou pior desempenho), as fronteiras de normalização, a meta 2027 e — novidade da v8 — a origem e a categoria documentadas dessa meta, a fonte, um marcador de fonte nacional, o grupo temático para controlo de duplicação, a série anual de 2015 a 2025, a cobertura observada e o último ano com dados. É a partir deste catálogo que o motor de selecção escolhe, de forma automática e recalculável, os indicadores que entram no índice.")
     b.h2("3.2 Fontes")
     b.para("Os indicadores provêm de uma combinação de fontes nacionais e internacionais. Entre as fontes nacionais contam-se o Instituto Nacional de Estatística (Contas Nacionais anuais e trimestrais, Índice de Preços no Consumidor Nacional, Inquérito sobre o Emprego em Angola, IIMS 2023-24, Censo 2024), o Banco Nacional de Angola, o Ministério das Finanças, o Ministério do Planeamento (Balanço do PDN), o Ministério da Saúde, o Ministério da Energia e Águas, o Ministério dos Transportes e o INSS/MAPTSS. Entre as fontes internacionais figuram o Banco Mundial (World Development Indicators e Worldwide Governance Indicators), o FMI (World Economic Outlook), a Organização Mundial da Saúde, a UNESCO, a OIT (ILOSTAT), a UNCTAD, a Transparency International, a União Interparlamentar, o Fórum Económico Mundial, a UNICEF e a FAO. A lista completa consta do Anexo B.")
-    b.para(f"Dos {cov['n_sel']} indicadores seleccionados, {cov['nacional']} envolvem uma fonte nacional. O processo de selecção atribui uma bonificação explícita aos indicadores de origem nacional, reconhecendo a sua maior pertinência e actualidade para o contexto angolano (ver Secção 4).")
+    b.para(f"Dos {cov['n_sel']} indicadores seleccionados, {cov['nacional']} envolvem uma fonte nacional. O marcador de fonte nacional identifica o produtor primário dos dados (INE, BNA, MINFIN, MINSA e outros), independentemente do canal de extracção (WDI, WEO, ILOSTAT): a dívida pública e o saldo orçamental, extraídos do FMI WEO, que compila os dados do Ministério das Finanças, mantêm o marcador. O processo de selecção atribui uma bonificação explícita aos indicadores de origem nacional, reconhecendo a sua maior pertinência e actualidade para o contexto angolano (ver Secções 4 e 9.2).")
     b.h2("3.3 Período e estrutura temporal")
     b.para(f"Todas as séries são organizadas numa grelha anual fixa de 2015 a 2025, o que assegura a comparabilidade entre indicadores e ao longo do tempo. A cobertura efectiva varia entre indicadores: {cov['last2025']} dos {cov['n_sel']} indicadores têm observações até 2025, {cov['last2024']} têm 2024 como última observação e {cov['last2023']} têm 2023; por efeito do limiar de recência, nenhum indicador seleccionado tem última observação anterior a 2023. Esta heterogeneidade de cobertura é tratada pelas regras descritas na Secção 5.")
     b.h2("3.4 Anualização de séries infra-anuais")
-    b.para("Quando uma fonte disponibiliza dados com periodicidade superior à anual (por exemplo, mensal ou trimestral), a série é convertida para frequência anual segundo uma regra de agregação coerente com a natureza da variável: variáveis de fluxo são somadas ou anualizadas (o PIB não petrolífero resulta da soma anual das medidas de volume trimestrais encadeadas do INE), variáveis de stock e índices são tomados em fim de período ou em média anual (a inflação usa a média anual do IPC; a variação homóloga de Dezembro é registada em linha separada). Esta regra é aplicada de forma uniforme para evitar descontinuidades artificiais na série.")
+    b.para("Quando uma fonte disponibiliza dados com periodicidade superior à anual (por exemplo, mensal ou trimestral), a série é convertida para frequência anual segundo uma regra de agregação coerente com a natureza da variável: variáveis de fluxo são somadas ou anualizadas (o PIB não petrolífero resulta da soma anual das medidas de volume trimestrais encadeadas, não ajustadas de sazonalidade, do INE — Quadro 5 das Contas Nacionais Trimestrais, cuja soma reproduz o PIB anual oficial), variáveis de stock e índices são tomados em fim de período ou em média anual (a inflação usa a média anual do IPC; a variação homóloga de Dezembro é registada em linha separada). Esta regra é aplicada de forma uniforme para evitar descontinuidades artificiais na série.")
     b.h2("3.5 Vintages e revisões (v8)")
-    b.para("Cada série está associada ao vintage da fonte de que foi extraída, registado na coluna 'Origem' da base potencial e no Anexo B. Na v8 foram actualizadas, com fontes primárias nacionais, as séries de crescimento do PIB (Contas Nacionais Anuais Preliminares 2025 do INE, Maio de 2026), do PIB não petrolífero (Contas Nacionais Trimestrais até ao IV trimestre de 2025), da inflação (IPCN até Dezembro de 2025 e, para leitura, até Agosto de 2026), do emprego (Anuário do IEA 2025 e primeiras publicações da nova metodologia), da dívida pública e do saldo orçamental (FMI WEO Abril 2026, coerente com o PIB rebaseado pelo INE e com os rácios do Ministério das Finanças) e da mortalidade materna (IIMS 2023-24). As séries do Banco Mundial (WDI Junho/Julho 2026), da OIT, da OMS/UNICEF, da UNCTAD, da Transparency International, do WEF e da IPU mantêm o vintage da v7 (Junho-Agosto de 2026), que é o mais recente publicado por essas instituições à data desta revisão.")
+    b.para("Cada série está associada ao vintage da fonte de que foi extraída, registado na coluna 'Origem' da base potencial e no Anexo B. Na v8 foram actualizadas, com fontes primárias nacionais, as séries de crescimento do PIB (Contas Nacionais Anuais Preliminares 2025 do INE, Maio de 2026), da inflação (IPCN até Dezembro de 2025 e, para leitura, até Agosto de 2026) e do emprego (Anuário do IEA 2025 e primeiras publicações da nova metodologia); o PIB não petrolífero foi verificado nas Contas Nacionais Trimestrais (IV trimestre de 2025, já incluído na v7, sem revisões). Para a dívida pública e o saldo orçamental adoptou-se a série do FMI WEO de Abril de 2026, que compila os dados do Ministério das Finanças (fonte histórica declarada pelo FMI; GFSM 2014) — razão pela qual o marcador de fonte nacional é mantido — e cujo denominador de 2025 é o PIB nominal das Contas Nacionais Trimestrais do INE. A mortalidade materna foi corrigida (Secção 8.6). As séries do Banco Mundial (WDI; bulk de 30-06-2026, registado na coluna 'Nota' das linhas então verificadas), da OIT, da OMS/UNICEF, da UNCTAD, da Transparency International, do WEF e da IPU mantêm o vintage herdado da v7 — edições disponíveis até Agosto de 2026 (WGI edição 2025, dados até 2024; CPI 2025; PCI da UNCTAD até 2024) — e não foram reverificadas nesta revisão (Secção 9.2); edições eventualmente publicadas depois de Agosto de 2026 não estão incorporadas.")
 
     # 4
     b.h1("4. Selecção de indicadores")
@@ -106,7 +141,7 @@ def build(template, out):
                ("Completude. ", "A extensão da cobertura temporal observada, premiando séries com menos lacunas e dados mais recentes."),
                ("Consistência. ", "A estabilidade e fiabilidade da série, penalizando rupturas metodológicas e valores anómalos não explicados.")])
     b.h2("4.2 Pontuação e ranking")
-    b.para("Cada indicador candidato recebe uma pontuação total que combina os três critérios com os pesos abaixo, acrescida de uma bonificação fixa quando a fonte é nacional. Os parâmetros são configuráveis na folha de critérios do construtor:")
+    b.para("Cada indicador candidato recebe uma pontuação total que combina os três critérios com os pesos abaixo, acrescida de uma bonificação fixa quando a fonte é nacional — entendendo-se por fonte nacional o produtor primário dos dados, independentemente do canal de extracção. Os parâmetros são configuráveis na folha de critérios do construtor:")
     b.table(["Parâmetro de selecção", "Símbolo", "Valor"], [["Peso do critério Relevância", "w₁", "0,40"], ["Peso do critério Completude", "w₂", "0,35"], ["Peso do critério Consistência", "w₃", "0,25"], ["Bonificação de fonte nacional (pontos)", "+b", "12"]], col_widths=[Cm(8), Cm(2.5), Cm(2.5)])
     b.para("Os indicadores são ordenados pela pontuação total dentro de cada dimensão. Um indicador só é elegível se tiver sinal e fronteiras de normalização válidos, dados suficientes (cobertura mínima de 80% dos anos) e um último ano observado não anterior ao limiar de recência (fixado em 2023).")
     b.h2("4.3 Mecanismo anti-duplicação")
@@ -114,7 +149,7 @@ def build(template, out):
     b.h2("4.4 Modo automático e modo manual")
     b.para("O construtor admite dois modos de operação. No modo automático, a selecção resulta do ranking: por dimensão, são escolhidos os melhores indicadores por Score Total até ao número-alvo, com anti-duplicação por grupo temático. No modo manual, entram apenas os indicadores marcados «Incluir». A selecção final opera em modo automático, com ajustes pontuais («Excluir») para retirar sobreposições residuais; o modo de referência é «Automática».")
     b.h2("4.5 Resultado da selecção")
-    b.para(f"A aplicação destes critérios, com curadoria de não-redundância, resulta em {cov['n_sel']} indicadores distribuídos pelas oito dimensões activas, conforme o quadro seguinte. A selecção da v8 é idêntica à da v7: os sete novos candidatos (emprego INE, pobreza a 3,00 USD, cobertura do Kwenda e segurados do INSS) ficam documentados no catálogo mas não cumprem o limiar de cobertura temporal, por razões explicadas na Secção 8.6. O detalhe indicador a indicador consta do Anexo A.")
+    b.para(f"A aplicação destes critérios, com curadoria de não-redundância, resulta em {cov['n_sel']} indicadores distribuídos pelas oito dimensões activas, conforme o quadro seguinte. A selecção da v8 é idêntica à da v7: os {n_new} novos candidatos (emprego INE, pobreza a 3,00 USD, cobertura do Kwenda e segurados do INSS) ficam documentados no catálogo mas não cumprem o limiar de cobertura temporal, por razões explicadas na Secção 8.6. O detalhe indicador a indicador consta do Anexo A.")
     counts = {d: sum(1 for i in ind if i["dim"] == d) for d in DIMS8}
     b.table(["Dimensão", "Candidatos", "Elegíveis", "N.º de indicadores"], [[f"{k+1}. {DIM_LABEL[d]}", V8["candidatos_por_dim"][d], V8["elegiveis_por_dim"][d], counts[d]] for k, d in enumerate(DIMS8)] + [["Total (8 dimensões activas)", sum(V8["candidatos_por_dim"][d] for d in DIMS8), sum(V8["elegiveis_por_dim"][d] for d in DIMS8), cov["n_sel"]]], col_widths=[Cm(9), Cm(2.5), Cm(2.5), Cm(3)])
 
@@ -178,20 +213,28 @@ def build(template, out):
     b.para("A revisão v7 substituiu as três últimas fronteiras de base histórica (desemprego juvenil, produto por trabalhador e tráfego portuário) por fronteiras normativas, sem alterar indicadores, pesos ou regras de agregação. O Mercado de Trabalho corrigiu de 66,0 para 56,2 em 2025 e as Infraestruturas passaram de 48,0 para 49,9.")
     b.h2("8.6 Revisão v7 → v8: dados, metas do PDN e resposta ao feedback externo")
     b.para("A v8 resulta de uma auditoria de qualidade ao construtor v7 e do cruzamento do índice com o PDN 2023-2027 solicitado a um avaliador externo (Fable 5.1). Incidiu em cinco frentes, sem alterar a lista dos 41 indicadores, as fronteiras, os pesos ou as regras de agregação:")
+    ex_tr = {k: tr[k] for k in ("SAU04", "INF001", "MAC004") if k in tr}
     b.numbered([
-        ("Actualização de séries com fontes primárias. ", "Crescimento do PIB 2025 confirmado pelas Contas Nacionais Anuais Preliminares do INE (+3,13%); PIB não petrolífero recalculado a partir das Contas Nacionais Trimestrais mais recentes (IV trimestre de 2025, com revisões de até 0,2 p.p.); inflação validada com o IPCN (média anual 2025 de 20,2%; homóloga de Dezembro 15,7%); emprego informal e formalização actualizados com o Anuário do IEA 2025."),
-        ("Correcção de séries sem rastreabilidade. ", "A dívida pública e o saldo orçamental usavam valores arredondados de 'compilação interna' (o saldo de 2017 estava registado em +1,5% do PIB quando o valor oficial foi −5,7%). Foram substituídos pela série do FMI WEO de Abril de 2026, já coerente com o PIB rebaseado pelo INE em 2025 e com os rácios do Ministério das Finanças (dívida governamental de 46,6% em 2025; FMI 51,3%; Banco Mundial ≈52%). A mortalidade materna de 2025 (170) não tinha suporte documental e foi removida; o valor do IIMS 2023-24 (170 por 100 mil, IC 99–242) passa a figurar em 2024."),
-        ("Alinhamento das metas 2027 com o PDN. ", f"{len(R['meta_changes'])} metas foram alteradas para as metas oficiais do PDN 2023-2027 (por exemplo, mortalidade materna 300 → 165; esperança de vida 65 → 63; electrificação 60 → 49; água 70 → 61; desemprego 20 → 25; dívida pública 60; IPC 35 → 34). As metas do PDN expressas em percentis dos Worldwide Governance Indicators foram convertidas para a escala de estimativas por deslocamento equivalente na normal padrão a partir do valor de 2022; as metas expressas em % do PIB não petrolífero foram convertidas para % do PIB. Onde o PDN não fixa meta comparável, a meta operacional da v7 foi mantida e identificada como tal. Uma nova coluna 'Origem da Meta 2027' documenta cada caso; a coluna deixa assim de conter as treze metas inconsistentes assinaladas na avaliação externa."),
-        ("Emprego — séries do INE (feedback, ponto 1). ", "Foram acrescentadas ao catálogo as séries do Inquérito sobre o Emprego em Angola, originais (13.ª CIET) e harmonizadas pela OIT para a definição internacional, bem como a primeira observação da nova metodologia (19.ª–21.ª CIET, IV trimestre de 2025). Como o IEA só existe desde 2019, estas séries não cumprem a cobertura mínima de 80% e não substituem as estimativas modeladas da OIT no índice-mãe; a nova folha 12_Emprego_INE calcula um subíndice alternativo 2019–2025 com as séries INE, que isola o efeito do desfasamento de vintage (a série INE harmonizada regista a descida do desemprego de 13,9% para 10,4% em 2025, que a estimativa modelada ainda não incorpora)."),
-        ("Inclusão — pobreza e protecção social (feedback, ponto 2). ", "A taxa de pobreza foi desdobrada nas linhas de 2,15 USD (PPC 2017, referência do PDN: 31% → 28%) e de 3,00 USD (PPC 2021, novo padrão do Banco Mundial: 39,3% em 2018), e foram criados dois indicadores de protecção social: cobertura do programa Kwenda (agregados beneficiários acumulados em % dos agregados familiares do Censo 2024: 6,7% em 2022 → 14,8% em 2025) e segurados inscritos no INSS (1,97 milhões em 2020 → 3,34 milhões em 2025; meta PDN 4,3 milhões). Sem inquérito de despesas posterior ao IDREA 2018-19 e com programas iniciados em 2020, nenhum destes indicadores atinge ainda a cobertura temporal exigida; ficam documentados para incorporação automática quando a cumprirem."),
+        ("Actualização de séries com fontes primárias. ", "Crescimento do PIB 2025 confirmado pelas Contas Nacionais Anuais Preliminares do INE (+3,13%); PIB não petrolífero verificado nas Contas Nacionais Trimestrais (Quadro 5: o IV trimestre de 2025 já constava da v7 e não há revisões — série inalterada); inflação validada com o IPCN (média anual 2025 de 20,2%; homóloga de Dezembro 15,7%); emprego informal e formalização actualizados com o Anuário do IEA 2025, e o valor de 2019 da formalização alinhado com o valor anual publicado pelo INE (25,3%)."),
+        ("Correcção de séries sem rastreabilidade. ", "A dívida pública e o saldo orçamental usavam valores arredondados de 'compilação interna' (o saldo de 2017 estava registado em +1,5% do PIB quando o valor oficial foi −5,7%). Foram substituídos pela série do FMI WEO de Abril de 2026, em precisão total, que compila os dados do Ministério das Finanças (fonte histórica declarada pelo FMI; GFSM 2014) — razão pela qual o marcador de fonte nacional é mantido — e cujo denominador de 2025 é o PIB nominal das Contas Nacionais Trimestrais do INE (129 255 mil milhões de kwanzas; as Contas Anuais Preliminares reviram-no para 128 302, o que daria ≈51,7% em vez de 51,3%). Os níveis não são comparáveis com a leitura PDN/MINFIN, feita em perímetro 'dívida pública' e PIB pré-rebasing (66% em 2022, contra 57,4% na série FMI; em 2025: FMI 51,3%, Banco Mundial ≈52%, MINFIN dívida governamental 46,6%). A mortalidade materna de 2024 (185) e de 2025 (170) não tinha suporte na série modelada MMEIG e foi removida: 2024–2025 passam a carry-forward do valor de 2023 (183). A estimativa directa do IIMS 2023-24 (170 por 100 mil, IC 99–242, referida aos sete anos anteriores ao inquérito) é compatível com a série mas não é comparável ponto a ponto com as estimativas modeladas, e fica registada na linha SAU029 como validação cruzada."),
+        ("Alinhamento das metas 2027 com o PDN. ", f"{len(mc)} metas foram revistas, em cinco categorias identificadas na nova coluna 'Origem da Meta 2027' (entre parênteses rectos): {len(by_cat.get('pdn', []))} fixadas directamente nos valores quantificados do PDN, quando a base coincide com a série ou o indicador é o do próprio PDN ({lista(by_cat.get('pdn', []))}); {len(by_cat.get('transposta', []))} transpostas à base da própria série — quando a base 2022 do PDN não coincide com o valor 2022 da série (fonte ou definição distinta), aplica-se ao valor 2022 da série a variação do PDN, aditiva para níveis e proporções e relativa para taxas de mortalidade e de desemprego e para o rácio da dívida (por exemplo, mortalidade de menores de 5 anos: PDN 69 → 51 sobre a série IGME de 51,9 dá {fmt(ex_tr['SAU04']['meta'], 1)}; electrificação: PDN 43 → 49 sobre 48,5 dá {fmt(ex_tr['INF001']['meta'], 1)}; dívida pública: PDN 66 → 60 sobre a série FMI de 57,4 dá {fmt(ex_tr['MAC004']['meta'], 1)}); {len(by_cat.get('convertida', []))} convertidas de escala — as metas do PDN em percentis dos Worldwide Governance Indicators foram convertidas para a escala de estimativas pela fórmula do quadro seguinte, e as metas em % do PIB não petrolífero para % do PIB (peso não petrolífero ≈80%); {len(by_cat.get('minplan', []))} tomada do Balanço anual do PDN (MINPLAN; meta 2025 usada como proxy: incidência da malária 215 por mil); {len(by_cat.get('operacional', []))} operacional ajustada (escolaridade obrigatória 9 → 10 anos); e {len(by_cat.get('sem_meta', []))} removidas por o conceito do PDN não ser comparável com a série ({lista(by_cat.get('sem_meta', []))}). A meta da dívida (60% do PIB) já constava da v7, mas em perímetro e base do PIB distintos dos da série FMI, pelo que foi transposta. Onde o PDN não fixa meta comparável, a meta operacional da v7 foi mantida e identificada como tal. A coluna 'Meta 2027' não entra em nenhuma fórmula do construtor. Entre os {cov['n_sel']} indicadores do índice, {len(ids_u)} têm a meta 2027 já atingida na última observação ({lista(ids_u)}) e {len(ids_15)} já a atingiam em 2015 ({lista(ids_15)}) — sobretudo metas operacionais herdadas e trajectórias médias do PDN; a coluna documenta agora a origem de cada meta, mas não serve ainda de âncora a uma escala de progresso (Secção 11)."),
+        ("Emprego — séries do INE (feedback, ponto 1). ", f"Foram acrescentadas ao catálogo as séries do Inquérito sobre o Emprego em Angola, originais (13.ª CIET) e harmonizadas pela OIT para a definição internacional, bem como a primeira observação da nova metodologia (19.ª–21.ª CIET, IV trimestre de 2025). Como o IEA só existe desde 2019, estas séries não cumprem a cobertura mínima de 80% e não substituem as estimativas modeladas da OIT no índice-mãe; a nova folha 12_Emprego_INE calcula um subíndice alternativo 2019–2025 com as séries INE normalizadas com as fronteiras das séries oficiais que substituem. A diferença face à leitura oficial é de {f1(mean_prev, sign=True)} p.p. em média em 2019–2024 e salta para {f1(d25, sign=True)} p.p. em 2025: é este salto que aproxima o efeito do desfasamento de vintage (a série INE harmonizada regista a descida do desemprego de 13,9% para 10,4% em 2025, que a estimativa modelada ainda não incorpora); a diferença residual dos outros anos reflecte níveis e definições distintos entre séries harmonizadas e modeladas."),
+        ("Inclusão — pobreza e protecção social (feedback, ponto 2). ", "A taxa de pobreza foi desdobrada nas linhas de 2,15 USD (PPC 2017, referência do PDN: 31% → 28%) e de 3,00 USD (PPC 2021, novo padrão do Banco Mundial: 39,3% em 2018), e foram criados dois indicadores de protecção social: cobertura do programa Kwenda (agregados beneficiários acumulados em % dos agregados familiares do Censo 2024: 3,3% em 2021 → 14,8% em 2025) e segurados inscritos no INSS (1,97 milhões em 2020 → 3,34 milhões em 2025, quatro observações; meta PDN 4,3 milhões). Sem inquérito de despesas posterior ao IDREA 2018-19, com o Kwenda iniciado em 2020 (primeiro dado anual em 2021) e sem série anual do INSS anterior a 2020, nenhum destes indicadores atinge ainda a cobertura temporal exigida; ficam documentados para incorporação automática quando a cumprirem."),
     ])
-    b.para(f"O efeito agregado das alterações é contido: o IGDA 2025 passa de {f1(igda7[-1])} para {f1(igda[-1])} e a variação 2015–2025 mantém-se em {f1(igda[-1]-igda[0], sign=True)} pontos. A dimensão mais afectada é a Estabilidade Macroeconómica, onde a série oficial do saldo orçamental revela um défice em 2017 e em 2025 que a série anterior escondia; a Diversificação ajusta-se marginalmente pela revisão do PIB não petrolífero. O quadro seguinte compara as duas versões.")
+    b.para("Conversão das metas de governança (PDN, p.30, percentis WGI '2022 ou ano mais recente disponível'): meta = ê2022 + [Φ⁻¹(p2027) − Φ⁻¹(p2022)], em que ê2022 é a estimativa WGI da série (edição 2025) e Φ⁻¹ a inversa da normal padrão. Os percentile ranks do WGI são posições empíricas de um vintage anterior, pelo que Φ(ê2022) difere de p2022 (por exemplo 29,4% contra 20,8% na estabilidade política); o deslocamento em z é invariante a essa diferença de nível. Aplicar o mesmo deslocamento em pontos percentuais ao percentil implícito Φ(ê2022) daria as metas da última coluna (diferença até 0,04 na escala WGI).")
+    b.table(["Indicador (PDN p.30)", "Percentil 2022", "Percentil 2027", "ê2022 (série)", "Meta 2027", "Sensibilidade (p.p.)"],
+            [[f"{v['nome']} [{k}]", fmt(v["p2022"], 1, pct=True), fmt(v["p2027"], 1, pct=True), fmt(v["e2022"], 2), fmt(v["meta"], 2), fmt(v["sens_pp"], 2)] for k, v in R["wgi"].items()],
+            col_widths=[Cm(6), Cm(2.2), Cm(2.2), Cm(2.2), Cm(2), Cm(2.4)], font_size=8)
+    changed_dims = [(d, sub7[d][-1], sub[d][-1]) for d in DIMS8 if abs(sub[d][-1] - sub7[d][-1]) >= 0.05]
+    razao = {"Macroeconomia": "substituição das séries de dívida e de saldo orçamental", "Saúde/Alimentar": "remoção dos valores 2024–2025 da mortalidade materna sem suporte", "Mercado Trabalho": "alinhamento do valor 2019 da formalização"}
+    txt_dims = "; ".join(f"{DIM_LABEL[d]} ({f1(a)} → {f1(c)} em 2025; {razao.get(d, 'revisão de dados')})" for d, a, c in changed_dims) or "nenhuma dimensão se altera de forma visível"
+    b.para(f"O efeito agregado das alterações é contido: o IGDA 2025 passa de {f1(igda7[-1])} para {f1(igda[-1])} e a variação 2015–2025 mantém-se em {f1(igda[-1]-igda[0], sign=True)} pontos. As dimensões alteradas são: {txt_dims}. A Diversificação não se altera, porque a série do PIB não petrolífero foi verificada sem revisão. O quadro seguinte compara as duas versões.")
     rows = []
     for d in DIMS8:
         rows.append([DIM_LABEL[d], f1(sub7[d][0]), f1(sub7[d][-1]), f1(sub[d][0]), f1(sub[d][-1]), f1(sub[d][-1] - sub7[d][-1], sign=True)])
     rows.append(["IGDA-BDA", f1(igda7[0]), f1(igda7[-1]), f1(igda[0]), f1(igda[-1]), f1(igda[-1] - igda7[-1], sign=True)])
     b.table(["Dimensão", "v7 · 2015", "v7 · 2025", "v8 · 2015", "v8 · 2025", "Δ v8−v7 (2025)"], rows, col_widths=[Cm(6.5), Cm(2), Cm(2), Cm(2), Cm(2), Cm(2.5)])
-    b.para("Nota sobre o ficheiro v7: o livro Excel distribuído com a v7 tinha sido gravado sem recálculo e conservava em cache os valores da v6 (IGDA 2025 = 46,4; Mercado de Trabalho = 66,0), embora as fórmulas e os documentos correspondessem à v7 (45,7; 56,2). Os valores 'v7' deste quadro resultam do recálculo integral das fórmulas da v7. O livro v8 é gravado com recálculo integral forçado na abertura.")
+    b.para("Nota sobre o ficheiro v7: o livro Excel distribuído com a v7 tinha sido gravado sem recálculo e conservava em cache os valores da v6 (IGDA 2025 = 46,4; Mercado de Trabalho = 66,0), embora as fórmulas e os documentos correspondessem à v7 (45,7; 56,2). Os valores 'v7' deste quadro resultam do recálculo integral das fórmulas da v7. O livro v8 é gravado com recálculo integral forçado na abertura e com as caches dos gráficos regeneradas com os resultados v8.")
 
     # 9
     b.h1("9. Pressupostos e limitações")
@@ -203,11 +246,13 @@ def build(template, out):
     b.h2("9.2 Limitações de dados")
     b.bullets([
         ("Anos recentes provisórios. ", f"Pouco mais de metade dos indicadores ({cov['last2025']} em {cov['n_sel']}) chega a 2025; o último ano assenta em parte em extrapolação e deve ser lido como provisório."),
-        ("Lacunas em Inclusão. ", "A dimensão de Inclusão Social e Protecção conta apenas com três indicadores. Os candidatos de pobreza e protecção social acrescentados na v8 documentam a lacuna mas não a colmatam: não existe inquérito de despesas posterior a 2018-19 e as séries do Kwenda e do INSS começam em 2020."),
+        ("Lacunas em Inclusão. ", "A dimensão de Inclusão Social e Protecção conta apenas com três indicadores. Os candidatos de pobreza e protecção social acrescentados na v8 documentam a lacuna mas não a colmatam: não existe inquérito de despesas posterior a 2018-19, a série do Kwenda só tem valores desde 2021 (o programa arrancou em 2020 mas não há dado anual para esse ano) e a do INSS conta apenas quatro observações desde 2020."),
         ("Dependência de estimativas internacionais. ", "Vários indicadores provêm de modelações de organismos internacionais e não de registos administrativos nacionais. O caso mais relevante é o emprego: as estimativas modeladas da OIT para 2025 ainda não incorporam a queda do desemprego medida pelo INE (Secção 10.5 e folha 12_Emprego_INE)."),
+        ("Estimativas de inquérito vs. modeladas (mortalidade materna). ", "A estimativa directa do IIMS 2023-24 (170 por 100 mil, IC 99–242) refere-se aos sete anos anteriores ao inquérito e resulta do método de sobrevivência de irmãs; as estimativas MMEIG corrigem sub-registo e são comparáveis entre anos. Por isso o IIMS não foi incorporado na série do índice (fica em SAU029 como validação cruzada) e 2024–2025 usam carry-forward até nova ronda MMEIG."),
         ("Quebra de série no IEA. ", "Desde o IV trimestre de 2025 o INE aplica a nova metodologia (19.ª–21.ª CIET), que exclui a produção para autoconsumo do emprego: a taxa de desemprego passa de 26,9% para 20,1% e a taxa de emprego de ~63% para ~40% sem alteração real do mercado. Não existe retropolação; as metas do PDN (25% em 2027) foram fixadas na definição antiga."),
-        ("Rebasing do PIB. ", "O INE rebaseou o PIB em 2025; rácios em % do PIB de vintages anteriores (dívida, saldo, crédito) não são comparáveis com os actuais. A v8 usa um único vintage (FMI WEO Abril 2026) para dívida e saldo."),
-        ("Fontes internacionais não reverificadas nesta revisão. ", "Os valores WGI, WUENIC, SOFI, UNCTAD, CPI 2025, GGGI e IPU mantêm o vintage da v7 (Junho–Agosto de 2026); a sua reverificação directa nas fontes não foi possível no ambiente desta revisão e deve ser feita no ciclo seguinte."),
+        ("Rebasing do PIB. ", "O INE rebaseou o PIB em 2025; rácios em % do PIB de vintages anteriores (dívida, saldo, crédito) não são comparáveis com os actuais. A v8 usa um único vintage (FMI WEO Abril 2026) para dívida e saldo; o denominador de 2025 do WEO é o PIB nominal das Contas Nacionais Trimestrais do INE (129 255 mil milhões de kwanzas), que as Contas Anuais Preliminares reviram para 128 302 (−0,7%)."),
+        ("Marcador de fonte nacional e sensibilidade da selecção. ", f"O marcador (+12 pontos) identifica o produtor primário dos dados, independentemente do canal de extracção; a dívida e o saldo (MINFIN via FMI WEO) mantêm-no. A composição de Macroeconomia é sensível a esta convenção: sem o bónus, a dívida pública e o saldo orçamental sairiam do índice (entrariam a dívida externa pública e a conta corrente, ambas do BNA) e o IGDA 2025 seria {f1(sens['igda_2025'])} em vez de {f1(igda[-1])}."),
+        ("Fontes internacionais não reverificadas nesta revisão. ", "Os valores WGI (edição 2025), WUENIC, SOFI, UNCTAD, CPI 2025, GGGI e IPU mantêm o vintage da v7 (edições disponíveis até Agosto de 2026); a sua reverificação directa nas fontes não foi possível no ambiente desta revisão e deve ser feita no ciclo seguinte."),
     ])
     b.h2("9.3 Limitações metodológicas")
     b.bullets([
@@ -225,73 +270,79 @@ def build(template, out):
     b.h2("10.3 Série de referência (2015–2025)")
     b.para("Nesta versão, e tratando 2025 como provisório, o índice global apresenta a seguinte trajectória — ascendente no conjunto do período —, com as oito dimensões activas a contribuir em todos os anos:")
     b.table([str(y) for y in YEARS], [[f1(v) for v in igda]], font_size=9)
-    b.para(f"No conjunto do período, o IGDA sobe de {f1(igda[0])} (2015) para {f1(igda[-1])} (2025), uma melhoria de {f1(igda[-1]-igda[0])} pontos. O mínimo da série ocorre em 2020 ({f1(igda[5])}, choque pandémico e petrolífero, único ano na banda Baixo); a recuperação é contínua desde então, com estabilização em 2025 ({f1(igda[-1]-igda[-2], sign=True)} p.p., provisório).")
+    imax = max(range(11), key=lambda k: igda[k])
+    b.para(f"No conjunto do período, o IGDA sobe de {f1(igda[0])} (2015) para {f1(igda[-1])} (2025), uma melhoria de {f1(igda[-1]-igda[0])} pontos. O mínimo da série ocorre em 2020 ({f1(igda[5])}, choque pandémico e petrolífero, único ano na banda Baixo); a recuperação é contínua desde então, com o máximo em {2015+imax} ({f1(igda[imax])}) e estabilização em 2025 ({f1(igda[-1]-igda[-2], sign=True)} p.p., provisório).")
     deltas = {d: sub[d][-1] - sub[d][0] for d in DIMS8}
     up = sorted([d for d in DIMS8 if deltas[d] > 0], key=lambda d: -deltas[d]); down = sorted([d for d in DIMS8 if deltas[d] <= 0], key=lambda d: deltas[d])
     b.para("Por dimensão, entre 2015 e 2025: melhoraram " + ", ".join(f"{DIM_LABEL[d]} ({f1(deltas[d], sign=True)})" for d in up) + "; recuaram " + ", ".join(f"{DIM_LABEL[d]} ({f1(deltas[d], sign=True)})" for d in down) + ". Estas variações são medidas em pontos de score, na escala própria de cada dimensão; a leitura comparável faz-se pela via da Secção 10.4.")
     b.table(["Dimensão"] + [str(y) for y in YEARS] + ["Δ 2015–25"], [[DIM_LABEL[d]] + [f1(v) for v in sub[d]] + [f1(deltas[d], sign=True)] for d in DIMS8] + [["IGDA-BDA"] + [f1(v) for v in igda] + [f1(igda[-1]-igda[0], sign=True)]], font_size=8)
     b.h2("10.4 Escala comum de evolução (2015 = 100)")
     b.para("Para permitir uma comparação legítima entre dimensões, o construtor inclui uma folha que reexprime cada subíndice face ao seu próprio valor de 2015 (Índice(t) = 100 × Subíndice(t) ÷ Subíndice(2015)). Por partirem todas do mesmo valor, as trajectórias tornam-se directamente comparáveis, o que os níveis não permitem.")
-    order = sorted(DIMS8, key=lambda d: -esc[d][-1])
-    b.para("Nesta escala, " + ", ".join(f"{DIM_LABEL[d]} ({fmt(esc[d][-1]-100, 1, pct=True, sign=True)})" for d in order[:3]) + " lideram o progresso acumulado; recuam " + ", ".join(f"{DIM_LABEL[d]} ({fmt(esc[d][-1]-100, 1, pct=True, sign=True)})" for d in order if esc[d][-1] < 100) + f". O IGDA global progride {fmt(esc['IGDA'][-1]-100, 1, pct=True, sign=True)}. Esta escala compara ritmos de progresso, não patamares de desenvolvimento.")
-    b.table(["Dimensão"] + [str(y) for y in YEARS], [[DIM_LABEL[d]] + [fmt(v, 0) for v in esc[d]] for d in order] + [["IGDA-BDA"] + [fmt(v, 0) for v in esc["IGDA"]]], font_size=8)
+    order = sorted(DIMS8, key=lambda d: -esc_raw[d][-1])
+    b.para("Nesta escala, " + ", ".join(f"{DIM_LABEL[d]} ({fmt(esc_raw[d][-1]-100, 1, pct=True, sign=True)})" for d in order[:3]) + " lideram o progresso acumulado; recuam " + ", ".join(f"{DIM_LABEL[d]} ({fmt(esc_raw[d][-1]-100, 1, pct=True, sign=True)})" for d in order if esc_raw[d][-1] < 100) + f". O IGDA global progride {fmt(esc_raw['IGDA'][-1]-100, 1, pct=True, sign=True)}. Esta escala compara ritmos de progresso, não patamares de desenvolvimento (valores arredondados ao inteiro a partir do valor exacto).")
+    b.table(["Dimensão"] + [str(y) for y in YEARS], [[DIM_LABEL[d]] + [fmt(v, 0) for v in esc_raw[d]] for d in order] + [["IGDA-BDA"] + [fmt(v, 0) for v in esc_raw["IGDA"]]], font_size=8)
     b.h2("10.5 Cruzamento com o PDN 2023-2027 (passo 9 do quadro OCDE/JRC)")
     b.para("A avaliação externa da v7 cruzou a trajectória recente de cada dimensão (2023–2025) com as metas e o Balanço oficial do PDN 2023-2027. A v8 retoma e actualiza esse cruzamento com os dados desta revisão. Em seis das oito dimensões o índice e o plano contam a mesma história, o que constitui uma validação externa da construção; nos dois pilares do PDN as leituras divergem — o capital humano avança devagar e a segurança alimentar regride.")
-    d23 = {d: sub[d][-1] - sub[d][8] for d in DIMS8}
     cruz = [
-        ["Governança", "Metas modestas (percentis WGI +4 a +7 p.p.; IPC 33 → 34); IPC estagnado em 32 (2024 e 2025)", f"{f1(d23['Governança'], sign=True)} p.p.; estagnação após os ganhos de 2018–23 (estabilidade política −5,2)", "Consistente"],
-        ["Macroeconomia", "Dívida 66 → 60% do PIB largamente superada (FMI 51,3% em 2025); reservas >6 meses; inflação desviou (27,5% em Dez-2024) e corrigiu (15,7% em Dez-2025; 8,8% em Ago-2026); défice de 4,1% do PIB em 2025", f"{f1(d23['Macroeconomia'], sign=True)} p.p.; dívida (+16,3) e crescimento (+7,2) puxam; inflação (−13,0) e saldo orçamental (−6,3) pesam", "Consistente"],
+        ["Governança", "Metas modestas (percentis WGI +4 a +7 p.p.; IPC 33 → 34); IPC estagnado em 32 (2024 e 2025)", f"{f1(d23['Governança'], sign=True)} p.p.; estagnação após os ganhos de 2018–23 (estabilidade política {dd('GOV004')})", "Consistente"],
+        ["Macroeconomia", f"Dívida: PDN 66 → 60% do PIB (perímetro MINFIN); transposta à série FMI, 57,4 → {fmt(tr['MAC004']['meta'], 1)}%; FMI 51,3% em 2025, meta cumprida nessa série; reservas >6 meses; inflação desviou (27,5% em Dez-2024) e corrigiu (15,7% em Dez-2025; 8,8% em Ago-2026); défice de 4,1% do PIB em 2025", f"{f1(d23['Macroeconomia'], sign=True)} p.p.; dívida ({dd('MAC004')}) e crescimento ({dd('MAC001')}) puxam; inflação ({dd('MAC003')}) e saldo orçamental ({dd('MAC005')}) pesam", "Consistente"],
         ["Capital Humano", "Incrementos pequenos (esperança de vida 62 → 63; alfabetização 76 → 78%); compromisso de subir a educação para 11,8% da despesa", f"{f1(d23['Capital Humano'], sign=True)} p.p.; despesa em educação em queda (dotações OGE: 2,0% do PIB em 2024, 1,8% em 2025, 1,7% em 2026)", "Consistente, com alerta"],
-        ["Inclusão Social", "Pobreza 31 → 28%; Kwenda com 1,35 milhões de agregados acumulados (meta anual 2025: 1,8 milhões)", f"{f1(d23['Inclusão Social'], sign=True)} p.p., quase só por representação política (mulheres no parlamento +9,1)", "Parcial — o índice não mede pobreza (candidatos criados, sem série elegível)"],
+        ["Inclusão Social", "Pobreza 31 → 28%; Kwenda com 1,35 milhões de agregados acumulados (meta anual 2025: 1,8 milhões)", f"{f1(d23['Inclusão Social'], sign=True)} p.p., quase só por representação política (mulheres no parlamento {dd('INC06')})", "Parcial — o índice não mede pobreza (candidatos criados, sem série elegível)"],
         ["Infraestruturas", "Electrificação 43 → 49%: 48% em 2025 (MINPLAN); água tratada estagnada; PIP com 846 projectos por iniciar (2024)", f"{f1(d23['Infraestruturas'], sign=True)} p.p., lento; 2025 por carry-forward em electrificação e energia limpa", "Consistente"],
-        ["Mercado de Trabalho", "Desemprego 30 → 25%: 28,3% em 2025 (Anuário IEA); 20,1% no IV trim 2025 na nova metodologia", f"{f1(d23['Mercado Trabalho'], sign=True)} p.p., estagnado; leitura INE (folha 12) mostra melhoria em 2025 — divergência de vintage; produtividade em queda é a divergência substantiva", "Inconsistente — desfasamento + produtividade"],
-        ["Saúde e Seg. Alimentar", "Metas ambiciosas (mortalidade <5 anos 69 → 51; materna 199 → 165); Balanço com vacinação (76% vs 80%) e produção alimentar abaixo da meta", f"{f1(d23['Saúde/Alimentar'], sign=True)} p.p.; malária (−0,7), cobertura vacinal (−10,0) e desnutrição pesam; indicadores de resultado (mortalidade) ainda melhoram", "Consistente — alerta principal"],
-        ["Diversificação", "Não petrolífero +4,6%/ano em média (INE: +5,2% em 2025); IDE e exportações não petrolíferas aquém", f"{f1(d23['Diversificação'], sign=True)} p.p.; PIB não petrolífero (+10,8) puxa; crédito ao sector privado (−1,1) e concentração das exportações sem sinal", "Parcial"],
+        ["Mercado de Trabalho", "Desemprego 30 → 25%: 28,3% em 2025 (Anuário IEA); 20,1% no IV trim 2025 na nova metodologia", f"{f1(d23['Mercado Trabalho'], sign=True)} p.p., estagnado; leitura INE (folha 12) melhora em 2025 — desfasamento de vintage; produtividade em queda é a divergência substantiva", "Inconsistente — desfasamento + produtividade"],
+        ["Saúde e Seg. Alimentar", "Metas ambiciosas (mortalidade <5 anos 69 → 51; materna 199 → 165); Balanço com vacinação (76% vs 80%) e produção alimentar abaixo da meta", f"{f1(d23['Saúde/Alimentar'], sign=True)} p.p.; cobertura vacinal ({dd('SAU006')}) explica quase todo o recuo, malária ({dd('SAU020')}) agrava; desnutrição sem observação desde 2023 (carry-forward; {f1(ind_by['SAU002']['d_15_25'], sign=True)} em 2015–25); mortalidade materna sem dado novo (carry-forward) e mortalidade <5 anos ({dd('SAU04')}) ainda melhora", "Consistente — alerta principal"],
+        ["Diversificação", "Não petrolífero +4,6%/ano em média (INE: +5,4% em 2025); IDE e exportações não petrolíferas aquém", f"{f1(d23['Diversificação'], sign=True)} p.p.; PIB não petrolífero ({dd('DIV017')}) puxa; crédito ao sector privado ({dd('DIV015')}) e concentração das exportações sem sinal", "Parcial"],
     ]
     b.table(["Dimensão", "PDN 2023-2027 e Balanço", "IGDA 2023–2025 (v8)", "Veredicto"], cruz, col_widths=[Cm(3), Cm(6.5), Cm(6), Cm(3)], font_size=8)
-    b.para("Três conclusões para o Comité Executivo. Primeira: o cruzamento com o plano oficial não desmente o índice. Segunda: o pilar da segurança alimentar do PDN está a regredir nos indicadores de processo (vacinação, desnutrição, malária) antes de as metas de mortalidade o reflectirem — é a leitura de maior valor do índice. Terceira: o Balanço do PDN reconhece que, dos 1 036 indicadores definidos, 856 não apresentavam execução no I trimestre de 2025 e que os reportados são sobretudo de produto; o IGDA mede resultados e complementa o PDN no que este não mede.")
+    b.para("Três conclusões para o Comité Executivo. Primeira: o cruzamento com o plano oficial não desmente o índice. Segunda: o pilar da segurança alimentar do PDN está a regredir nos indicadores de processo (cobertura vacinal e malária em 2023–25; desnutrição ao longo da década, sem observação desde 2023) antes de as metas de mortalidade o reflectirem — é a leitura de maior valor do índice. Terceira: o Balanço do PDN reconhece que, dos 1 036 indicadores definidos, 856 não apresentavam execução no I trimestre de 2025 e que os reportados são sobretudo de produto; o IGDA mede resultados e complementa o PDN no que este não mede.")
 
     # 11
     b.h1("11. Recomendações para desenvolvimento futuro")
     b.para("O índice está operacional e auditável. As recomendações seguintes constituem o programa de aperfeiçoamento futuro:")
     b.bullets([
-        ("Concluído na v8 — metas do PDN. ", "Coluna de metas alinhada com as metas oficiais e documentada linha a linha; as metas operacionais remanescentes estão identificadas."),
+        ("Parcialmente concluído na v8 — metas do PDN. ", f"Coluna de metas alinhada com o PDN por cinco vias e documentada linha a linha. Fica por rever a coerência das metas já atingidas: {len(ids_u)} dos {cov['n_sel']} indicadores têm a meta 2027 cumprida na última observação ({lista(ids_u)}), na maioria metas operacionais herdadas ou trajectórias médias; a decisão sobre metas mais exigentes cabe ao gabinete responsável pelo índice."),
         ("Concluído na v8 — leitura INE do emprego. ", "Séries INE/IEA no catálogo e folha 12_Emprego_INE. Passo seguinte: quando a OIT publicar estimativas modeladas que incorporem o IEA 2025 (Novembro de 2026), actualizar LAB001–LAB003; a partir de 2028 (≥9 anos de IEA), avaliar a substituição directa pelas séries INE harmonizadas."),
         ("Em curso — Inclusão. ", "Candidatos de pobreza (2,15 e 3,00 USD), Kwenda e INSS criados; obter do INSS a série anual de segurados 2015–2025 (tornaria INC033 elegível de imediato) e acompanhar o próximo inquérito de despesas do INE."),
         ("Substituir a variável de política em Capital Humano. ", "Avaliar a troca dos anos de escolaridade obrigatória por um indicador de resultado com série elegível (taxa de conclusão do ensino primário: 58% em 2025 vs. meta anual 69%, MINPLAN)."),
         ("Estabelecer um referencial externo de comparação. ", "Reescalar cada indicador contra a distribuição observada num grupo de países pares, à maneira da medida de distância à fronteira."),
-        ("Consolidar os anos recentes. ", "Rever 2024 e 2025 à medida que as fontes publiquem dados definitivos (WDI, WGI 2025, WUENIC, IGME, SOFI 2026, UNCTAD PCI) e levantar progressivamente o estatuto de provisório."),
+        ("Consolidar os anos recentes. ", "Rever 2024 e 2025 à medida que as fontes publiquem dados definitivos (WDI, WGI 2026 com dados de 2025, WUENIC, IGME, MMEIG, SOFI 2026, UNCTAD PCI) e levantar progressivamente o estatuto de provisório."),
         ("Activar as dimensões inactivas. ", "Ambiente (10 elegíveis), Demografia (7) e Digital (9) têm já candidatos elegíveis; a sua activação é uma decisão de desenho a fundamentar (número de indicadores alvo e não-redundância)."),
-        ("Realizar análise de sensibilidade. ", "Executar o passo 7 do quadro da OCDE, testando a robustez do IGDA a pesos alternativos, à escolha entre agregação aritmética e geométrica e à inclusão ou exclusão de indicadores marginais."),
+        ("Realizar análise de sensibilidade. ", "Executar o passo 7 do quadro da OCDE, testando a robustez do IGDA a pesos alternativos, à escolha entre agregação aritmética e geométrica, ao marcador de fonte nacional (Secção 9.2) e à inclusão ou exclusão de indicadores marginais."),
     ])
 
     # 12
     b.h1("12. Implementação técnica")
     b.h2("12.1 Arquitectura do construtor")
-    b.para("O índice é implementado num livro de cálculo integralmente ligado por fórmulas, organizado em folhas sequenciais: um painel de síntese (00); os critérios de selecção e parâmetros (01); a base potencial (02, o catálogo completo de candidatos, onde opera o motor de selecção, agora com a coluna 'Origem da Meta 2027'); a base do índice (03); os dados ajustados (04); as bandeiras de qualidade (05); a normalização (06); os subíndices e o IGDA (07); as visualizações (08); a metodologia (09); as fontes (10); a escala comum de evolução (11); a leitura complementar do emprego com dados do INE (12, nova na v8); e o registo de alterações v7 → v8 com a comparação de resultados (13, nova na v8). Toda a cadeia é dinâmica.")
+    b.para("O índice é implementado num livro de cálculo integralmente ligado por fórmulas, organizado em folhas sequenciais: um painel de síntese (00, com navegação para todas as folhas); os critérios de selecção e parâmetros (01); a base potencial (02, o catálogo completo de candidatos, onde opera o motor de selecção, agora com a coluna 'Origem da Meta 2027'); a base do índice (03); os dados ajustados (04); as bandeiras de qualidade (05); a normalização (06); os subíndices e o IGDA (07); as visualizações (08); a metodologia (09); as fontes (10); a escala comum de evolução (11); a leitura complementar do emprego com dados do INE (12, nova na v8); e o registo de alterações v7 → v8 com a comparação de resultados, as metas alteradas e a conversão WGI (13, nova na v8). Toda a cadeia é dinâmica.")
     b.h2("12.2 Cadeia de cálculo")
     b.para("A sequência de cálculo parte da base potencial, onde o motor de selecção pontua e ordena os candidatos; os seleccionados alimentam a base do índice; seguem-se os dados ajustados, onde se aplica a imputação; a normalização, que converte tudo para a escala de 0 a 100 com os sentidos correctos; e os subíndices e o IGDA, calculados com as regras de cobertura e as funções de agregação descritas. O painel, as visualizações e as folhas 11 a 13 lêem o resultado final.")
     b.h2("12.3 Recalibração e reprodutibilidade")
-    b.para("A recalibração faz-se através de dois pontos de controlo: a folha de critérios e a base potencial. Qualquer alteração, seguida de recálculo, reconstrói o índice de forma reproduzível. A v8 foi verificada com um motor de cálculo independente, que replica todas as fórmulas do construtor e reproduziu exactamente os valores da v6 e da v7; o livro é gravado com a opção de recálculo integral na abertura, para evitar a repetição do problema de valores em cache detectado na v7.")
+    b.para("A recalibração faz-se através de dois pontos de controlo: a folha de critérios e a base potencial. Qualquer alteração, seguida de recálculo, reconstrói o índice de forma reproduzível. A v8 foi verificada com um motor de cálculo independente, que replica todas as fórmulas do construtor e reproduziu exactamente os valores da v6 e da v7; o livro é gravado com a opção de recálculo integral na abertura e com as caches dos gráficos regeneradas, para evitar a repetição do problema de valores em cache detectado na v7.")
 
     # Anexo A
     b.h1(f"Anexo A — Estrutura completa: {cov['n_sel']} indicadores")
-    b.para("O quadro seguinte lista os indicadores do índice, agrupados pelas oito dimensões activas, com a respectiva unidade, sentido, cobertura temporal observada (percentagem de anos com observação em 2015–2025, antes de imputação), fonte e meta 2027 (alinhada com o PDN quando existe correspondência; 'op.' identifica metas operacionais mantidas).")
+    b.para("O quadro seguinte lista os indicadores do índice, agrupados pelas oito dimensões activas, com a respectiva unidade, sentido, cobertura temporal observada (percentagem de anos com observação em 2015–2025, antes de imputação), fonte e meta 2027. Marcas da coluna Meta: sem marca = valor directo do PDN; (t) = meta do PDN transposta à base da série; (c) = meta do PDN convertida de escala; (m) = meta anual 2025 do MINPLAN usada como proxy; (op.) = meta operacional mantida; '–' = sem meta comparável.")
     rows = []
     wsmeta = {}
     import openpyxl
-    wb = openpyxl.load_workbook("/home/user/bda-indice/Versão Final/Finalíssima/files/IGDA_BDA_Construtor_v8.xlsx", data_only=True)
+    wb = openpyxl.load_workbook(XLSX, data_only=True)
     ws = wb["02_Base_Potencial"]; hdr = [c.value for c in ws[4]]; ci = {h: i for i, h in enumerate(hdr) if h is not None}
     for r in ws.iter_rows(min_row=5, values_only=True):
         if r[0]:
-            wsmeta[r[0]] = (r[ci["Meta 2027"]], r[ci["Origem da Meta 2027"]])
+            wsmeta[r[0]] = r[ci["Meta 2027"]]
     for d in DIMS8:
         rows.append([f"{DIMS8.index(d)+1}. {DIM_LABEL[d]}", "", "", "", "", "", ""])
         for i in sorted([i for i in ind if i["dim"] == d], key=lambda x: x["slot"]):
-            meta, orig = wsmeta.get(i["id"], (None, ""))
-            mtxt = "–" if meta is None else (fmt(meta, 2) if abs(meta) < 10 and not float(meta).is_integer() else fmt(meta, 0))
-            if orig and not str(orig).startswith("PDN") and meta is not None:
-                mtxt += " (op.)"
+            meta = wsmeta.get(i["id"])
+            if meta is None:
+                mtxt = "–"
+            elif float(meta).is_integer():
+                mtxt = fmt(meta, 0)
+            else:
+                dec = len(f"{meta:g}".split(".")[1]) if "." in f"{meta:g}" else 1
+                mtxt = fmt(meta, min(2, max(1, dec)))
+            if meta is not None:
+                mtxt += CAT_MARK.get(META_CAT.get(i["id"], "operacional"), "")
             rows.append([i["id"], i["nome"], i["unidade"], i["sentido"].replace("-", "−"), pct1(100 * i["cobertura"]), i["fonte"], mtxt])
     b.table(["Código", "Indicador", "Unidade", "Sentido", "Cobertura", "Fonte", "Meta 2027"], rows, col_widths=[Cm(1.8), Cm(6), Cm(2.6), Cm(1.3), Cm(1.8), Cm(3.5), Cm(1.8)], font_size=8)
 
@@ -300,27 +351,28 @@ def build(template, out):
     b.para("B.1 Fontes de dados e vintages usados na v8")
     b.table(["Fonte", "Séries", "Vintage / publicação", "Estado na v8"], [
         ["INE — Contas Nacionais Anuais", "Crescimento do PIB (MAC001)", "CN Anuais Preliminares 2025 (05-05-2026); série 2002–2024 (24-03-2026)", "Actualizado"],
-        ["INE — Contas Nacionais Trimestrais", "PIB não petrolífero (MAC014/DIV017)", "IV trimestre 2025 (ficheiro 09-05-2026)", "Recalculado"],
+        ["INE — Contas Nacionais Trimestrais", "PIB não petrolífero (MAC014/DIV017)", "Quadro 5, IV trimestre 2025 (ficheiro 09-05-2026)", "Verificado — sem alteração"],
         ["INE — IPCN", "Inflação média anual e homóloga (MAC003/MAC027)", "Dezembro 2025; leitura até Agosto 2026", "Validado"],
         ["INE — IEA", "Emprego informal, formalização, séries INE (LAB004/005/028-031)", "Anuário 2025 (Abril 2026); I e II trim 2026 (nova metodologia)", "Actualizado / novo"],
-        ["INE — IIMS 2023-24", "Mortalidade materna, infantil, <5 anos", "Relatório final (2025)", "Corrigido"],
+        ["INE — IIMS 2023-24", "Mortalidade materna (SAU029), infantil, <5 anos (HUM025)", "Relatório final (2025)", "Validação cruzada (não incorporado na série SAU003)"],
         ["INE — Censo 2024", "População, agregados familiares (denominador do Kwenda)", "Resultados definitivos (Nov-2025)", "Novo"],
-        ["FMI — WEO", "Dívida e saldo do governo geral (MAC004/005/016/019/020)", "Abril 2026 (PIB rebaseado)", "Substituído"],
+        ["FMI — WEO (dados MINFIN)", "Dívida e saldo do governo geral (MAC004/005)", "Abril 2026 (PIB rebaseado; precisão total)", "Substituído"],
+        ["FMI — WEO", "Dívida, saldo e saldo primário (MAC016/019/020)", "Abril 2026", "Mantido da v7 (vintage confirmado)"],
         ["MINFIN/UGD; MINPLAN; MAPTSS/INSS; FAS", "Rácios de dívida (validação), Balanço do PDN, Kwenda, INSS", "PAE 2026; RBPDN I trim 2025; Boletim 2025", "Novo / contexto"],
-        ["Banco Mundial — WDI/WGI", "Restantes séries macro, sociais e de governança", "WDI Junho/Julho 2026; WGI 2025 (ano 2024)", "Mantido da v7"],
+        ["Banco Mundial — WDI/WGI", "Restantes séries macro, sociais e de governança", "WDI (bulk de 30-06-2026; Abril 2026 em cache local); WGI edição 2025 (dados até 2024)", "Mantido da v7 (não reverificado)"],
         ["OIT — ILOSTAT", "Emprego, desemprego, produtividade (modeladas) e estimativas nacionais harmonizadas", "Modeladas Nov-2025; nacionais Abr-2026", "Mantido / novo"],
-        ["OMS, UNICEF, FAO, UNCTAD, TI, WEF, IPU", "Saúde, nutrição, capacidades produtivas, portos, índices", "Edições 2025–2026 (v7)", "Mantido da v7"],
+        ["OMS, UNICEF, FAO, UNCTAD, TI, WEF, IPU", "Saúde, nutrição, capacidades produtivas, portos, índices", "Edições 2025–2026 (v7)", "Mantido da v7 (não reverificado)"],
         ["PDN 2023-2027 (Diário da República / AUDA-NEPAD)", "Metas 2027", "Outubro 2023", "Novo (metas)"],
     ], col_widths=[Cm(4.5), Cm(5.5), Cm(5), Cm(2.5)], font_size=8)
     b.para("Referência metodológica: OCDE e Joint Research Centre da Comissão Europeia (2008), Handbook on Constructing Composite Indicators: Methodology and User Guide.")
     b.para("B.2 Lista de siglas")
     b.table(["Sigla", "Designação"], [
         ["BDA", "Banco de Desenvolvimento de Angola"], ["BNA", "Banco Nacional de Angola"], ["CIET", "Conferência Internacional de Estatísticos do Trabalho (OIT)"], ["CPI", "Corruption Perceptions Index (Índice de Percepção da Corrupção)"],
-        ["FAO", "Organização das Nações Unidas para a Alimentação e a Agricultura"], ["FMI", "Fundo Monetário Internacional"], ["IDH", "Índice de Desenvolvimento Humano"], ["IEA", "Inquérito sobre o Emprego em Angola (INE)"],
-        ["IGDA", "Índice Global de Desenvolvimento de Angola"], ["IIMS", "Inquérito de Indicadores Múltiplos e de Saúde"], ["INE", "Instituto Nacional de Estatística"], ["INSS", "Instituto Nacional de Segurança Social"],
+        ["FAO", "Organização das Nações Unidas para a Alimentação e a Agricultura"], ["FMI", "Fundo Monetário Internacional"], ["GFSM", "Government Finance Statistics Manual (FMI)"], ["IDH", "Índice de Desenvolvimento Humano"], ["IEA", "Inquérito sobre o Emprego em Angola (INE)"],
+        ["IGDA", "Índice Global de Desenvolvimento de Angola"], ["IGME", "UN Inter-agency Group for Child Mortality Estimation"], ["IIMS", "Inquérito de Indicadores Múltiplos e de Saúde"], ["INE", "Instituto Nacional de Estatística"], ["INSS", "Instituto Nacional de Segurança Social"],
         ["IPC", "Índice de Preços no Consumidor"], ["IPU", "Inter-Parliamentary Union"], ["JRC", "Joint Research Centre (Comissão Europeia)"], ["MAPTSS", "Ministério da Administração Pública, Trabalho e Segurança Social"],
-        ["MINEA", "Ministério da Energia e Águas"], ["MINFIN", "Ministério das Finanças"], ["MINPLAN", "Ministério do Planeamento"], ["MINSA", "Ministério da Saúde"], ["OCDE", "Organização para a Cooperação e Desenvolvimento Económico"],
-        ["OIT", "Organização Internacional do Trabalho"], ["OMS", "Organização Mundial da Saúde"], ["PDN", "Plano de Desenvolvimento Nacional 2023-2027"], ["PIB", "Produto Interno Bruto"], ["PPC", "Paridade de Poder de Compra"],
+        ["MINEA", "Ministério da Energia e Águas"], ["MINFIN", "Ministério das Finanças"], ["MINPLAN", "Ministério do Planeamento"], ["MINSA", "Ministério da Saúde"], ["MMEIG", "Maternal Mortality Estimation Inter-agency Group (OMS/UNICEF/UNFPA/Banco Mundial/UNDESA)"], ["OCDE", "Organização para a Cooperação e Desenvolvimento Económico"],
+        ["OIT", "Organização Internacional do Trabalho"], ["OMS", "Organização Mundial da Saúde"], ["PDN", "Plano de Desenvolvimento Nacional 2023-2027"], ["PIB", "Produto Interno Bruto"], ["PIP", "Poverty and Inequality Platform (Banco Mundial)"], ["PPC", "Paridade de Poder de Compra"],
         ["RNB", "Rendimento Nacional Bruto"], ["TEU", "Twenty-foot Equivalent Unit"], ["UGD", "Unidade de Gestão da Dívida (MINFIN)"], ["UNCTAD", "Conferência das Nações Unidas sobre Comércio e Desenvolvimento"],
         ["UNICEF", "Fundo das Nações Unidas para a Infância"], ["WDI", "World Development Indicators (Banco Mundial)"], ["WEF", "Fórum Económico Mundial"], ["WEO", "World Economic Outlook (FMI)"], ["WGI", "Worldwide Governance Indicators (Banco Mundial)"],
     ], col_widths=[Cm(2.5), Cm(13)], font_size=8)
@@ -334,12 +386,12 @@ def build(template, out):
     rows = []
     for t, es in tipos.items():
         rows.append([t.capitalize(), len(es), "; ".join(sorted(set(e["id"] for e in es if e["id"])))[:400] or "—"])
-    rows.append(["Metas 2027 alteradas", len(R["meta_changes"]), "; ".join(m[0] for m in R["meta_changes"])])
+    rows.append(["Metas 2027 alteradas", len(mc), "; ".join(f"{P.META_CAT_LABEL[c]}: {len(v)}" for c, v in by_cat.items())])
     b.table(["Tipo de alteração", "N.º", "Indicadores"], rows, col_widths=[Cm(4), Cm(1.5), Cm(11.5)], font_size=8)
     b.p("Banco de Desenvolvimento de Angola", "Source Code")
     b.save(out)
 
 
 if __name__ == "__main__":
-    build("/home/user/bda-indice/Versão Final/Finalíssima/files/IGDA_BDA_Nota_Metodologica_v7.docx", sys.argv[1])
+    build(os.path.join(FILES, "IGDA_BDA_Nota_Metodologica_v7.docx"), sys.argv[1])
     print("ok")

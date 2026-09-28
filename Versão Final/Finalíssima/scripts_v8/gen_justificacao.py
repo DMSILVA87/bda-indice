@@ -1,20 +1,31 @@
 """
 Gera IGDA_BDA_Justificacao_Minimos_Maximos_v8.docx a partir da Base_Potencial do construtor v8.
 Corrige o erro de texto da v7 (escalas 0-100 descritas como "0 e 1") e actualiza séries/metas.
+Uso: python3 gen_justificacao.py <construtor_v8.xlsx> <saida.docx> [<v8_results.json>]
 """
 from __future__ import annotations
-import os
-import sys, re
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sys, os, json
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 import openpyxl
 from docx.shared import Cm
 from docx_tools import DocBuilder, fmt
+import v8_plan as P
 
+REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+FILES = os.path.join(REPO, "Versão Final/Finalíssima/files")
 DIMS = ["1. Governança e Estado de Direito", "2. Estabilidade Macroeconómica", "3. Capital Humano", "4. Inclusão Social e Protecção",
-        "5. Infraestruturas e Serviços", "6. Mercado de Trabalho", "7. Segurança Alimentar e Saúde", "8. Diversificação Produtiva e Setor Privado",
+        "5. Infraestruturas e Serviços", "6. Mercado de Trabalho", "7. Segurança Alimentar e Saúde", "8. Diversificação Produtiva e Sector Privado",
         "9. Ambiente, Clima e Resiliência", "10. Demografia, Território e Urbanização", "11. Transformação Digital e Inovação"]
 
 REVISED_V7 = {"INF024", "LAB003", "LAB025"}
+META_PHRASE = {
+    "pdn": "Meta alinhada com o PDN 2023-2027 (v8).",
+    "transposta": "Meta do PDN 2023-2027 transposta à base da série (v8; ver coluna 'Origem da Meta 2027').",
+    "convertida": "Meta do PDN 2023-2027 convertida de escala/unidade (v8).",
+    "minplan": "Meta anual 2025 do Balanço do PDN (MINPLAN) usada como proxy da meta 2027 (v8).",
+    "operacional": "Meta operacional da v7 mantida (sem correspondência directa no PDN; ver coluna 'Origem da Meta 2027').",
+}
 
 
 def num_pt(x):
@@ -29,12 +40,11 @@ def num_pt(x):
     return f"{x:.4g}".replace(".", ",") if abs(x) < 1000 else f"{x:,.1f}".replace(",", " ").replace(".", ",")
 
 
-def justify(row, cols, years):
+def justify(row, cols, years, meta_cat):
     lo, hi = row[cols["Mínimo"]], row[cols["Máximo"]]
     unit = str(row[cols["Unidade"]] or "")
     sent = str(row[cols["Sentido"]] or "")
     meta = row[cols["Meta 2027"]]
-    meta_or = row[cols.get("Origem da Meta 2027", -1)] if "Origem da Meta 2027" in cols else None
     vals = [row[cols[y]] for y in years if isinstance(row[cols[y]], (int, float))]
     u = unit.lower()
     sl, sh = num_pt(lo), num_pt(hi)
@@ -75,8 +85,8 @@ def justify(row, cols, years):
     if isinstance(meta, (int, float)):
         inside = (lo <= meta <= hi) if isinstance(lo, (int, float)) and isinstance(hi, (int, float)) else True
         parts.append(f"A meta 2027 ({num_pt(meta)}) fica dentro da faixa, permitindo interpretar progresso sem saturar a escala antes do objectivo." if inside else f"A meta 2027 ({num_pt(meta)}) está fora da faixa: rever limites ou meta.")
-        if meta_or and str(meta_or).startswith("PDN"):
-            parts.append("Meta alinhada com o PDN 2023-2027 (v8).")
+        cat = meta_cat.get(row[cols["ID"]], "operacional")
+        parts.append(META_PHRASE.get(cat, META_PHRASE["operacional"]))
     if vals:
         parts.append(f"A série observada em 2015-2025 vai de {num_pt(min(vals))} a {num_pt(max(vals))}.")
     else:
@@ -84,7 +94,10 @@ def justify(row, cols, years):
     return " ".join(parts)
 
 
-def build(xlsx_path, template_path, out_path, version="v8", date="Setembro de 2026"):
+def build(xlsx_path, template_path, out_path, results_path, version="v8", date="Setembro de 2026"):
+    R = json.load(open(results_path))
+    meta_cat = R["meta_cat"]
+    new_ids = [e["id"] for e in R["log"] if e["tipo"] == "novo indicador"]
     wb = openpyxl.load_workbook(xlsx_path, data_only=True)
     ws = wb["02_Base_Potencial"]
     hdr = [c.value for c in ws[4]]
@@ -102,8 +115,10 @@ def build(xlsx_path, template_path, out_path, version="v8", date="Setembro de 20
            "o limite é operacional: serve para preservar comparabilidade, evitar que outliers dominem o índice e manter a meta 2027 dentro da faixa sempre que possível.")
     n_in = sum(1 for r in rows if all(isinstance(r[cols[k]], (int, float)) for k in ("Mínimo", "Máximo")) and all((r[cols[y]] is None) or (r[cols["Mínimo"]] <= r[cols[y]] <= r[cols["Máximo"]]) for y in years))
     b.para(f"Validação: todos os {len(rows)} indicadores da Base Potencial têm mínimo e máximo definidos e {n_in} têm todas as observações de 2015-2025 dentro dos respectivos intervalos" + ("." if n_in == len(rows) else f" (os restantes {len(rows) - n_in} são assinalados na tabela)."))
-    b.para(f"Revisão {version}: nenhuma fronteira dos 41 indicadores do índice foi alterada face à v7. As alterações desta versão incidem sobre (i) a coluna Meta 2027, agora alinhada com as metas oficiais do PDN 2023-2027 sempre que existe correspondência "
-           "(a origem de cada meta está documentada na nova coluna 'Origem da Meta 2027' da Base_Potencial); (ii) as séries actualizadas com as publicações mais recentes; e (iii) seis novos candidatos (LAB028-LAB031, INC031, INC032), cujos limites seguem as regras abaixo. "
+    numeros = {7: "sete", 6: "seis", 8: "oito"}.get(len(new_ids), str(len(new_ids)))
+    b.para(f"Revisão {version}: nenhuma fronteira dos 41 indicadores do índice foi alterada face à v7. As alterações desta versão incidem sobre (i) a coluna Meta 2027, agora alinhada com o PDN 2023-2027 sempre que existe correspondência — "
+           "directa, transposta à base da série ou convertida de escala — com a origem e a categoria de cada meta documentadas na nova coluna 'Origem da Meta 2027' da Base_Potencial; (ii) as séries actualizadas com as publicações mais recentes; "
+           f"e (iii) {numeros} novos candidatos ({', '.join(new_ids)}), cujos limites seguem as regras abaixo. "
            "Foi ainda corrigido um erro de redacção da v7, que descrevia várias escalas 0-100 como '0 e 1'.")
     b.table(["Critério", "Justificação geral"], [
         ["Escalas oficiais", "WGI (−2,5 a 2,5), CPIA (1 a 6), UHC e scores 0-100 mantêm a escala publicada pela fonte."],
@@ -113,7 +128,8 @@ def build(xlsx_path, template_path, out_path, version="v8", date="Setembro de 20
         ["Variáveis monetárias/contagens", "O mínimo é normalmente zero; o máximo é tecto operacional baseado em ordem de grandeza, meta, série observada e comparabilidade."],
         ["Fronteiras de amplitude histórica", "Não são usadas em nenhum indicador que integre o índice (revisão v7). Candidatos fora do índice que ainda as usam mantêm os parâmetros para eventual revisão quando forem incorporados."],
         ["Variáveis +/−", "São variáveis de equilíbrio ou composição; o intervalo delimita a zona de leitura útil para normalização."],
-        ["Metas 2027 (v8)", "Alinhadas com o PDN 2023-2027 quando existe correspondência directa ou derivável (percentis WGI convertidos para estimativas; rácios do PIB não petrolífero convertidos para % do PIB). Sem correspondência, mantém-se a meta operacional da v7, identificada como tal."],
+        ["Metas 2027 (v8)", "Alinhadas com o PDN 2023-2027 por cinco vias: valor directo (base do PDN coincide com a série); transposição à base da série quando a base 2022 do PDN difere (variação aditiva para níveis/proporções, relativa para mortalidade, desemprego e dívida); "
+                            "conversão de escala (percentis WGI → estimativas; % do PIB não petrolífero → % do PIB); meta anual 2025 do MINPLAN como proxy; meta operacional da v7 mantida quando não há correspondência. Sem meta quando o conceito do PDN difere do da série. A coluna Meta 2027 não entra em nenhuma fórmula."],
     ], col_widths=[Cm(4.5), Cm(20)])
     b.h1("Justificação linha a linha")
     for dim in DIMS:
@@ -123,7 +139,7 @@ def build(xlsx_path, template_path, out_path, version="v8", date="Setembro de 20
         b.h2(dim)
         table_rows = []
         for i, r in sub:
-            table_rows.append([i + 5, r[cols["ID"]], r[cols["Indicador"]], f"{r[cols['Unidade']]} / {r[cols['Sentido']]}", num_pt(r[cols["Mínimo"]]), num_pt(r[cols["Máximo"]]), justify(r, cols, years)])
+            table_rows.append([i + 5, r[cols["ID"]], r[cols["Indicador"]], f"{r[cols['Unidade']]} / {r[cols['Sentido']]}", num_pt(r[cols["Mínimo"]]), num_pt(r[cols["Máximo"]]), justify(r, cols, years, meta_cat)])
         b.table(["Linha", "ID", "Indicador", "Unidade / sentido", "Mín.", "Máx.", "Justificação"], table_rows, col_widths=[Cm(1.2), Cm(1.7), Cm(4.6), Cm(2.6), Cm(1.4), Cm(1.6), Cm(11.5)], font_size=8)
     b.para(f"Total de linhas documentadas: {len(rows)}. Fonte: folha 02_Base_Potencial de IGDA_BDA_Construtor_{version}.xlsx.")
     b.save(out_path)
@@ -131,5 +147,6 @@ def build(xlsx_path, template_path, out_path, version="v8", date="Setembro de 20
 
 
 if __name__ == "__main__":
-    n = build(sys.argv[1], "/home/user/bda-indice/Versão Final/Finalíssima/files/IGDA_BDA_Justificacao_Minimos_Maximos_v7.docx", sys.argv[2])
+    results = sys.argv[3] if len(sys.argv) > 3 else os.path.join(HERE, "v8_results.json")
+    n = build(sys.argv[1], os.path.join(FILES, "IGDA_BDA_Justificacao_Minimos_Maximos_v7.docx"), sys.argv[2], results)
     print("rows", n)

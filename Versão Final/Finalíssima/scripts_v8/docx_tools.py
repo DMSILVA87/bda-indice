@@ -3,7 +3,7 @@ Geração de documentos Word a partir do modelo v7 (mantém estilos: Title, Subt
 Heading 1/2, First Paragraph, Body Text, Normal, Source Code, Table).
 """
 from __future__ import annotations
-import copy
+import copy, math
 import docx
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt, RGBColor
@@ -168,7 +168,12 @@ def fmt(x, nd=1, pct=False, sign=False):
         return "–"
     if isinstance(x, str):
         return x
-    s = f"{x:+.{nd}f}" if sign else f"{x:.{nd}f}"
+    # arredondamento "half away from zero" (ROUND do Excel), evitando o half-to-even do Python
+    m = 10 ** nd
+    xr = (math.floor(abs(x) * m + 0.5) / m) * (1 if x >= 0 else -1)
+    if xr == 0:
+        xr = 0.0
+    s = f"{xr:+.{nd}f}" if sign else f"{xr:.{nd}f}"
     s = s.replace(".", ",").replace("-", "−")
     if pct:
         s += "%"

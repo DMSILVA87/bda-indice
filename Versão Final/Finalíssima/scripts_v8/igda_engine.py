@@ -34,13 +34,19 @@ DIM_ORDER = [
     "5. Infraestruturas e Serviços",
     "6. Mercado de Trabalho",
     "7. Segurança Alimentar e Saúde",
-    "8. Diversificação Produtiva e Setor Privado",
+    "8. Diversificação Produtiva e Sector Privado",
     "9. Ambiente, Clima e Resiliência",
     "10. Demografia, Território e Urbanização",
     "11. Transformação Digital e Inovação",
 ]
 DIM_SHORT = ["Governança", "Macroeconomia", "Capital Humano", "Inclusão Social", "Infraestruturas",
              "Mercado Trabalho", "Saúde/Alimentar", "Diversificação", "Ambiente", "Demografia", "Digital/Inovação"]
+
+
+def canon_dim(name) -> str:
+    """Normaliza a grafia do nome da dimensão (a v7 usava 'Setor Privado'; a v8 uniformiza para 'Sector Privado')."""
+    s = str(name or "")
+    return s.replace("Setor Privado", "Sector Privado")
 
 
 def _num(v):
@@ -143,7 +149,7 @@ def load_inputs_from_workbook(path: str, sheet_base: str = "02_Base_Potencial", 
             yv.append(float(v) if _num(v) else None)
         rows.append(Row(
             excel_row=r[0].row,
-            id=str(vals[col["ID"]]), dim=str(vals[col["Dimensão"]]), subtema=str(vals[col["Subtema"]] or ""),
+            id=str(vals[col["ID"]]), dim=canon_dim(vals[col["Dimensão"]]), subtema=str(vals[col["Subtema"]] or ""),
             indicador=str(vals[col["Indicador"]] or ""), unidade=str(vals[col["Unidade"]] or ""),
             sentido=str(vals[col["Sentido"]] or ""), minimo=vals[col["Mínimo"]], maximo=vals[col["Máximo"]],
             meta=vals[col["Meta 2027"]], peso=vals[col["Peso"]], fonte=str(vals[col["Fonte"]] or ""),
@@ -163,7 +169,7 @@ def load_inputs_from_workbook(path: str, sheet_base: str = "02_Base_Potencial", 
     p.w_rel = float(wc["C19"].value); p.w_comp = float(wc["C20"].value); p.w_cons = float(wc["C21"].value)
     p.bonus_nacional = float(wc["C22"].value)
     for r in range(26, 37):
-        d = wc[f"B{r}"].value
+        d = canon_dim(wc[f"B{r}"].value) if wc[f"B{r}"].value else None
         if d:
             p.dims_incluir[d] = wc[f"C{r}"].value
             p.dims_peso[d] = wc[f"D{r}"].value

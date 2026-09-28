@@ -1,20 +1,34 @@
-# Scripts de construção da v8 (IGDA-BDA)
+# Scripts da revisão v8 do IGDA-BDA
 
-Ferramentas Python usadas para gerar os entregáveis da pasta `../files/` a partir da v7. Executar a partir desta pasta
-(os caminhos para o repositório estão em `build_v8.py`, `run_build.py`, `gen_*.py` e podem ser adaptados).
+Scripts Python (openpyxl, python-docx, python-pptx) que constroem o `IGDA_BDA_Construtor_v8.xlsx` a partir do v7 e geram os três suportes (Nota Metodológica v8, Justificação de mínimos e máximos v8, apresentação CEX v10). Os caminhos são relativos à raiz do repositório (a pasta `scripts_v8` está três níveis abaixo).
 
 | Ficheiro | Função |
 |---|---|
-| `igda_engine.py` | Motor de cálculo que replica todas as fórmulas do construtor (selecção, imputação, normalização, agregação). Reproduz exactamente os valores da v6 e da v7; usado para validar a v8 e para gerar os números dos documentos. |
-| `xlsx_tools.py` | Alargamento de intervalos (`$5:$335` → `$5:$342`), cópia/tradução de fórmulas para novas linhas. |
-| `v8_plan.py` | Plano de alterações: metas 2027 (PDN), novas linhas, séries actualizadas, notas e contexto. Fonte única do registo de alterações. |
-| `build_v8.py`, `build_v8_sheets.py`, `run_build.py` | Constroem `IGDA_BDA_Construtor_v8.xlsx` (folhas novas `12_Emprego_INE` e `13_Alteracoes_v8`) e gravam `v8_results.json`. |
-| `gen_nota.py`, `gen_justificacao.py`, `gen_cex.py` | Geram a Nota Metodológica v8, a Justificação de mínimos/máximos v8 e a apresentação CEX v10 (a partir dos modelos v7/v9, mantendo estilos). |
-| `docx_tools.py`, `pptx_tools.py` | Utilitários python-docx / python-pptx. |
-| `labour_data.json` | Séries INE/IEA (13.ª CIET, nova metodologia) e séries OIT harmonizadas usadas na folha 12. |
-| `analysis.json`, `v8_results.json` | Resultados calculados (subíndices, IGDA, drivers, cobertura; registo de alterações). |
-| `sweep_partial.json` | Dados recolhidos na web (INE, MINFIN/FMI, MINPLAN/INSS/Kwenda), com citações e URLs. |
+| `igda_engine.py` | Motor de cálculo que replica a cadeia de fórmulas do construtor (scoring, elegibilidade, selecção, imputação, normalização, agregação, escala comum). Reproduz exactamente a v6 e a v7. |
+| `xlsx_tools.py` | Utilitários openpyxl: alargar intervalos `$5:$335 → $5:$342`, copiar linhas-modelo com tradução de fórmulas, estilos. |
+| `v8_plan.py` | Plano de alterações, fonte única do registo: metas 2027 por categoria (PDN directa, transposta, convertida, MINPLAN, operacional, sem meta), regra de transposição (`TRANSPOR`), conversão WGI (`WGI_PDN`), séries actualizadas (`SERIES`), renomeações (`RENAME`), novas linhas (`NEW_ROWS`), uniformização de grafia, nomes curtos e contexto para os documentos. |
+| `build_v8.py` | Aplica o plano ao livro v7: séries, metas (incluindo o cálculo das metas transpostas), novas linhas, coluna "Origem da Meta 2027", sincronização de 10_Fontes, filtros/formatação condicional/validação alargados, grafia, textos de 09_Metodologia, navegação do painel, título do gráfico do IGDA. |
+| `build_v8_sheets.py` | Folhas novas `12_Emprego_INE` (blocos A–D) e `13_Alteracoes_v8` (comparação v7/v8, registo linha a linha, metas alteradas por categoria, conversão WGI), nota de versão em 09_Metodologia, regeneração das caches dos gráficos, recálculo integral ao abrir. |
+| `run_build.py` | Orquestra a construção: `python3 run_build.py <saida.xlsx>` grava o livro e `<saida>_results.json` (log, metas alteradas, categorias, transposições, resultados v7/v8, diferenças do bloco D de 12_Emprego_INE). |
+| `make_analysis.py` | `python3 make_analysis.py <v8.xlsx> <v7.xlsx> <analysis.json>`: drivers por indicador (Δ 2015–25 e 2023–25), cobertura, subíndices, escala comum a partir dos valores exactos, metas já cumpridas e sensibilidade da selecção ao marcador de fonte nacional. |
+| `gen_nota.py` | `python3 gen_nota.py <saida.docx> [<v8.xlsx>] [<analysis.json>] [<v8_results.json>]` — Nota Metodológica v8 a partir do modelo v7. |
+| `gen_justificacao.py` | `python3 gen_justificacao.py <v8.xlsx> <saida.docx> [<v8_results.json>]` — Justificação de mínimos e máximos v8. |
+| `gen_cex.py` | `python3 gen_cex.py <saida.pptx> [<analysis.json>] [<v8_results.json>]` — apresentação CEX v10 a partir da v9. |
+| `docx_tools.py`, `pptx_tools.py` | Utilitários de geração Word (estilos do modelo v7, arredondamento "half away from zero") e PowerPoint (substituição de texto preservando formatação, dados de gráficos por cache XML). |
+| `labour_data.json` | Séries do IEA (13.ª CIET, nova metodologia, ILOSTAT nacional) extraídas dos ficheiros INE do repositório e da recolha web. |
+| `analysis.json`, `v8_results.json` | Resultados intermédios usados pelos geradores de documentos. |
+| `sweep_partial.json` | 242 registos da recolha web (INE, MINFIN/FMI, MINPLAN/INSS/Kwenda) com citações e URLs. |
+| `verify_round1.json` | 46 achados da verificação adversarial da primeira entrega v8 (42 confirmados e corrigidos; 4 refutados), com os veredictos. |
 
-Dependências: `openpyxl`, `python-docx`, `python-pptx`, `pandas`, `lxml`.
+Sequência completa (a partir da raiz do repositório):
 
-Ordem de execução: `python3 run_build.py <saída.xlsx>` → `python3 gen_justificacao.py <v8.xlsx> <saída.docx>` → `python3 gen_nota.py <saída.docx>` → `python3 gen_cex.py <saída.pptx>`.
+```
+S="Versão Final/Finalíssima/scripts_v8"; F="Versão Final/Finalíssima/files"
+python3 "$S/run_build.py" "$F/IGDA_BDA_Construtor_v8.xlsx" && mv "$F/IGDA_BDA_Construtor_v8_results.json" "$S/v8_results.json"
+python3 "$S/make_analysis.py" "$F/IGDA_BDA_Construtor_v8.xlsx" "$F/IGDA_BDA_Construtor_v7.xlsx" "$S/analysis.json"
+python3 "$S/gen_nota.py" "$F/IGDA_BDA_Nota_Metodologica_v8.docx"
+python3 "$S/gen_justificacao.py" "$F/IGDA_BDA_Construtor_v8.xlsx" "$F/IGDA_BDA_Justificacao_Minimos_Maximos_v8.docx"
+python3 "$S/gen_cex.py" "$F/IGDA_Evolucao_CEX_v10.pptx"
+```
+
+Nota: o livro v8 é gravado sem valores em cache nas células (o Excel recalcula tudo ao abrir; se necessário, Ctrl+Alt+F9). Os valores apresentados nos documentos são os do motor de cálculo, que replica as fórmulas.
