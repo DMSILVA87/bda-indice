@@ -28,12 +28,12 @@
   {
    "tipo": "série",
    "id": "MAC004",
-   "descricao": "v8: substitui a série 'Compilação interna BDA' (valores arredondados, sem rastreabilidade) pela série oficial do FMI WEO Abr-2026 em precisão total (2025: 51,3%), que compila os dados do Ministério das Finanças (fonte histórica declarada pelo FMI: Ministry of Finance; GFSM 2014) — por isso mantém o marcador de fonte nacional. Mesma direcção que a leitura PDN/MINFIN (pico em 2020, forte descida até 2022), mas níveis não comparáveis: PDN/MINFIN em perímetro 'dívida pública' e PIB pré-rebasing (134% em 2020; 66% em 2022); FMI WEO em governo geral e PIB rebaseado (119,8% em 2020; 57,4% em 2022). Referências 2025: FMI 51,3%; Banco Mundial ≈52%; MINFIN dívida governamental 46,6%. O denominador de 2025 do WEO é o PIB nominal das Contas Nacionais Trimestrais do INE (129 255 mil M Kz); as CN Anuais Preliminares (Maio 2026) reviram-no para 128 302 mil M Kz, o que daria ≈51,7%. Alterações: 2015: 50→50.3858; 2016: 67→65.6916; 2017: 60→59.6072; 2018: 83→81.6355; 2019: 101→100.799; 2020: 119→119.839; 2021: 74→75.5027; 2022: 56→57.4272; 2023: 72→75.7391; 2024: 60→57.1069; 2025: 63→51.3109"
+   "descricao": "v8: substitui a série 'Compilação interna BDA' (valores arredondados, sem rastreabilidade) pela série oficial do FMI WEO Abr-2026 em precisão total (2025: 51,3%), que compila os dados do Ministério das Finanças (fonte histórica declarada pelo FMI: 'Ministry of Finance or Treasury'; GFSM 2014 a partir de 2018, GFSM 2001 até 2017; governo geral = governo central e governos provinciais) — por isso mantém o marcador de fonte nacional. Mesma direcção que a leitura PDN/MINFIN (pico em 2020, forte descida até 2022), mas níveis não comparáveis: PDN/MINFIN em perímetro 'dívida pública' e PIB pré-rebasing (134% em 2020; 66% em 2022); FMI WEO em governo geral e PIB rebaseado (119,8% em 2020; 57,4% em 2022). Referências 2025: FMI 51,3%; Banco Mundial ≈52%; MINFIN dívida governamental 46,6%. O denominador de 2025 do WEO é o PIB nominal das Contas Nacionais Trimestrais do INE (129 255 mil M Kz); as CN Anuais Preliminares (Maio 2026) reviram-no para 128 302 mil M Kz, o que daria ≈51,7%. Alterações: 2015: 50→50.3858; 2016: 67→65.6916; 2017: 60→59.6072; 2018: 83→81.6355; 2019: 101→100.799; 2020: 119→119.839; 2021: 74→75.5027; 2022: 56→57.4272; 2023: 72→75.7391; 2024: 60→57.1069; 2025: 63→51.3109"
   },
   {
    "tipo": "série",
    "id": "MAC005",
-   "descricao": "v8: substitui a série 'Compilação interna BDA' (ex.: 2017 = +1,5 quando o saldo oficial foi −5,7) pela série FMI WEO Abr-2026 em precisão total, que compila os dados do MINFIN (marcador de fonte nacional mantido). Alterações: 2015: -2→-2.58209; 2016: -3→-3.93418; 2017: 1.5→-5.68272; 2018: -0.5→1.9988; 2019: 0.5→-0.19541; 2020: -5→-3.04626; 2021: 1.5→1.35204; 2022: 0.7→1.77914; 2023: -1.9→-2.4918; 2024: -1.5→-1.19233; 2025: -1.65→-4.07024"
+   "descricao": "v8: substitui a série 'Compilação interna BDA' (ex.: 2017 = +1,5 quando o saldo oficial foi −5,7) pela série FMI WEO Abr-2026 em precisão total, que compila os dados do MINFIN ('Ministry of Finance or Treasury'; GFSM 2014 a partir de 2018, GFSM 2001 até 2017; marcador de fonte nacional mantido). Alterações: 2015: -2→-2.58209; 2016: -3→-3.93418; 2017: 1.5→-5.68272; 2018: -0.5→1.9988; 2019: 0.5→-0.19541; 2020: -5→-3.04626; 2021: 1.5→1.35204; 2022: 0.7→1.77914; 2023: -1.9→-2.4918; 2024: -1.5→-1.19233; 2025: -1.65→-4.07024"
   },
   {
    "tipo": "metadados",
@@ -98,12 +98,12 @@
   {
    "tipo": "série",
    "id": "LAB004",
-   "descricao": "v8: 2025 = 78,8% (Anuário IEA 2025, valor anual; a v7 usava o III trim). Quebra de série a partir do IV trim 2025 (nova metodologia: 78,6%). 2019 = valor anual publicado pelo INE (74,5%), que diverge da média dos trimestres II-IV (79,5%). Alterações: 2025: 77.1208→78.8"
+   "descricao": "v8: 2025 = 78,8% (Anuário IEA 2025: média dos trimestres I–III na metodologia antiga, porque o IV trim já segue a nova metodologia; a v7 usava só o III trim). Quebra de série a partir do IV trim 2025 (nova metodologia: 78,6%). 2019 = valor anual publicado pelo INE (74,5%), que diverge da média dos trimestres II-IV (79,5%). Alterações: 2025: 77.1208→78.8"
   },
   {
    "tipo": "série",
    "id": "LAB005",
-   "descricao": "v8: 2025 = 21,2% (Anuário IEA 2025, complemento do emprego informal 78,8%); 2019 corrigido de 25,46 (= 100 − informal) para 25,31 (valor anual publicado pelo INE; no ano 2019 do INE formal + informal = 99,86%). Alterações: 2019: 25.4582→25.31; 2025: 22.8792→21.2"
+   "descricao": "v8: 2025 = 21,2% (Anuário IEA 2025, média dos trimestres I–III na metodologia antiga; complemento do emprego informal 78,8%); 2019 corrigido de 25,46 (= 100 − informal) para 25,31 (valor anual publicado pelo INE; no ano 2019 do INE formal + informal = 99,86%). Alterações: 2019: 25.4582→25.31; 2025: 22.8792→21.2"
   },
   {
    "tipo": "série",
@@ -127,6 +127,21 @@
   },
   {
    "tipo": "metadados",
+   "id": "INC006",
+   "descricao": "v8: marcador de fonte nacional = 1 (produtor primário INE, IDREA 2018-19; estimativa do Banco Mundial/PIP), em coerência com as outras linhas de pobreza do mesmo inquérito (INC001, INC031)."
+  },
+  {
+   "tipo": "metadados",
+   "id": "HUM025",
+   "descricao": "v8: URL corrigido para o INE (o anterior seguia o padrão WDI com um código interno)."
+  },
+  {
+   "tipo": "metadados",
+   "id": "SAU029",
+   "descricao": "metadados actualizados"
+  },
+  {
+   "tipo": "série",
    "id": "INC001",
    "descricao": "v8: a linha de 2,15 USD (PPC 2017) é a referência do PDN (31% em 2022; 28% em 2027). Valor 2018 (IDREA 2018-19) = 31,1% (Banco Mundial/PIP). A nova linha de 3,00 USD (PPC 2021) consta em INC031. Sem novo inquérito de despesas desde o IDREA 2018-19. Alterações: 2018: 39.3→31.1"
   },
@@ -257,18 +272,8 @@
   },
   {
    "tipo": "meta",
-   "id": "SAU020",
-   "descricao": "Meta 2027: 100 → 215 [MINPLAN (meta anual 2025, proxy)]. MINPLAN, Balanço PDN 2025: meta anual de incidência da malária 215 por 1 000 habitantes (usada como proxy da meta 2027; o PDN não fixa meta 2027 explícita)"
-  },
-  {
-   "tipo": "meta",
-   "id": "DIV015",
-   "descricao": "Meta 2027: 35 → 10 [PDN (convertida de escala/unidade)]. PDN p.163: stock de crédito ao sector privado 10,9% → 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)"
-  },
-  {
-   "tipo": "meta",
-   "id": "MAC013",
-   "descricao": "Meta 2027: 35 → 10 [PDN (convertida de escala/unidade)]. PDN p.163: crédito ao sector privado 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)"
+   "id": "SAU021",
+   "descricao": "Meta 2027: 0 → sem meta [Sem meta comparável]. Sem meta comparável no PDN; a meta 0 da v7 estava fora das fronteiras da linha (amplitude histórica 9 280–25 400 mortes), pelo que foi removida"
   },
   {
    "tipo": "meta",
@@ -283,17 +288,17 @@
   {
    "tipo": "meta",
    "id": "HUM003",
-   "descricao": "Meta 2027: 75 → 70.2 [PDN (transposta à base da série)]. PDN p.55: taxa de alfabetização ≥15 anos (%) 76 (2022) → 78 (2027) na base do PDN. A série (UNESCO-UIS/WDI) regista 68,18 em 2023 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+2 p.p.): 70,2."
+   "descricao": "Meta 2027: 75 → 70.2 [PDN (transposta à base da série)]. PDN p.55: taxa de alfabetização ≥15 anos (%) 76 (2022) → 78 (2027) na base do PDN. A série (UNESCO-UIS/WDI) regista 68,18 em 2023 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+2 p.p.): 70,2."
   },
   {
    "tipo": "meta",
    "id": "HUM024",
-   "descricao": "Meta 2027: 60 → 55.7 [PDN (transposta à base da série)]. PDN p.74: esperança de vida saudável, HALE (anos) 56 (2022) → 57 (2027) na base do PDN. A série (OMS GHO) regista 54,73 em 2021 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1 p.p.): 55,7."
+   "descricao": "Meta 2027: 60 → 55.7 [PDN (transposta à base da série)]. PDN p.74: esperança de vida saudável, HALE (anos) 56 (2022) → 57 (2027) na base do PDN. A série (OMS GHO) regista 54,73 em 2021 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1 p.p.): 55,7."
   },
   {
    "tipo": "meta",
    "id": "HUM025",
-   "descricao": "Meta 2027: 25 → 38.4 [PDN (transposta à base da série)]. PDN p.74: mortalidade de menores de 5 anos (‰) 69 (2022) → 51 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 52,00 em 2024 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−26,1%): 38,4."
+   "descricao": "Meta 2027: 25 → 38.4 [PDN (transposta à base da série)]. PDN p.74: mortalidade de menores de 5 anos (‰) 69 (2022) → 51 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 52,00 em 2024 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−26,1%): 38,4."
   },
   {
    "tipo": "meta",
@@ -303,7 +308,7 @@
   {
    "tipo": "meta",
    "id": "INC006",
-   "descricao": "Meta 2027: 30 → 29.2 [PDN (transposta à base da série)]. PDN p.92: pobreza <2,15 USD/dia (%) 31 (2022) → 28 (2027) na base do PDN. A série (linha de pobreza nacional, IDREA 2018-19) regista 32,30 em 2018 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−9,7%): 29,2. Nota: transposição por analogia: a linha nacional mede um conceito próximo mas distinto da linha internacional."
+   "descricao": "Meta 2027: 30 → 29.3 [PDN (transposta à base da série)]. PDN p.92: pobreza <2,15 USD/dia (%) 31 (2022) → 28 (2027) na base do PDN. A série (linha de pobreza nacional, IDREA 2018-19) regista 32,30 em 2018 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (−3 p.p.): 29,3. Nota: transposição por analogia (proporção da população, variação aditiva): a linha nacional mede um conceito próximo mas distinto da linha internacional."
   },
   {
    "tipo": "meta",
@@ -343,7 +348,7 @@
   {
    "tipo": "meta",
    "id": "SAU029",
-   "descricao": "Meta 2027: 70 → 141 [PDN (transposta à base da série)]. PDN p.74: razão de mortalidade materna (por 100 mil nascimentos) 199 (2022) → 165 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 170,0 em 2024 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−17,1%): 141."
+   "descricao": "Meta 2027: 70 → 141 [PDN (transposta à base da série)]. PDN p.74: razão de mortalidade materna (por 100 mil nascimentos) 199 (2022) → 165 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 170,0 em 2024 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−17,1%): 141."
   },
   {
    "tipo": "meta",
@@ -359,6 +364,26 @@
    "tipo": "meta",
    "id": "MAC016",
    "descricao": "Meta 2027: 60 → 52.2 [PDN (transposta à base da série)]. PDN p.24 (Quadro Visão 2027): dívida pública (% do PIB), perímetro MINFIN e PIB pré-rebasing 66 (2022) → 60 (2027) na base do PDN. A série (FMI WEO Abr-2026, governo geral, PIB rebaseado) regista 57,43 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−9,1%): 52,2."
+  },
+  {
+   "tipo": "meta",
+   "id": "DIV015",
+   "descricao": "Meta 2027: 35 → 8.3 [PDN (transposta à base da série)]. PDN p.163: crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80% 8,7 (2022) → 10 (2027) na base do PDN. A série (WDI FS.AST.PRVT.GD.ZS) regista 7,03 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1,3 p.p.): 8,3. Nota: a v7 usava 35; a simples conversão daria 10,0, mas a base convertida do PDN (8,7% do PIB em 2022) não coincide com a série."
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC013",
+   "descricao": "Meta 2027: 35 → 8.3 [PDN (transposta à base da série)]. PDN p.163: crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80% 8,7 (2022) → 10 (2027) na base do PDN. A série (WDI FS.AST.PRVT.GD.ZS) regista 7,03 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1,3 p.p.): 8,3."
+  },
+  {
+   "tipo": "meta",
+   "id": "SAU006",
+   "descricao": "Meta 2027: 80 → 64 [MINPLAN (meta anual 2025, proxy)]. MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de vacinação contra o sarampo', registo administrativo): cobertura vacinal contra o sarampo (%) 66 (2022) → 80 (2025, usada como proxy de 2027) na base MINPLAN/MINSA. A série (OMS/UNICEF WUENIC via WDI) regista 50,0 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação aditiva da meta (+14 p.p.): 64. Nota: o PDN não fixa meta 2027 explícita; a cobertura administrativa do MINSA (66% em 2022; 76% em 2025) e a estimativa WUENIC (50% em 2022) são sistemas de medição distintos."
+  },
+  {
+   "tipo": "meta",
+   "id": "SAU020",
+   "descricao": "Meta 2027: 100 → 219 [MINPLAN (meta anual 2025, proxy)]. MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de incidência da malária', por 1 000 habitantes): incidência da malária 255 (2022) → 215 (2025, usada como proxy de 2027) na base MINPLAN/MINSA. A série (OMS via WDI, por 1 000 habitantes em risco) regista 260,1 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação relativa da meta (−15,7%): 219. Nota: o PDN não fixa meta 2027 explícita; denominadores distintos (população total no MINSA; população em risco na OMS)."
   },
   {
    "tipo": "meta",
@@ -378,7 +403,7 @@
   {
    "tipo": "novo indicador",
    "id": "LAB030",
-   "descricao": "Taxa de desemprego 15+ (INE/IEA, 13.ª CIET, definição nacional alargada) — INE — séries cronológicas IEA (antiga metodologia, 13.ª CIET): valor anual publicado pelo INE (2019-2022, 2024); 2023 = IV trim (único publicado); 2025 = Anuário IEA 2025 (Abril 2026). v8: definição alargada (inclui desencorajados) — nível ~2x superior à definição estrita OIT. 2019 = valor anual INE (inquérito iniciado no II trim); 2023 = apenas IV trim publicado; 2025 = 28,3% (Anuário IEA 2025, Abril 2026). A série termina em 2025 com a mudança de metodologia. Inelegível por cobertura; usada em 12_Emprego_INE."
+   "descricao": "Taxa de desemprego 15+ (INE/IEA, 13.ª CIET, definição nacional alargada) — INE — séries cronológicas IEA (antiga metodologia, 13.ª CIET): valor anual publicado pelo INE (2019-2022, 2024); 2023 = IV trim (único publicado); 2025 = Anuário IEA 2025 (Abril 2026; metodologia antiga, agrega apenas os trimestres I–III, porque o IV trim já segue a nova metodologia). v8: definição alargada (inclui desencorajados) — nível ~2x superior à definição estrita OIT. 2019 = valor anual INE (inquérito iniciado no II trim); 2023 = apenas IV trim publicado; 2025 = 28,3% (Anuário IEA 2025, Abril 2026; média dos trimestres I–III na metodologia antiga). A série termina em 2025 com a mudança de metodologia. Inelegível por cobertura; usada em 12_Emprego_INE."
   },
   {
    "tipo": "novo indicador",
@@ -388,7 +413,7 @@
   {
    "tipo": "novo indicador",
    "id": "INC031",
-   "descricao": "Taxa de pobreza (< 3,00 USD/dia, PPC 2021) — Banco Mundial — WDI (actualização Abr-2026): linha internacional de pobreza revista para 3,00 USD/dia (PPC 2021). v8: novo padrão do Banco Mundial (Junho 2025). A meta do PDN (28%) refere-se à linha antiga de 2,15 USD (PPC 2017), mantida em INC001. Sem série anual: um inquérito (IDREA 2018-19) no período."
+   "descricao": "Taxa de pobreza (< 3,00 USD/dia, PPC 2021) — Banco Mundial — WDI (actualização Abr-2026): linha internacional de pobreza revista para 3,00 USD/dia (PPC 2021), estimada sobre o IDREA 2018-19 do INE. v8: novo padrão do Banco Mundial (Junho 2025). A meta do PDN (28%) refere-se à linha antiga de 2,15 USD (PPC 2017), mantida em INC001. Sem série anual: um inquérito (IDREA 2018-19) no período. Marcador de fonte nacional = 1 como nas outras linhas de pobreza do IDREA (produtor primário INE)."
   },
   {
    "tipo": "novo indicador",
@@ -403,17 +428,17 @@
   {
    "tipo": "estrutura",
    "id": "",
-   "descricao": "10_Fontes sincronizada com a Base_Potencial para as 26 linhas alteradas (MAC014, DIV017, MAC004, MAC005, MAC016, MAC019, MAC020, MAC003, MAC027, GOV004, GOV02, GOV03, GOV05, GOV06, GOV008, MAC001, LAB004, LAB005, SAU003, SAU029, HUM010, SAU004, INC001, INC028, INC029, INC030); 7 linhas novas com URL; filtro A4:H342"
+   "descricao": "10_Fontes sincronizada com a Base_Potencial para as 29 linhas alteradas (MAC014, DIV017, MAC004, MAC005, MAC016, MAC019, MAC020, MAC003, MAC027, GOV004, GOV02, GOV03, GOV05, GOV06, GOV008, MAC001, LAB004, LAB005, SAU003, SAU029, HUM010, SAU004, INC006, HUM025, SAU029, INC001, INC028, INC029, INC030); 7 linhas novas com URL; 42 URLs herdados da v7 no padrão WDI com códigos não-WDI substituídos pelo endereço institucional (BNA, INE, FMI WEO, etc.) ou removidos; filtro A4:H342"
   },
   {
    "tipo": "estrutura",
    "id": "",
-   "descricao": "Grafia uniformizada para a norma pré-Acordo Ortográfico em 96 células (nome da dimensão 8 'Sector Privado' em 01_Criterios, 02_Base_Potencial, 03_Base_Indice e 10_Fontes; nomes de indicadores e unidades)"
+   "descricao": "Grafia uniformizada para a norma pré-Acordo Ortográfico em 122 células (nome da dimensão 8 'Sector Privado' em 01_Criterios, 02_Base_Potencial, 03_Base_Indice e 10_Fontes; subtemas, nomes de indicadores, unidades, fontes, origens e notas). Excepção deliberada: 'Infraestruturas' (nome original da dimensão 5, grafia também usada pelo PDN 2023-2027) mantém-se."
   },
   {
    "tipo": "estrutura",
    "id": "",
-   "descricao": "00_Painel: navegação alargada às folhas 11_Escala_Comum, 12_Emprego_INE e 13_Alteracoes_v8"
+   "descricao": "00_Painel: navegação alargada às folhas 11_Escala_Comum, 12_Emprego_INE e 13_Alteracoes_v8; ligação de retorno ao painel reposta em 11_Escala_Comum!A1"
   },
   {
    "tipo": "estrutura",
@@ -582,25 +607,11 @@
    "sem_meta"
   ],
   [
-   "SAU020",
-   100,
-   215,
-   "MINPLAN, Balanço PDN 2025: meta anual de incidência da malária 215 por 1 000 habitantes (usada como proxy da meta 2027; o PDN não fixa meta 2027 explícita)",
-   "minplan"
-  ],
-  [
-   "DIV015",
-   35,
-   10,
-   "PDN p.163: stock de crédito ao sector privado 10,9% → 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)",
-   "convertida"
-  ],
-  [
-   "MAC013",
-   35,
-   10,
-   "PDN p.163: crédito ao sector privado 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)",
-   "convertida"
+   "SAU021",
+   0,
+   null,
+   "Sem meta comparável no PDN; a meta 0 da v7 estava fora das fronteiras da linha (amplitude histórica 9 280–25 400 mortes), pelo que foi removida",
+   "sem_meta"
   ],
   [
    "HUM002",
@@ -620,21 +631,21 @@
    "HUM003",
    75,
    70.2,
-   "PDN p.55: taxa de alfabetização ≥15 anos (%) 76 (2022) → 78 (2027) na base do PDN. A série (UNESCO-UIS/WDI) regista 68,18 em 2023 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+2 p.p.): 70,2.",
+   "PDN p.55: taxa de alfabetização ≥15 anos (%) 76 (2022) → 78 (2027) na base do PDN. A série (UNESCO-UIS/WDI) regista 68,18 em 2023 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+2 p.p.): 70,2.",
    "transposta"
   ],
   [
    "HUM024",
    60,
    55.7,
-   "PDN p.74: esperança de vida saudável, HALE (anos) 56 (2022) → 57 (2027) na base do PDN. A série (OMS GHO) regista 54,73 em 2021 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1 p.p.): 55,7.",
+   "PDN p.74: esperança de vida saudável, HALE (anos) 56 (2022) → 57 (2027) na base do PDN. A série (OMS GHO) regista 54,73 em 2021 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1 p.p.): 55,7.",
    "transposta"
   ],
   [
    "HUM025",
    25,
    38.4,
-   "PDN p.74: mortalidade de menores de 5 anos (‰) 69 (2022) → 51 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 52,00 em 2024 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−26,1%): 38,4.",
+   "PDN p.74: mortalidade de menores de 5 anos (‰) 69 (2022) → 51 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 52,00 em 2024 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−26,1%): 38,4.",
    "transposta"
   ],
   [
@@ -647,8 +658,8 @@
   [
    "INC006",
    30,
-   29.2,
-   "PDN p.92: pobreza <2,15 USD/dia (%) 31 (2022) → 28 (2027) na base do PDN. A série (linha de pobreza nacional, IDREA 2018-19) regista 32,30 em 2018 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−9,7%): 29,2. Nota: transposição por analogia: a linha nacional mede um conceito próximo mas distinto da linha internacional.",
+   29.3,
+   "PDN p.92: pobreza <2,15 USD/dia (%) 31 (2022) → 28 (2027) na base do PDN. A série (linha de pobreza nacional, IDREA 2018-19) regista 32,30 em 2018 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (−3 p.p.): 29,3. Nota: transposição por analogia (proporção da população, variação aditiva): a linha nacional mede um conceito próximo mas distinto da linha internacional.",
    "transposta"
   ],
   [
@@ -704,7 +715,7 @@
    "SAU029",
    70,
    141,
-   "PDN p.74: razão de mortalidade materna (por 100 mil nascimentos) 199 (2022) → 165 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 170,0 em 2024 (observação mais próxima de 2022), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−17,1%): 141.",
+   "PDN p.74: razão de mortalidade materna (por 100 mil nascimentos) 199 (2022) → 165 (2027) na base do PDN. A série (IIMS 2023-24 (estimativa directa)) regista 170,0 em 2024 (observação mais próxima de 2022; a variação é aplicada integralmente), pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−17,1%): 141.",
    "transposta"
   ],
   [
@@ -727,6 +738,34 @@
    52.2,
    "PDN p.24 (Quadro Visão 2027): dívida pública (% do PIB), perímetro MINFIN e PIB pré-rebasing 66 (2022) → 60 (2027) na base do PDN. A série (FMI WEO Abr-2026, governo geral, PIB rebaseado) regista 57,43 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação relativa do PDN (−9,1%): 52,2.",
    "transposta"
+  ],
+  [
+   "DIV015",
+   35,
+   8.3,
+   "PDN p.163: crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80% 8,7 (2022) → 10 (2027) na base do PDN. A série (WDI FS.AST.PRVT.GD.ZS) regista 7,03 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1,3 p.p.): 8,3. Nota: a v7 usava 35; a simples conversão daria 10,0, mas a base convertida do PDN (8,7% do PIB em 2022) não coincide com a série.",
+   "transposta"
+  ],
+  [
+   "MAC013",
+   35,
+   8.3,
+   "PDN p.163: crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80% 8,7 (2022) → 10 (2027) na base do PDN. A série (WDI FS.AST.PRVT.GD.ZS) regista 7,03 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação aditiva do PDN (+1,3 p.p.): 8,3.",
+   "transposta"
+  ],
+  [
+   "SAU006",
+   80,
+   64,
+   "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de vacinação contra o sarampo', registo administrativo): cobertura vacinal contra o sarampo (%) 66 (2022) → 80 (2025, usada como proxy de 2027) na base MINPLAN/MINSA. A série (OMS/UNICEF WUENIC via WDI) regista 50,0 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação aditiva da meta (+14 p.p.): 64. Nota: o PDN não fixa meta 2027 explícita; a cobertura administrativa do MINSA (66% em 2022; 76% em 2025) e a estimativa WUENIC (50% em 2022) são sistemas de medição distintos.",
+   "minplan"
+  ],
+  [
+   "SAU020",
+   100,
+   219,
+   "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de incidência da malária', por 1 000 habitantes): incidência da malária 255 (2022) → 215 (2025, usada como proxy de 2027) na base MINPLAN/MINSA. A série (OMS via WDI, por 1 000 habitantes em risco) regista 260,1 em 2022, pelo que a meta é TRANSPOSTA à base da série pela variação relativa da meta (−15,7%): 219. Nota: o PDN não fixa meta 2027 explícita; denominadores distintos (população total no MINSA; população em risco na OMS).",
+   "minplan"
   ],
   [
    "LAB004",
@@ -778,12 +817,9 @@
   "LAB003": "sem_meta",
   "LAB016": "operacional",
   "LAB025": "sem_meta",
-  "SAU006": "minplan",
-  "SAU020": "minplan",
   "SAU002": "operacional",
   "SAU017": "operacional",
-  "DIV015": "convertida",
-  "MAC013": "convertida",
+  "SAU021": "sem_meta",
   "DIV010": "operacional",
   "DIV007": "operacional",
   "DIV001": "operacional",
@@ -805,6 +841,10 @@
   "SAU004": "transposta",
   "MAC004": "transposta",
   "MAC016": "transposta",
+  "DIV015": "transposta",
+  "MAC013": "transposta",
+  "SAU006": "minplan",
+  "SAU020": "minplan",
   "LAB004": "transposta",
   "GOV005": "operacional",
   "GOV009": "operacional",
@@ -960,7 +1000,6 @@
   "SAU028": "operacional",
   "SAU016": "operacional",
   "SAU02": "operacional",
-  "SAU021": "operacional",
   "SAU030": "operacional",
   "SAU06": "operacional",
   "SAU033": "operacional",
@@ -1071,7 +1110,7 @@
   "LAB028": "sem_meta",
   "LAB029": "sem_meta",
   "LAB030": "pdn",
-  "LAB031": "pdn",
+  "LAB031": "sem_meta",
   "INC031": "sem_meta",
   "INC032": "minplan",
   "INC033": "pdn"
@@ -1084,7 +1123,9 @@
    "base": 62,
    "meta_pdn": 63,
    "modo": "add",
-   "conceito": "esperança média de vida"
+   "conceito": "esperança média de vida",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "HUM006": {
    "meta": 26.5,
@@ -1093,7 +1134,9 @@
    "base": 47,
    "meta_pdn": 37,
    "modo": "rel",
-   "conceito": "mortalidade de menores de 1 ano (‰)"
+   "conceito": "mortalidade de menores de 1 ano (‰)",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "HUM003": {
    "meta": 70.2,
@@ -1102,7 +1145,9 @@
    "base": 76,
    "meta_pdn": 78,
    "modo": "add",
-   "conceito": "taxa de alfabetização ≥15 anos (%)"
+   "conceito": "taxa de alfabetização ≥15 anos (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.55"
   },
   "HUM024": {
    "meta": 55.7,
@@ -1111,7 +1156,9 @@
    "base": 56,
    "meta_pdn": 57,
    "modo": "add",
-   "conceito": "esperança de vida saudável, HALE (anos)"
+   "conceito": "esperança de vida saudável, HALE (anos)",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "HUM025": {
    "meta": 38.4,
@@ -1120,7 +1167,9 @@
    "base": 69,
    "meta_pdn": 51,
    "modo": "rel",
-   "conceito": "mortalidade de menores de 5 anos (‰)"
+   "conceito": "mortalidade de menores de 5 anos (‰)",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "SAU04": {
    "meta": 38.4,
@@ -1129,16 +1178,20 @@
    "base": 69,
    "meta_pdn": 51,
    "modo": "rel",
-   "conceito": "mortalidade de menores de 5 anos (‰)"
+   "conceito": "mortalidade de menores de 5 anos (‰)",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "INC006": {
-   "meta": 29.2,
+   "meta": 29.3,
    "ano": 2018,
    "valor": 32.3,
    "base": 31,
    "meta_pdn": 28,
-   "modo": "rel",
-   "conceito": "pobreza <2,15 USD/dia (%)"
+   "modo": "add",
+   "conceito": "pobreza <2,15 USD/dia (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.92"
   },
   "INF001": {
    "meta": 54.5,
@@ -1147,7 +1200,9 @@
    "base": 43,
    "meta_pdn": 49,
    "modo": "add",
-   "conceito": "taxa de electrificação (%)"
+   "conceito": "taxa de electrificação (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.104"
   },
   "INF002": {
    "meta": 70.5,
@@ -1156,7 +1211,9 @@
    "base": 57,
    "meta_pdn": 61,
    "modo": "add",
-   "conceito": "população que utiliza serviços básicos de água potável (%)"
+   "conceito": "população que utiliza serviços básicos de água potável (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.125"
   },
   "INF003": {
    "meta": 53.3,
@@ -1165,7 +1222,9 @@
    "base": 52,
    "meta_pdn": 55,
    "modo": "add",
-   "conceito": "população que utiliza serviços básicos de saneamento (%)"
+   "conceito": "população que utiliza serviços básicos de saneamento (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.125"
   },
   "LAB002": {
    "meta": 11.8,
@@ -1174,7 +1233,9 @@
    "base": 30,
    "meta_pdn": 25,
    "modo": "rel",
-   "conceito": "taxa de desemprego, definição INE/IEA alargada (%)"
+   "conceito": "taxa de desemprego, definição INE/IEA alargada (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.13"
   },
   "LAB018": {
    "meta": 11.7,
@@ -1183,7 +1244,9 @@
    "base": 30,
    "meta_pdn": 25,
    "modo": "rel",
-   "conceito": "taxa de desemprego, definição INE/IEA alargada (%)"
+   "conceito": "taxa de desemprego, definição INE/IEA alargada (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.13"
   },
   "LAB005": {
    "meta": 29.1,
@@ -1192,7 +1255,9 @@
    "base": 22,
    "meta_pdn": 31,
    "modo": "add",
-   "conceito": "taxa de formalização do emprego (%)"
+   "conceito": "taxa de formalização do emprego (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.163"
   },
   "SAU003": {
    "meta": 153,
@@ -1201,7 +1266,9 @@
    "base": 199,
    "meta_pdn": 165,
    "modo": "rel",
-   "conceito": "razão de mortalidade materna (por 100 mil nascimentos)"
+   "conceito": "razão de mortalidade materna (por 100 mil nascimentos)",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "SAU029": {
    "meta": 141,
@@ -1210,7 +1277,9 @@
    "base": 199,
    "meta_pdn": 165,
    "modo": "rel",
-   "conceito": "razão de mortalidade materna (por 100 mil nascimentos)"
+   "conceito": "razão de mortalidade materna (por 100 mil nascimentos)",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "SAU004": {
    "meta": 3.6,
@@ -1219,7 +1288,9 @@
    "base": 3,
    "meta_pdn": 4,
    "modo": "add",
-   "conceito": "despesa corrente em saúde (% do PIB)"
+   "conceito": "despesa corrente em saúde (% do PIB)",
+   "cat": "transposta",
+   "pagina": "PDN p.74"
   },
   "MAC004": {
    "meta": 52.2,
@@ -1228,7 +1299,9 @@
    "base": 66,
    "meta_pdn": 60,
    "modo": "rel",
-   "conceito": "dívida pública (% do PIB), perímetro MINFIN 'dívida pública' e PIB pré-rebasing"
+   "conceito": "dívida pública (% do PIB), perímetro MINFIN 'dívida pública' e PIB pré-rebasing",
+   "cat": "transposta",
+   "pagina": "PDN p.24 (Quadro Visão 2027; p.14/16: 134% em 2020 → 65% em 2022)"
   },
   "MAC016": {
    "meta": 52.2,
@@ -1237,7 +1310,53 @@
    "base": 66,
    "meta_pdn": 60,
    "modo": "rel",
-   "conceito": "dívida pública (% do PIB), perímetro MINFIN e PIB pré-rebasing"
+   "conceito": "dívida pública (% do PIB), perímetro MINFIN e PIB pré-rebasing",
+   "cat": "transposta",
+   "pagina": "PDN p.24 (Quadro Visão 2027)"
+  },
+  "DIV015": {
+   "meta": 8.3,
+   "ano": 2022,
+   "valor": 7.025061944354152,
+   "base": 8.7,
+   "meta_pdn": 10.0,
+   "modo": "add",
+   "conceito": "crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80%",
+   "cat": "transposta",
+   "pagina": "PDN p.163"
+  },
+  "MAC013": {
+   "meta": 8.3,
+   "ano": 2022,
+   "valor": 7.025061944354152,
+   "base": 8.7,
+   "meta_pdn": 10.0,
+   "modo": "add",
+   "conceito": "crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80%",
+   "cat": "transposta",
+   "pagina": "PDN p.163"
+  },
+  "SAU006": {
+   "meta": 64,
+   "ano": 2022,
+   "valor": 50,
+   "base": 66,
+   "meta_pdn": 80,
+   "modo": "add",
+   "conceito": "cobertura vacinal contra o sarampo (%)",
+   "cat": "minplan",
+   "pagina": "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de vacinação contra o sarampo', registo administrativo)"
+  },
+  "SAU020": {
+   "meta": 219,
+   "ano": 2022,
+   "valor": 260.09,
+   "base": 255,
+   "meta_pdn": 215,
+   "modo": "rel",
+   "conceito": "incidência da malária",
+   "cat": "minplan",
+   "pagina": "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de incidência da malária', por 1 000 habitantes)"
   },
   "LAB004": {
    "meta": 70.9,
@@ -1246,7 +1365,9 @@
    "base": null,
    "meta_pdn": null,
    "modo": "complemento",
-   "conceito": "emprego informal (%)"
+   "conceito": "emprego informal (%)",
+   "cat": "transposta",
+   "pagina": "PDN p.163"
   }
  },
  "n_cand": 338,

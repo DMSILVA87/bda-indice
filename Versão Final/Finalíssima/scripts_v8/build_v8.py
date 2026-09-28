@@ -62,16 +62,18 @@ def transpor(spec: dict, series: dict, ref_year: int = 2022):
         _, _, year = min(cands)
         v = series[year]
     base, meta, nd = spec["base"], spec["meta"], spec.get("nd", 1)
+    quem = "do PDN" if spec.get("base_label") is None else "da meta"
     if spec["modo"] == "add":
         m = round(v + (meta - base), nd)
-        var = f"variação aditiva do PDN ({'+' if meta - base >= 0 else '−'}{_pt(abs(meta - base))} p.p.)"
+        var = f"variação aditiva {quem} ({'+' if meta - base >= 0 else '−'}{_pt(abs(meta - base))} p.p.)"
     else:
         m = round(v * meta / base, nd)
-        var = f"variação relativa do PDN ({(meta / base - 1) * 100:+.1f}%)".replace(".", ",").replace("+", "+").replace("-", "−")
+        var = f"variação relativa {quem} ({(meta / base - 1) * 100:+.1f}%)".replace(".", ",").replace("+", "+").replace("-", "−")
     if nd == 0:
         m = int(round(m))
-    txt = (f"{spec['pagina']}: {spec['conceito']} {_pt(base)} ({ref_year}) → {_pt(meta)} (2027) na base do PDN. A série ({spec['fonte_serie']}) regista {_pt(v, 2 if nd else 1)} em {year}"
-           f"{'' if year == ref_year else ' (observação mais próxima de 2022)'}, pelo que a meta é TRANSPOSTA à base da série pela {var}: {_pt(m)}.")
+    txt = (f"{spec['pagina']}: {spec['conceito']} {_pt(base)} ({ref_year}) → {_pt(meta)} ({spec.get('meta_ano', '2027')}) {spec.get('base_label', 'na base do PDN')}. "
+           f"A série ({spec['fonte_serie']}) regista {_pt(v, 2 if nd else 1)} em {year}"
+           f"{'' if year == ref_year else ' (observação mais próxima de 2022; a variação é aplicada integralmente)'}, pelo que a meta é TRANSPOSTA à base da série pela {var}: {_pt(m)}.")
     if spec.get("extra"):
         txt += f" Nota: {spec['extra']}."
     return m, txt, year, v
@@ -144,7 +146,7 @@ def build(out_path: str, version_label="v8", data_label="Setembro de 2026"):
         if spec.get("nota_add"):
             nota = (nota + " | " if nota else "") + spec["nota_add"]
         ws.cell(r, cols["Nota"]).value = nota
-        tipo = spec.get("tipo", default_tipo)
+        tipo = spec.get("tipo") or ("série" if changed else default_tipo)
         desc = (spec.get("nota_add") or "metadados actualizados") + (" Alterações: " + "; ".join(changed) if changed else (" (sem alteração de valores)" if tipo == "série" else ""))
         log.append(dict(tipo=tipo, id=ind_id, descricao=desc))
 
@@ -175,15 +177,15 @@ def build(out_path: str, version_label="v8", data_label="Setembro de 2026"):
             complementos.append((ind_id, spec)); continue
         r = find_row_by_id(ws, ind_id)
         m, txt, year, v = transpor(spec, read_series(r))
-        set_meta(ind_id, m, txt, "transposta")
-        transposicoes[ind_id] = dict(meta=m, ano=year, valor=v, base=spec["base"], meta_pdn=spec["meta"], modo=spec["modo"], conceito=spec["conceito"])
+        set_meta(ind_id, m, txt, spec.get("cat", "transposta"))
+        transposicoes[ind_id] = dict(meta=m, ano=year, valor=v, base=spec["base"], meta_pdn=spec["meta"], modo=spec["modo"], conceito=spec["conceito"], cat=spec.get("cat", "transposta"), pagina=spec["pagina"])
     for ind_id, spec in complementos:
         ref = P.TRANSPOR[spec["ref"]]
         m_ref = transposicoes[spec["ref"]]["meta"]
         m = round(100 - m_ref, spec.get("nd", 1))
         txt = f"{spec['pagina']}: {spec['conceito']} derivada como complemento (100 − meta transposta de {spec['ref']}, {_pt(m_ref)}): {_pt(m)}."
         set_meta(ind_id, m, txt, "transposta")
-        transposicoes[ind_id] = dict(meta=m, ano=None, valor=None, base=None, meta_pdn=None, modo="complemento", conceito=spec["conceito"])
+        transposicoes[ind_id] = dict(meta=m, ano=None, valor=None, base=None, meta_pdn=None, modo="complemento", conceito=spec["conceito"], cat="transposta", pagina=spec["pagina"])
     # metas não alteradas: documentar origem genérica
     for r in range(FIRST, old_last + 1):
         if ws.cell(r, meta_col).value is None:
@@ -235,18 +237,29 @@ def build(out_path: str, version_label="v8", data_label="Setembro de 2026"):
         wf.cell(rr, 1, spec["id"]); wf.cell(rr, 2, spec["indicador"]); wf.cell(rr, 3, spec["dim"]); wf.cell(rr, 4, spec["fonte"])
         wf.cell(rr, 5, spec.get("codigo")); wf.cell(rr, 6, "Sim" if spec.get("nacional") else None); wf.cell(rr, 7, spec.get("url") or None); wf.cell(rr, 8, spec["origem"])
     wf.auto_filter.ref = f"A4:H{lf + len(rows_new)}"
-    wf["B3"].value = "Uma linha por indicador do catálogo. As fontes nacionais provêm do INE, BNA, MINFIN, IIMS, MINPLAN, INSS/MAPTSS e ministérios sectoriais (o marcador identifica o produtor primário dos dados, independentemente do canal de extracção)."
-    log.append(dict(tipo="estrutura", id="", descricao=f"10_Fontes sincronizada com a Base_Potencial para as {len(synced)} linhas alteradas ({', '.join(synced)}); 7 linhas novas com URL; filtro A4:H{lf + len(rows_new)}"))
+    wf["B3"].value = ("Uma linha por indicador do catálogo. O marcador 'Fonte nacional' assinala as séries cujos dados de base são produzidos por instituições nacionais (INE, BNA, MINFIN, MINSA, IIMS, MINPLAN, INSS/MAPTSS, "
+                      "ministérios sectoriais), incluindo estimativas de organismos internacionais construídas sobre esses dados e extraídas por canais internacionais (WDI, WEO, ILOSTAT).")
+    # URLs herdados da v7 no padrão WDI para códigos que não são do WDI (NAT_BNA_*, NAT_INE_*, NAT_IIMS_*, GGX*, FSI, RSF...): substituir pelo endereço institucional
+    n_url = 0
+    for r in range(5, wf.max_row + 1):
+        u = wf.cell(r, 7).value or ""
+        mm = re.match(r"https://data\.worldbank\.org/indicator/([^?]+)", str(u))
+        if mm and not re.match(r"^[A-Z]{2}\.[A-Z0-9.]+$", mm.group(1)):
+            wf.cell(r, 7).value = P.url_institucional(mm.group(1)); n_url += 1
+    log.append(dict(tipo="estrutura", id="", descricao=f"10_Fontes sincronizada com a Base_Potencial para as {len(synced)} linhas alteradas ({', '.join(synced)}); 7 linhas novas com URL; "
+                                                       f"{n_url} URLs herdados da v7 no padrão WDI com códigos não-WDI substituídos pelo endereço institucional (BNA, INE, FMI WEO, etc.) ou removidos; filtro A4:H{lf + len(rows_new)}"))
 
     # ---- 01_Criterios: definição do marcador de fonte nacional ----
     wc = wb["01_Criterios"]
     for r in range(5, wc.max_row + 1):
         if isinstance(wc.cell(r, 2).value, str) and wc.cell(r, 2).value.startswith("Bónus fonte nacional"):
-            wc.cell(r, 4).value = "Acresce ao score de indicadores cujo produtor primário é nacional (INE, BNA, MINFIN, IIMS, ministérios sectoriais), independentemente do canal de extracção (WDI, WEO, ILOSTAT)."
+            wc.cell(r, 4).value = ("Acresce ao score das séries cujos dados de base são produzidos por instituições nacionais (INE, BNA, MINFIN, MINSA, IIMS, ministérios sectoriais), "
+                                   "incluindo estimativas de organismos internacionais construídas sobre esses dados e extraídas por canais internacionais (WDI, WEO, ILOSTAT). Ver 09_Metodologia e Nota v8 (9.2) para a sensibilidade.")
 
     # ---- grafia (pré-Acordo) ----
     n_orto = fix_orthography(wb, ws, wf, cols)
-    log.append(dict(tipo="estrutura", id="", descricao=f"Grafia uniformizada para a norma pré-Acordo Ortográfico em {n_orto} células (nome da dimensão 8 'Sector Privado' em 01_Criterios, 02_Base_Potencial, 03_Base_Indice e 10_Fontes; nomes de indicadores e unidades)"))
+    log.append(dict(tipo="estrutura", id="", descricao=f"Grafia uniformizada para a norma pré-Acordo Ortográfico em {n_orto} células (nome da dimensão 8 'Sector Privado' em 01_Criterios, 02_Base_Potencial, 03_Base_Indice e 10_Fontes; "
+                                                       "subtemas, nomes de indicadores, unidades, fontes, origens e notas). Excepção deliberada: 'Infraestruturas' (nome original da dimensão 5, grafia também usada pelo PDN 2023-2027) mantém-se."))
 
     # ---- 09_Metodologia: textos herdados ----
     w9 = wb["09_Metodologia"]
@@ -267,9 +280,13 @@ def build(out_path: str, version_label="v8", data_label="Setembro de 2026"):
                 v = v.replace("ex.: PIB não petrolífero, cobertura 4G, protecção social INSS", "ex.: taxa líquida de matrícula no primário, cobertura 4G, IDE não petrolífero")
             cc.value = v
 
-    # ---- 00_Painel: navegação para as folhas 11-13 ----
+    # ---- 00_Painel: navegação para as folhas 11-13; ligação de retorno em 11_Escala_Comum ----
     add_painel_navigation(wb)
-    log.append(dict(tipo="estrutura", id="", descricao="00_Painel: navegação alargada às folhas 11_Escala_Comum, 12_Emprego_INE e 13_Alteracoes_v8"))
+    w11 = wb["11_Escala_Comum"]
+    if isinstance(w11["A1"].value, str) and "Painel" in w11["A1"].value and w11["A1"].hyperlink is None:
+        w11["A1"].hyperlink = Hyperlink(ref="A1", location="'00_Painel'!A1", display=w11["A1"].value)
+        copy_style(wb["10_Fontes"]["A1"], w11["A1"])
+    log.append(dict(tipo="estrutura", id="", descricao="00_Painel: navegação alargada às folhas 11_Escala_Comum, 12_Emprego_INE e 13_Alteracoes_v8; ligação de retorno ao painel reposta em 11_Escala_Comum!A1"))
 
     # ---- 07_Subindices: título do gráfico do IGDA (herdado como 'None') ----
     for ch in wb["07_Subindices"]._charts:
@@ -294,22 +311,24 @@ def fix_orthography(wb, ws, wf, cols):
             for c in row:
                 if isinstance(c.value, str) and not c.value.startswith("=") and P.DIM8_OLD in c.value:
                     c.value = c.value.replace(P.DIM8_OLD, P.DIM8_NEW); n += 1
-    # 2) nomes de subtema, indicador e unidade (Base) e espelho em 10_Fontes
+    # 2) subtema, indicador, unidade, fonte, origem e nota (Base) e espelho em 10_Fontes (B, C, D, H)
+    pats = [(re.compile(p), rep) for p, rep in P.ORTOGRAFIA_RE]
     def fix(cell):
         nonlocal n
         v = cell.value
         if not isinstance(v, str) or v.startswith("="):
             return
         nv = v
-        for old, new in P.ORTOGRAFIA:
-            nv = nv.replace(old, new)
+        for pat, rep in pats:
+            nv = pat.sub(rep, nv)
         if nv != v:
             cell.value = nv; n += 1
     for r in range(FIRST, ws.max_row + 1):
-        for colname in ("Subtema", "Indicador", "Unidade"):
+        for colname in ("Subtema", "Indicador", "Unidade", "Fonte", "Origem", "Nota"):
             fix(ws.cell(r, cols[colname]))
     for r in range(5, wf.max_row + 1):
-        fix(wf.cell(r, 2))
+        for c in (2, 3, 4, 8):
+            fix(wf.cell(r, c))
     return n
 
 

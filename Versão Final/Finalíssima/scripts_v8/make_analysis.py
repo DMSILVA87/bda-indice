@@ -2,7 +2,7 @@
 Gera analysis.json (drivers por indicador, cobertura, subíndices, escala comum) para os geradores de documentos.
 Uso: python3 make_analysis.py <v8.xlsx> <v7.xlsx> <analysis.json>
 """
-import sys, json, os
+import sys, json, os, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from igda_engine import Model, load_inputs_from_workbook, DIM_ORDER, DIM_SHORT
 
@@ -53,6 +53,10 @@ def analyse(path):
     return out
 
 
+# canal de extracção internacional = a coluna Origem começa por uma instituição internacional (o INE/IPCN, validado contra o WDI, é canal nacional)
+INTL_RE = re.compile(r"^\s*(Banco Mundial|WDI|FMI|WEO|OMS|UNICEF|OIT|ILOSTAT|GHED|MMEIG|WGI|UNCTAD)", re.I)
+
+
 def sensitivity_nacional(path, ids=("MAC004", "MAC005")):
     """Recalcula o índice com o marcador de fonte nacional a 0 nos indicadores indicados (sensibilidade da selecção ao bónus nacional)."""
     inp = load_inputs_from_workbook(path)
@@ -61,7 +65,14 @@ def sensitivity_nacional(path, ids=("MAC004", "MAC005")):
             r.nacional = 0
     m = Model(inp).run()
     return {"igda_2025": m.igda[-1], "igda": m.igda, "selected": [r.id for r in m.selected()],
-            "macro_2025": m.subindices["2. Estabilidade Macroeconómica"][-1]}
+            "macro_2025": m.subindices["2. Estabilidade Macroeconómica"][-1], "ids": list(ids)}
+
+
+def n1_intl_ids(path):
+    """Indicadores seleccionados com marcador nacional = 1 cuja coluna Origem indica canal de extracção internacional."""
+    inp = load_inputs_from_workbook(path)
+    m = Model(inp).run()
+    return [r.id for r in m.selected() if r.nacional == 1 and INTL_RE.match(r.origem or "")]
 
 
 if __name__ == "__main__":
@@ -71,8 +82,15 @@ if __name__ == "__main__":
     base_sel = set(a8["selected_ids"]); alt_sel = set(sens["selected"])
     sens["saem"] = sorted(base_sel - alt_sel); sens["entram"] = sorted(alt_sel - base_sel)
     a8["sens_nacional"] = sens
+    intl = n1_intl_ids(v8)
+    sens2 = sensitivity_nacional(v8, tuple(intl))
+    alt2 = set(sens2["selected"])
+    sens2["saem"] = sorted(base_sel - alt2); sens2["entram"] = sorted(alt2 - base_sel)
+    a8["sens_nacional_intl"] = sens2
+    a8["n1_total"] = a8["coverage"]["nacional"]
     json.dump({"v8": a8, "v7": a7}, open(out, "w"), ensure_ascii=False, indent=1, default=str)
     print("sensibilidade nac=0 em MAC004/MAC005:", round(sens["igda_2025"], 2), "saem", sens["saem"], "entram", sens["entram"])
+    print(f"sensibilidade nac=0 nos {len(intl)} seleccionados nacionais com canal internacional {intl}:", round(sens2["igda_2025"], 2), "saem", sens2["saem"], "entram", sens2["entram"])
     print("metas cumpridas no último ano:", [d["id"] for d in a8["metas_cumpridas"] if d["no_ultimo"]])
     print("metas cumpridas em 2015:", [d["id"] for d in a8["metas_cumpridas"] if d["em_2015"]])
     print("coverage v8:", a8["coverage"])

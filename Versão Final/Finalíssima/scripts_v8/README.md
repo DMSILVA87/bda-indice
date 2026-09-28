@@ -18,7 +18,8 @@ Scripts Python (openpyxl, python-docx, python-pptx) que constroem o `IGDA_BDA_Co
 | `labour_data.json` | Séries do IEA (13.ª CIET, nova metodologia, ILOSTAT nacional) extraídas dos ficheiros INE do repositório e da recolha web. |
 | `analysis.json`, `v8_results.json` | Resultados intermédios usados pelos geradores de documentos. |
 | `sweep_partial.json` | 242 registos da recolha web (INE, MINFIN/FMI, MINPLAN/INSS/Kwenda) com citações e URLs. |
-| `verify_round1.json` | 46 achados da verificação adversarial da primeira entrega v8 (42 confirmados e corrigidos; 4 refutados), com os veredictos. |
+| `verify_round1.json` | 46 achados da verificação adversarial da primeira entrega v8 (42 confirmados; 4 refutados), com os veredictos. |
+| `verify_round2.json` | 28 achados da segunda ronda de verificação, sobre os ficheiros corrigidos, com os veredictos de refutação; todos tratados na versão final. |
 
 Sequência completa (a partir da raiz do repositório):
 

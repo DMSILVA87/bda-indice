@@ -82,7 +82,7 @@ METAS.update({
     "HUM028": (85, "PDN p.55 fixa a meta da alfabetização total (76% → 78%); a alfabetização masculina (84% em 2023) já a supera — meta operacional mantida", "operacional"),
     "HUM018": (None, "PDN p.55 fixa meta apenas para a alfabetização total (76% → 78%); a série feminina (54% em 2023) mede um conceito distinto — sem meta comparável (a v7 usava 75)", "sem_meta"),
     "HUM004": (70, "PDN p.55: taxa líquida de escolarização no ensino primário 64% (2022) → 70% (2027) → 90% (2050); a série (WDI) não tem observações em 2015-2025, pelo que a base não pôde ser confrontada", "pdn"),
-    "HUM010": (5, "PDN p.55 fixa o peso da educação na despesa pública (10,0% → 11,8%), não em % do PIB; meta operacional mantida", "operacional"),
+    "HUM010": (5, "PDN p.22 fixa o peso da educação na despesa total (10,0% em 2022 → 11,8% em 2027), não em % do PIB; meta operacional mantida", "operacional"),
     "HUM030": (10, "Sem meta no PDN; variável de política (duração legal da escolaridade obrigatória) — meta operacional ajustada para os 10 anos em vigor", "operacional"),
     # Inclusão Social — PDN p.92
     "INC001": (28, "PDN p.92: população abaixo do limiar de pobreza (<2,15 USD/dia PPC 2017) 31% (2022*) → 28% (2027) → 18% (2050); a série regista 31,1% em 2018 (base coincide)", "pdn"),
@@ -99,24 +99,22 @@ METAS.update({
     "LAB003": (None, "Sem meta no PDN para o desemprego jovem", "sem_meta"),
     "LAB016": (65, "Sem meta no PDN; meta operacional mantida", "operacional"),
     "LAB025": (None, "Sem meta no PDN", "sem_meta"),
-    # Saúde e Segurança Alimentar — PDN p.74; MINPLAN painel anual 2025
-    "SAU006": (80, "MINPLAN, Balanço PDN 2025: meta anual de vacinação contra o sarampo 80% (usada como proxy da meta 2027; o PDN não fixa meta 2027 explícita)", "minplan"),
-    "SAU020": (215, "MINPLAN, Balanço PDN 2025: meta anual de incidência da malária 215 por 1 000 habitantes (usada como proxy da meta 2027; o PDN não fixa meta 2027 explícita)", "minplan"),
+    # Saúde e Segurança Alimentar — PDN p.74; MINPLAN painel anual 2025 (SAU006/SAU020 transpostas: ver TRANSPOR)
     "SAU002": (15, "Sem meta numérica no PDN (compromisso 'mais segurança alimentar'); meta operacional mantida", "operacional"),
     "SAU017": (20, "Sem meta no PDN; meta operacional mantida", "operacional"),
-    # Diversificação — PDN p.163 e p.193
-    "DIV015": (10, "PDN p.163: stock de crédito ao sector privado 10,9% → 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)", "convertida"),
-    "MAC013": (10, "PDN p.163: crédito ao sector privado 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)", "convertida"),
+    "SAU021": (None, "Sem meta comparável no PDN; a meta 0 da v7 estava fora das fronteiras da linha (amplitude histórica 9 280–25 400 mortes), pelo que foi removida", "sem_meta"),
+    # Diversificação — PDN p.163 e p.193 (DIV015/MAC013 convertidas e transpostas: ver TRANSPOR)
     "DIV010": (70, "PDN p.193 fixa exportações não petrolíferas em USD (4,0 → 7,3 mil milhões), não em % das exportações; meta operacional mantida", "operacional"),
     "DIV007": (12, "Sem meta no PDN para a indústria transformadora; meta operacional mantida", "operacional"),
     "DIV001": (45, "Sem meta no PDN; meta operacional mantida", "operacional"),
 })
 
-# 1.2 Metas TRANSPOSTAS — a base 2022 do PDN não coincide com o valor 2022 da série (fonte ou definição distinta).
+# 1.2 Metas TRANSPOSTAS — a base 2022 do PDN (ou do Balanço MINPLAN) não coincide com o valor 2022 da série (fonte, definição ou vintage distintos).
 #     Regra: meta_série = valor2022_série + (meta_PDN − base_PDN)  [modo "add", níveis e proporções]
 #            meta_série = valor2022_série × (meta_PDN ÷ base_PDN)  [modo "rel", taxas de mortalidade/desemprego e rácios de dívida]
-#     Se a série não tem observação em 2022, usa-se a observação mais próxima (identificada no texto da origem).
-#     "complemento": meta = 100 − meta de outra linha.
+#     Se a série não tem observação em 2022, usa-se a observação mais próxima (identificada no texto da origem; a variação é aplicada
+#     integralmente, opção conservadora). "complemento": meta = 100 − meta de outra linha. Metas do PDN em % do PIB não petrolífero
+#     são primeiro convertidas para % do PIB (×0,8) e depois transpostas. "cat" permite manter a categoria de origem (ex.: MINPLAN).
 TRANSPOR = {
     "HUM002": dict(pagina="PDN p.74", conceito="esperança média de vida", base=62, meta=63, modo="add", fonte_serie="WDI/UN WPP", nd=1),
     "HUM006": dict(pagina="PDN p.74", conceito="mortalidade de menores de 1 ano (‰)", base=47, meta=37, modo="rel", fonte_serie="IGME/WDI", nd=1),
@@ -124,8 +122,8 @@ TRANSPOR = {
     "HUM024": dict(pagina="PDN p.74", conceito="esperança de vida saudável, HALE (anos)", base=56, meta=57, modo="add", fonte_serie="OMS GHO", nd=1),
     "HUM025": dict(pagina="PDN p.74", conceito="mortalidade de menores de 5 anos (‰)", base=69, meta=51, modo="rel", fonte_serie="IIMS 2023-24 (estimativa directa)", nd=1),
     "SAU04": dict(pagina="PDN p.74", conceito="mortalidade de menores de 5 anos (‰)", base=69, meta=51, modo="rel", fonte_serie="IGME/WDI", nd=1),
-    "INC006": dict(pagina="PDN p.92", conceito="pobreza <2,15 USD/dia (%)", base=31, meta=28, modo="rel", fonte_serie="linha de pobreza nacional, IDREA 2018-19", nd=1,
-                   extra="transposição por analogia: a linha nacional mede um conceito próximo mas distinto da linha internacional"),
+    "INC006": dict(pagina="PDN p.92", conceito="pobreza <2,15 USD/dia (%)", base=31, meta=28, modo="add", fonte_serie="linha de pobreza nacional, IDREA 2018-19", nd=1,
+                   extra="transposição por analogia (proporção da população, variação aditiva): a linha nacional mede um conceito próximo mas distinto da linha internacional"),
     "INF001": dict(pagina="PDN p.104", conceito="taxa de electrificação (%)", base=43, meta=49, modo="add", fonte_serie="WDI (acesso à electricidade por qualquer fonte)", nd=1,
                    extra="o PDN mede a electrificação pela rede (on-grid); o WDI mede o acesso por qualquer fonte"),
     "INF002": dict(pagina="PDN p.125", conceito="população que utiliza serviços básicos de água potável (%)", base=57, meta=61, modo="add", fonte_serie="OMS/UNICEF JMP via WDI", nd=1),
@@ -141,6 +139,18 @@ TRANSPOR = {
     "MAC004": dict(pagina="PDN p.24 (Quadro Visão 2027; p.14/16: 134% em 2020 → 65% em 2022)", conceito="dívida pública (% do PIB), perímetro MINFIN 'dívida pública' e PIB pré-rebasing", base=66, meta=60, modo="rel",
                    fonte_serie="FMI WEO Abr-2026, governo geral, PIB rebaseado", nd=1, extra="o tecto de 60% coincide com a Lei de Sustentabilidade das Finanças Públicas; na série FMI o ponto de partida 2022 é 57,4%"),
     "MAC016": dict(pagina="PDN p.24 (Quadro Visão 2027)", conceito="dívida pública (% do PIB), perímetro MINFIN e PIB pré-rebasing", base=66, meta=60, modo="rel", fonte_serie="FMI WEO Abr-2026, governo geral, PIB rebaseado", nd=1),
+    # convertidas de % do PIB não petrolífero para % do PIB (×0,8) e depois transpostas ao valor 2022 da série
+    "DIV015": dict(pagina="PDN p.163", conceito="crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80%", base=8.7, meta=10.0, modo="add",
+                   fonte_serie="WDI FS.AST.PRVT.GD.ZS", nd=1, extra="a v7 usava 35; a simples conversão daria 10,0, mas a base convertida do PDN (8,7% do PIB em 2022) não coincide com a série"),
+    "MAC013": dict(pagina="PDN p.163", conceito="crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80%", base=8.7, meta=10.0, modo="add",
+                   fonte_serie="WDI FS.AST.PRVT.GD.ZS", nd=1),
+    # metas anuais 2025 do Balanço do PDN (MINPLAN/MINSA) usadas como proxy da meta 2027 e transpostas à série do índice
+    "SAU006": dict(pagina="MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de vacinação contra o sarampo', registo administrativo)", conceito="cobertura vacinal contra o sarampo (%)", base=66, meta=80, modo="add",
+                   fonte_serie="OMS/UNICEF WUENIC via WDI", nd=0, cat="minplan", meta_ano="2025, usada como proxy de 2027", base_label="na base MINPLAN/MINSA",
+                   extra="o PDN não fixa meta 2027 explícita; a cobertura administrativa do MINSA (66% em 2022; 76% em 2025) e a estimativa WUENIC (50% em 2022) são sistemas de medição distintos"),
+    "SAU020": dict(pagina="MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de incidência da malária', por 1 000 habitantes)", conceito="incidência da malária", base=255, meta=215, modo="rel",
+                   fonte_serie="OMS via WDI, por 1 000 habitantes em risco", nd=0, cat="minplan", meta_ano="2025, usada como proxy de 2027", base_label="na base MINPLAN/MINSA",
+                   extra="o PDN não fixa meta 2027 explícita; denominadores distintos (população total no MINSA; população em risco na OMS)"),
 }
 
 META_CAT_LABEL = {"pdn": "PDN (valor directo)", "transposta": "PDN (transposta à base da série)", "convertida": "PDN (convertida de escala/unidade)",
@@ -165,25 +175,25 @@ NEW_ROWS = [
          nota="v8: série INE/IEA harmonizada pela OIT. Inelegível por cobertura; usada em 12_Emprego_INE.", meta_origem="Sem meta no PDN", meta_cat="sem_meta"),
     dict(id="LAB030", dim="6. Mercado de Trabalho", subtema="6. Mercado de Trabalho", indicador="Taxa de desemprego 15+ (INE/IEA, 13.ª CIET, definição nacional alargada)",
          unidade="%", sentido="-", minimo=0, maximo=60, meta=25, peso=1, fonte="INE — Inquérito sobre o Emprego em Angola (IEA)", codigo="INE_IEA_TXDESEMP_13CIET",
-         origem="INE — séries cronológicas IEA (antiga metodologia, 13.ª CIET): valor anual publicado pelo INE (2019-2022, 2024); 2023 = IV trim (único publicado); 2025 = Anuário IEA 2025 (Abril 2026)",
+         origem="INE — séries cronológicas IEA (antiga metodologia, 13.ª CIET): valor anual publicado pelo INE (2019-2022, 2024); 2023 = IV trim (único publicado); 2025 = Anuário IEA 2025 (Abril 2026; metodologia antiga, agrega apenas os trimestres I–III, porque o IV trim já segue a nova metodologia)",
          nacional=1, grupo="G_DESEMPREGO", prioridade="Alta", url="https://www.ine.gov.ao/publicacoes/detalhes/NTM0NjU=",
          values={2019: 30.21, 2020: 32.18, 2021: 32.32, 2022: 30.16, 2023: 31.85, 2024: 31.47, 2025: 28.3},
          nota=("v8: definição alargada (inclui desencorajados) — nível ~2x superior à definição estrita OIT. 2019 = valor anual INE (inquérito iniciado no II trim); 2023 = apenas IV trim publicado; "
-               "2025 = 28,3% (Anuário IEA 2025, Abril 2026). A série termina em 2025 com a mudança de metodologia. Inelegível por cobertura; usada em 12_Emprego_INE."),
+               "2025 = 28,3% (Anuário IEA 2025, Abril 2026; média dos trimestres I–III na metodologia antiga). A série termina em 2025 com a mudança de metodologia. Inelegível por cobertura; usada em 12_Emprego_INE."),
          meta_origem="PDN p.13: taxa de desemprego 30% (2022) → 25% (2027), na definição INE (base coincide: 30,2% em 2022)", meta_cat="pdn"),
     dict(id="LAB031", dim="6. Mercado de Trabalho", subtema="6. Mercado de Trabalho", indicador="Taxa de desemprego 15+ (INE/IEA, 19.ª-21.ª CIET, nova metodologia)",
-         unidade="%", sentido="-", minimo=0, maximo=60, meta=25, peso=1, fonte="INE — IEA (nova metodologia)", codigo="INE_IEA_TXDESEMP_19CIET",
+         unidade="%", sentido="-", minimo=0, maximo=60, meta=None, peso=1, fonte="INE — IEA (nova metodologia)", codigo="INE_IEA_TXDESEMP_19CIET",
          origem="INE — IEA IV trimestre 2025 (primeira publicação com as resoluções da 19.ª, 20.ª e 21.ª CIET)", nacional=1, grupo="G_DESEMPREGO", prioridade="Alta",
          url="https://www.ine.gov.ao/publicacoes/detalhes/NTA0Mzk=",
          values={2025: 20.12},
          nota="v8: quebra de série — nova metodologia desde o IV trim 2025 (20,1%; emprego 39,6%; informalidade 78,6%; desemprego jovem 43,3%). Série a acumular a partir de 2026.",
-         meta_origem="PDN p.13: taxa de desemprego 30% → 25% (2027), fixada na definição antiga do INE; a nova metodologia não tem retropolação", meta_cat="pdn"),
+         meta_origem="PDN p.13 fixa 30% (2022) → 25% (2027) na definição antiga do INE (13.ª CIET, aplicada em LAB030); a nova metodologia (20,1% no IV trim 2025) não tem base 2022 nem retropolação — sem meta comparável", meta_cat="sem_meta"),
     dict(id="INC031", dim="4. Inclusão Social e Protecção", subtema="4. Inclusão Social", indicador="Taxa de pobreza (< 3,00 USD/dia, PPC 2021)",
-         unidade="%", sentido="-", minimo=0, maximo=80, meta=None, peso=1, fonte="Banco Mundial — PIP/WDI", codigo="SI.POV.DDAY (linha 3,00 USD PPC 2021)",
-         origem="Banco Mundial — WDI (actualização Abr-2026): linha internacional de pobreza revista para 3,00 USD/dia (PPC 2021)", nacional=0, grupo="G_POBREZA", prioridade="Alta",
+         unidade="%", sentido="-", minimo=0, maximo=80, meta=None, peso=1, fonte="INE/BM (IDREA 2018-19; estimativa PIP)", codigo="SI.POV.DDAY (linha 3,00 USD PPC 2021)",
+         origem="Banco Mundial — WDI (actualização Abr-2026): linha internacional de pobreza revista para 3,00 USD/dia (PPC 2021), estimada sobre o IDREA 2018-19 do INE", nacional=1, grupo="G_POBREZA", prioridade="Alta",
          url="https://data.worldbank.org/indicator/SI.POV.DDAY?locations=AO",
          values={2018: 39.3},
-         nota="v8: novo padrão do Banco Mundial (Junho 2025). A meta do PDN (28%) refere-se à linha antiga de 2,15 USD (PPC 2017), mantida em INC001. Sem série anual: um inquérito (IDREA 2018-19) no período.",
+         nota="v8: novo padrão do Banco Mundial (Junho 2025). A meta do PDN (28%) refere-se à linha antiga de 2,15 USD (PPC 2017), mantida em INC001. Sem série anual: um inquérito (IDREA 2018-19) no período. Marcador de fonte nacional = 1 como nas outras linhas de pobreza do IDREA (produtor primário INE).",
          meta_origem="PDN p.92 fixa a meta na linha 2,15 USD (PPC 2017); sem meta comparável nesta linha", meta_cat="sem_meta"),
 ]
 
@@ -211,7 +221,7 @@ INE_CPI_DEC = {2015: 12.09, 2016: 41.12, 2017: 23.67, 2018: 18.60, 2019: 16.90, 
 WGI_ORIGEM = "Banco Mundial — Worldwide Governance Indicators, edição 2025 (dados até 2024); herdado da v7, não reverificado na v8"
 
 MAC004_NOTA = ("v8: substitui a série 'Compilação interna BDA' (valores arredondados, sem rastreabilidade) pela série oficial do FMI WEO Abr-2026 em precisão total (2025: 51,3%), "
-               "que compila os dados do Ministério das Finanças (fonte histórica declarada pelo FMI: Ministry of Finance; GFSM 2014) — por isso mantém o marcador de fonte nacional. "
+               "que compila os dados do Ministério das Finanças (fonte histórica declarada pelo FMI: 'Ministry of Finance or Treasury'; GFSM 2014 a partir de 2018, GFSM 2001 até 2017; governo geral = governo central e governos provinciais) — por isso mantém o marcador de fonte nacional. "
                "Mesma direcção que a leitura PDN/MINFIN (pico em 2020, forte descida até 2022), mas níveis não comparáveis: PDN/MINFIN em perímetro 'dívida pública' e PIB pré-rebasing "
                "(134% em 2020; 66% em 2022); FMI WEO em governo geral e PIB rebaseado (119,8% em 2020; 57,4% em 2022). Referências 2025: FMI 51,3%; Banco Mundial ≈52%; MINFIN dívida governamental 46,6%. "
                "O denominador de 2025 do WEO é o PIB nominal das Contas Nacionais Trimestrais do INE (129 255 mil M Kz); as CN Anuais Preliminares (Maio 2026) reviram-no para 128 302 mil M Kz, o que daria ≈51,7%.")
@@ -225,10 +235,10 @@ SERIES = {
                    codigo="WEO GGXWDG_NGDP", url=WEO_URL, nota_add=MAC004_NOTA),
     "MAC005": dict(values=IMF_BAL, origem="FMI — World Economic Outlook, Abril 2026 (saldo global do governo geral, % PIB; compila dados do MINFIN)", fonte="MINFIN (via FMI WEO)",
                    codigo="WEO GGXCNL_NGDP", url=WEO_URL,
-                   nota_add="v8: substitui a série 'Compilação interna BDA' (ex.: 2017 = +1,5 quando o saldo oficial foi −5,7) pela série FMI WEO Abr-2026 em precisão total, que compila os dados do MINFIN (marcador de fonte nacional mantido)."),
-    "MAC016": dict(values=None, tipo="metadados", origem="FMI — World Economic Outlook, Abril 2026", nota_add="v8: vintage Abr-2026 confirmado (série já presente na v7 em precisão total; sem alteração de valores)."),
-    "MAC019": dict(values=None, tipo="metadados", origem="FMI — World Economic Outlook, Abril 2026", nota_add="v8: vintage Abr-2026 confirmado (série já presente na v7; sem alteração de valores)."),
-    "MAC020": dict(values=None, tipo="metadados", origem="FMI — World Economic Outlook, Abril 2026", nota_add="v8: vintage Abr-2026 confirmado (série já presente na v7; sem alteração de valores)."),
+                   nota_add="v8: substitui a série 'Compilação interna BDA' (ex.: 2017 = +1,5 quando o saldo oficial foi −5,7) pela série FMI WEO Abr-2026 em precisão total, que compila os dados do MINFIN ('Ministry of Finance or Treasury'; GFSM 2014 a partir de 2018, GFSM 2001 até 2017; marcador de fonte nacional mantido)."),
+    "MAC016": dict(values=None, tipo="metadados", origem="FMI — World Economic Outlook, Abril 2026", url=WEO_URL, nota_add="v8: vintage Abr-2026 confirmado (série já presente na v7 em precisão total; sem alteração de valores)."),
+    "MAC019": dict(values=None, tipo="metadados", origem="FMI — World Economic Outlook, Abril 2026", url=WEO_URL, nota_add="v8: vintage Abr-2026 confirmado (série já presente na v7; sem alteração de valores)."),
+    "MAC020": dict(values=None, tipo="metadados", origem="FMI — World Economic Outlook, Abril 2026", url=WEO_URL, nota_add="v8: vintage Abr-2026 confirmado (série já presente na v7; sem alteração de valores)."),
     "MAC003": dict(values=None, tipo="metadados", origem="INE — IPC Nacional (média anual; idêntica ao WDI FP.CPI.TOTL.ZG)", fonte="INE",
                    nota_add="v8: validado com o IPCN do INE (2025: média anual 20,16%; homóloga de Dezembro 15,70%)."),
     "MAC027": dict(values=INE_CPI_DEC, origem="INE — IPC Nacional, variação homóloga de Dezembro (ficheiro 2026-05-09)", nota_add="v8: 2025 = 15,70% (Dez/2025)."),
@@ -240,7 +250,10 @@ for _g in WGI_PDN:
 # 4. RENOMEAÇÕES / CORRECÇÕES DE METADADOS
 # --------------------------------------------------------------------------------------------
 RENAME = {
-    "INC001": dict(indicador="Taxa de pobreza (< 2,15 USD/dia, PPC 2017)", codigo="PIP (PPC 2017) — headcount 2,15 USD/dia [ex-SI.POV.DDAY, WDI ≤2024]",
+    "INC006": dict(nacional=1, nota_add="v8: marcador de fonte nacional = 1 (produtor primário INE, IDREA 2018-19; estimativa do Banco Mundial/PIP), em coerência com as outras linhas de pobreza do mesmo inquérito (INC001, INC031)."),
+    "HUM025": dict(url="https://www.ine.gov.ao/", nota_add="v8: URL corrigido para o INE (o anterior seguia o padrão WDI com um código interno)."),
+    "SAU029": dict(url="https://www.ine.gov.ao/"),
+    "INC001": dict(tipo="série", indicador="Taxa de pobreza (< 2,15 USD/dia, PPC 2017)", codigo="PIP (PPC 2017) — headcount 2,15 USD/dia [ex-SI.POV.DDAY, WDI ≤2024]",
                    origem="Banco Mundial — PIP/WDI (PPC 2017), via UNdata; valor 2018 (IDREA 2018-19) = 31,1%, já constante das versões anteriores do IGDA; PDN p.92 confirma 31% (2022*)",
                    url=PIP_URL,
                    nota_sub=[("Poverty headcount ratio at $3.00 a day (2021 PPP) (% of population)", "Poverty headcount ratio at $2.15 a day (2017 PPP) (% of population) — PIP (versão PPC 2017)/WDI até 2024")],
@@ -255,12 +268,12 @@ RENAME = {
 # 5. ACTUALIZAÇÕES RESULTANTES DA RECOLHA WEB (INE, MINFIN, FMI) — ronda 1
 # --------------------------------------------------------------------------------------------
 SERIES.update({
-    "MAC001": dict(values={2025: 3.13}, origem="INE — Contas Nacionais Anuais Preliminares 2025 (05-05-2026): PIB real +3,13%; 2015-2024 CN anuais definitivas",
+    "MAC001": dict(values={2025: 3.13}, origem="INE — Contas Nacionais Anuais Preliminares 2025 (05-05-2026): PIB real +3,13%; 2015-2024 CN anuais definitivas", url="https://www.ine.gov.ao/",
                    nota_add="v8: 2025 confirmado pelas Contas Nacionais Anuais Preliminares do INE (+3,13%; sector petrolífero −5,23%). Coincide com o FMI (Art. IV 2026: 3,1%) e com o WDI."),
-    "LAB004": dict(values={2025: 78.8}, origem="INE — IEA, Anuário 2025 (Abril 2026), metodologia 13.ª CIET; 2019-2024 séries cronológicas IEA (valor anual publicado)",
-                   nota_add="v8: 2025 = 78,8% (Anuário IEA 2025, valor anual; a v7 usava o III trim). Quebra de série a partir do IV trim 2025 (nova metodologia: 78,6%). 2019 = valor anual publicado pelo INE (74,5%), que diverge da média dos trimestres II-IV (79,5%)."),
-    "LAB005": dict(values={2019: 25.31, 2025: 21.2}, fonte="INE", origem="INE — IEA, taxa de emprego formal publicada (séries cronológicas 13.ª CIET); 2025 = Anuário IEA 2025",
-                   nota_add="v8: 2025 = 21,2% (Anuário IEA 2025, complemento do emprego informal 78,8%); 2019 corrigido de 25,46 (= 100 − informal) para 25,31 (valor anual publicado pelo INE; no ano 2019 do INE formal + informal = 99,86%)."),
+    "LAB004": dict(values={2025: 78.8}, origem="INE — IEA, Anuário 2025 (Abril 2026; metodologia 13.ª CIET, agrega apenas os trimestres I–III de 2025); 2019-2024 séries cronológicas IEA (valor anual publicado)",
+                   nota_add="v8: 2025 = 78,8% (Anuário IEA 2025: média dos trimestres I–III na metodologia antiga, porque o IV trim já segue a nova metodologia; a v7 usava só o III trim). Quebra de série a partir do IV trim 2025 (nova metodologia: 78,6%). 2019 = valor anual publicado pelo INE (74,5%), que diverge da média dos trimestres II-IV (79,5%)."),
+    "LAB005": dict(values={2019: 25.31, 2025: 21.2}, fonte="INE", origem="INE — IEA, taxa de emprego formal publicada (séries cronológicas 13.ª CIET); 2025 = Anuário IEA 2025 (metodologia antiga, trimestres I–III)",
+                   nota_add="v8: 2025 = 21,2% (Anuário IEA 2025, média dos trimestres I–III na metodologia antiga; complemento do emprego informal 78,8%); 2019 corrigido de 25,46 (= 100 − informal) para 25,31 (valor anual publicado pelo INE; no ano 2019 do INE formal + informal = 99,86%)."),
     "SAU003": dict(values={2024: None, 2025: None}, origem="Banco Mundial — WDI (estimativas modeladas MMEIG) até 2023",
                    nota_add=("v8: correcção — a v7 registava 185 (2024) e 170 (2025) sem suporte na série MMEIG; 2024-2025 passam a carry-forward (183) até nova ronda MMEIG. "
                              "A estimativa directa do IIMS 2023-24 (Quadro 17.4: 170 por 100 mil, IC 99-242, ≈7 anos anteriores ao inquérito) é compatível com a série mas não é comparável ponto a ponto "
@@ -306,8 +319,30 @@ for row in NEW_ROWS:
 # --------------------------------------------------------------------------------------------
 DIM8_OLD = "8. Diversificação Produtiva e Setor Privado"
 DIM8_NEW = "8. Diversificação Produtiva e Sector Privado"
-ORTOGRAFIA = [("Setor", "Sector"), ("setor", "sector"), ("Proteção", "Protecção"), ("proteção", "protecção"), ("direta", "directa"), ("Eletricidade", "Electricidade"),
-              ("eletricidade", "electricidade"), ("hidroelétric", "hidroeléctric"), ("Elétric", "Eléctric"), ("elétric", "eléctric"), ("afetada", "afectada"), ("eletrónicos", "electrónicos")]
+# Substituições por expressão regular (com fronteiras de palavra, para não tocar em texto inglês nem em palavras como 'estimativa').
+# Excepção deliberada: 'Infraestruturas' (nome original da dimensão 5, grafia também usada pelo próprio PDN 2023-2027) mantém-se.
+ORTOGRAFIA_RE = [
+    (r"\bSetor", "Sector"), (r"\bsetor", "sector"), (r"\bProteção", "Protecção"), (r"\bproteção", "protecção"),
+    (r"\b([Dd])iret", r"\1irect"), (r"\bEletric", "Electric"), (r"\beletric", "electric"), (r"hidroelétric", "hidroeléctric"),
+    (r"\bElétric", "Eléctric"), (r"\belétric", "eléctric"), (r"\b([Aa])fetad", r"\1fectad"), (r"\beletrónic", "electrónic"),
+    (r"\b([Ee])fetiv", r"\1fectiv"), (r"\b([Aa])tual\b", r"\1ctual"), (r"\b([Aa])tuali", r"\1ctuali"), (r"\b([Ee])xtração", r"\1xtracção"),
+    (r"\b([Aa])tiv(a|o|as|os|idade|idades)\b", r"\1ctiv\2"),
+]
+# URLs institucionais para códigos não-WDI que a v7 ligava, erradamente, a data.worldbank.org/indicator/<código>
+URL_INSTITUCIONAL = [
+    ("NAT_BNA", "https://www.bna.ao/"), ("NAT_INE", "https://www.ine.gov.ao/"), ("NAT_IIMS", "https://www.ine.gov.ao/"), ("INE_", "https://www.ine.gov.ao/"),
+    ("GGX", WEO_URL), ("GGR_", WEO_URL), ("NGSD", WEO_URL), ("NID_", WEO_URL), ("FSI", "https://fragilestatesindex.org/"), ("RSF", "https://rsf.org/"),
+    ("LEGATUM", "https://www.prosperity.com/"), ("PER_", "https://www.worldbank.org/en/data/datatopics/aspire"), ("GGGI", "https://www.weforum.org/"),
+    ("SH_UHC_SCI", "https://www.who.int/data/gho"), ("NDGAIN", "https://gain.nd.edu/"), ("EPART", "https://publicadministration.un.org/"),
+]
+
+
+def url_institucional(codigo: str):
+    c = (codigo or "").upper()
+    for prefix, url in URL_INSTITUCIONAL:
+        if c.startswith(prefix):
+            return url
+    return None
 
 # Nomes curtos dos indicadores do índice (documentos e apresentação)
 NOMES_CURTOS = {"GOV01": "Percepção da Corrupção", "GOV05": "Qualidade Regulatória", "GOV03": "Eficiência do Governo", "GOV02": "Estado de Direito", "GOV004": "Estabilidade Política",
@@ -322,7 +357,8 @@ NOMES_CURTOS = {"GOV01": "Percepção da Corrupção", "GOV05": "Qualidade Regul
                 "HUM018": "Alfabetização feminina", "INF016": "Electricidade renovável", "HUM004": "Matrícula no primário", "HUM003": "Alfabetização", "HUM024": "HALE", "HUM025": "Mortalidade < 5 anos (IIMS)",
                 "INC001": "Pobreza 2,15 USD", "INC006": "Pobreza (linha nacional)", "INF003": "Saneamento básico", "LAB018": "Desemprego (INE harmonizada)", "LAB005": "Formalização", "LAB004": "Emprego informal",
                 "SAU029": "Mortalidade materna (IIMS)", "MAC016": "Dívida bruta (FMI)", "MAC028": "Crescimento do PIB (INE)", "MAC006": "IDE não petrolífero", "MAC013": "Crédito ao sector privado (% PIB)",
-                "MAC034": "Reservas (BNA)", "INC032": "Cobertura do Kwenda", "INC033": "Segurados INSS", "LAB030": "Desemprego INE (13.ª CIET)", "LAB031": "Desemprego INE (nova metodologia)"}
+                "MAC034": "Reservas (BNA)", "INC032": "Cobertura do Kwenda", "INC033": "Segurados INSS", "LAB030": "Desemprego INE (13.ª CIET)", "LAB031": "Desemprego INE (nova metodologia)",
+                "SAU021": "Mortes por malária", "MAC027": "Inflação homóloga (Dez.)", "MAC032": "Conta corrente (BNA)", "MAC030": "Inflação Luanda"}
 
 # Contexto para os documentos (não altera o construtor)
 CONTEXTO = dict(

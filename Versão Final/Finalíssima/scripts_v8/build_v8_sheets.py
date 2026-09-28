@@ -10,6 +10,7 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook.properties import CalcProperties
 from openpyxl.chart.data_source import NumData, NumVal
+from openpyxl.worksheet.hyperlink import Hyperlink
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -101,7 +102,7 @@ def add_emprego_ine(wb, labour: dict, web_new_method: dict, model):
     cols = sheet_columns(base)
     diffs = emprego_alt_diffs(model)
     ws.column_dimensions["A"].width = 3
-    ws["A1"] = "← Painel"; ws["A1"].font = LINK_FONT; ws["A1"].hyperlink = "#'00_Painel'!A1"
+    ws["A1"] = "← Painel"; ws["A1"].font = LINK_FONT; ws["A1"].hyperlink = Hyperlink(ref="A1", location="'00_Painel'!A1", display="← Painel")
     ws["B2"] = "LEITURA COMPLEMENTAR — MERCADO DE TRABALHO COM DADOS DO INE (IEA)"; ws["B2"].font = TITLE_FONT
     ws["B3"] = ("Resposta ao ponto 1 do feedback (Fable 5.1): o índice usa as estimativas modeladas da OIT (2015-2025, definição internacional/estrita) porque o Inquérito sobre o Emprego em Angola "
                 "(IEA) só existe desde 2019 e, com o limiar de cobertura de 80%, as séries INE são inelegíveis para o índice-mãe. Esta folha mostra (A) as séries INE originais, (B) a nova metodologia "
@@ -134,11 +135,11 @@ def add_emprego_ine(wb, labour: dict, web_new_method: dict, model):
         for j, y in enumerate(yrs):
             v = override.get(y, ann(code, y))
             _cell(ws, r, 3 + j, None if v is None else round(v, 2), "0.0")
-        _cell(ws, r, 3 + len(yrs), "INE, Séries cronológicas IEA (13.ª CIET), valor anual; 2025 = Anuário IEA 2025 (Abr-2026)" if override else "INE, Séries cronológicas IEA (13.ª CIET), valor anual; 2025 = média I-III trim", fill=SRC_FILL)
+        _cell(ws, r, 3 + len(yrs), "INE, Séries cronológicas IEA (13.ª CIET), valor anual; 2025 = Anuário IEA 2025 (Abr-2026; metodologia antiga, média I-III trim)" if override else "INE, Séries cronológicas IEA (13.ª CIET), valor anual; 2025 = média I-III trim (metodologia antiga)", fill=SRC_FILL)
         r += 1
     _note(ws, r, "Notas: 2019-2022 e 2024 = valor anual publicado pelo INE (2019: inquérito iniciado no II trim; o valor anual do emprego informal/formal de 2019, 74,5%/25,3%, diverge da média dos trimestres II-IV, 79,5%/20,5%, "
-                 "e formal + informal = 99,9%); 2023 = apenas IV trim publicado; 2025 = Anuário IEA 2025 (taxa de actividade: média I-III trim). A definição nacional inclui a população desencorajada, "
-                 "pelo que o nível é cerca do dobro da definição estrita da OIT (bloco C).", height=54)
+                 "e formal + informal = 99,9%); 2023 = apenas IV trim publicado; 2025 = Anuário IEA 2025 (Abril 2026), que na metodologia antiga agrega apenas os trimestres I-III porque o IV trim já segue a nova metodologia (bloco B). "
+                 "A definição nacional inclui a população desencorajada, pelo que o nível é cerca do dobro da definição estrita da OIT (bloco C).", height=54)
     r += 2
 
     # ---------------- B ----------------
@@ -239,17 +240,21 @@ def add_changelog(wb, log: list, results_v7: dict, results_v8: dict, meta_change
     """results_*: {"dims": {short: [11 values]}, "igda": [11]}; meta_changes: (id, antes, depois, origem, categoria)."""
     ws = wb.create_sheet(f"13_Alteracoes_{version_label}")
     ws.column_dimensions["A"].width = 3; ws.column_dimensions["B"].width = 16; ws.column_dimensions["C"].width = 14; ws.column_dimensions["D"].width = 9
-    ws["A1"] = "← Painel"; ws["A1"].font = LINK_FONT; ws["A1"].hyperlink = "#'00_Painel'!A1"
+    ws["A1"] = "← Painel"; ws["A1"].font = LINK_FONT; ws["A1"].hyperlink = Hyperlink(ref="A1", location="'00_Painel'!A1", display="← Painel")
     ws["B2"] = f"REGISTO DE ALTERAÇÕES v7 → {version_label}  ·  {date_label}"; ws["B2"].font = TITLE_FONT
     ws["B3"] = ("Actualização de dados (INE, MINFIN/FMI, MINPLAN, INSS/MAPTSS; séries internacionais mantidas no vintage da v7), alinhamento das metas 2027 com o PDN 2023-2027, "
                 "novos candidatos de emprego (INE/IEA) e protecção social, correcção de séries sem rastreabilidade e resposta ao feedback Fable 5.1. "
                 "Todas as fórmulas do construtor foram preservadas; o livro recalcula integralmente ao abrir. "
-                "Regras de alinhamento das metas 2027 (a coluna 'Meta 2027' não entra em nenhuma fórmula): (i) valor do PDN aplicado directamente quando a base coincide com a série ou o indicador é o do PDN; "
-                "(ii) TRANSPOSIÇÃO quando a base 2022 do PDN difere do valor 2022 da série (fonte/definição distinta): meta = valor2022 + (meta_PDN − base_PDN) para níveis e proporções; "
-                "meta = valor2022 × meta_PDN ÷ base_PDN para taxas de mortalidade, de desemprego e rácios de dívida; (iii) CONVERSÃO de escala: percentis WGI → estimativas, "
-                "meta = ê2022 + [Φ⁻¹(p2027) − Φ⁻¹(p2022)] (secção 4); % do PIB não petrolífero → % do PIB (peso ≈80%); (iv) meta anual 2025 do Balanço do PDN (MINPLAN) como proxy quando o PDN não fixa 2027; "
-                "(v) meta operacional mantida, ou sem meta, quando o conceito do PDN difere do da série.")
-    ws["B3"].font = SUB_FONT; ws["B3"].alignment = Alignment(wrap_text=True, vertical="top"); ws.merge_cells("B3:P3"); ws.row_dimensions[3].height = 110
+                "Regras de alinhamento das metas 2027 (a coluna 'Meta 2027' não entra em nenhuma fórmula), em seis categorias identificadas entre parênteses rectos na coluna 'Origem da Meta 2027': "
+                "(i) valor do PDN aplicado directamente quando a base coincide com a série, o indicador é o do PDN ou a série não permite confrontar a base; "
+                "(ii) TRANSPOSIÇÃO quando a base 2022 do PDN difere do valor 2022 da série (fonte, definição ou vintage distintos): meta = valor2022 + (meta_PDN − base_PDN) para níveis e proporções; "
+                "meta = valor2022 × meta_PDN ÷ base_PDN para taxas de mortalidade, de desemprego e rácios de dívida; quando a série não tem observação em 2022 usa-se a observação mais próxima "
+                "(HUM003 2023; HUM024 2021; INC006 2018; HUM025 e SAU029 2024) e a variação é aplicada integralmente; LAB004 = 100 − meta de LAB005; as metas em % do PIB não petrolífero são primeiro convertidas para % do PIB (×0,8) e depois transpostas; "
+                "(iii) CONVERSÃO de escala: percentis WGI → estimativas, meta = ê2022 + [Φ⁻¹(p2027) − Φ⁻¹(p2022)] (secção 4); IDE não petrolífero em % do PIB não petrolífero → % do PIB; "
+                "(iv) meta anual 2025 do Balanço do PDN (MINPLAN/MINSA) como proxy quando o PDN não fixa 2027, transposta à série do índice (sarampo, malária); "
+                "(v) meta operacional mantida ou ajustada quando não há correspondência; (vi) sem meta quando o conceito do PDN difere do da série. "
+                "Em seis indicadores do índice (HUM002, HUM006, SAU04, INF001, INF002, LAB002) a última observação já atinge o valor absoluto do PDN; a meta transposta é deliberadamente mais exigente porque preserva a variação, e não o nível, do plano.")
+    ws["B3"].font = SUB_FONT; ws["B3"].alignment = Alignment(wrap_text=True, vertical="top"); ws.merge_cells("B3:P3"); ws.row_dimensions[3].height = 150
     r = 5
     ws.cell(r, 2, "1 · Comparação de resultados (subíndices e IGDA)").font = H2_FONT; r += 1
     _hdr(ws, r, 2, "Dimensão"); _hdr(ws, r, 3, "Versão")
@@ -307,7 +312,8 @@ def add_version_notes(wb, n_cand: int, version_label="v8", date_label="Setembro 
     ws.cell(r, 2, f"10. REVISÃO {version_label.upper()} ({date_label})").font = Font(bold=True, size=11, color="1F3864"); r += 1
     notes = [
         f"  Catálogo: {n_cand} candidatos (331 na v7 + 7 na v8). Dados: séries actualizadas com fontes primárias nacionais (INE Contas Nacionais preliminares 2025 e trimestrais; INE IEA Anuário 2025; INE IPCN; FMI WEO Abr-2026, que compila dados do MINFIN; MINPLAN Balanço PDN 2025; INSS/MAPTSS). As séries internacionais (WDI, WGI, OIT, OMS/UNICEF, UNCTAD, TI, WEF, IPU) mantêm o vintage da v7, não reverificado nesta revisão.",
-        "  Metas 2027: coluna I alinhada com o PDN 2023-2027 por cinco vias — valor directo; transposição à base da série quando a base 2022 do PDN difere (variação aditiva para níveis/proporções, relativa para mortalidade, desemprego e dívida); conversão de escala (percentis WGI → estimativas; % do PIB não petrolífero → % do PIB); meta anual 2025 do MINPLAN como proxy; meta operacional mantida ou sem meta quando o conceito difere. A coluna 'Origem da Meta 2027' identifica a categoria [entre parênteses rectos] e a fonte de cada meta; regras e fórmulas em 13_Alteracoes_v8. A coluna I não entra em nenhuma fórmula.",
+        "  Metas 2027: coluna I alinhada com o PDN 2023-2027 em seis categorias — valor directo (base coincide, indicador do PDN ou base não confrontável); transposição à base da série quando a base 2022 do PDN difere (variação aditiva para níveis/proporções, relativa para mortalidade, desemprego e dívida; observação mais próxima quando não há 2022; LAB004 = 100 − LAB005; metas em % do PIB não petrolífero convertidas ×0,8 antes de transpor); conversão de escala (percentis WGI → estimativas); meta anual 2025 do MINPLAN como proxy, transposta à série; meta operacional mantida ou ajustada; sem meta quando o conceito difere. A coluna 'Origem da Meta 2027' identifica a categoria [entre parênteses rectos] e a fonte de cada meta; regras e fórmulas em 13_Alteracoes_v8. A coluna I não entra em nenhuma fórmula.",
+        "  Marcador de fonte nacional (+12 pontos): assinala as séries cujos dados de base são produzidos por instituições nacionais, incluindo estimativas de organismos internacionais construídas sobre esses dados (ex.: estimativas modeladas da OIT a partir do IEA; dívida e saldo do MINFIN via FMI WEO). A composição de Macroeconomia é sensível a esta convenção (ver Nota v8, 9.2).",
         "  Emprego (feedback ponto 1): novas linhas LAB028-LAB031 com as séries INE/IEA (originais e harmonizadas pela OIT); folha 12_Emprego_INE com leitura complementar 2019-2025. O índice-mãe mantém as séries OIT 2015-2025 por exigência de cobertura.",
         "  Inclusão (feedback ponto 2): pobreza a 2,15 USD (PDN) e 3,00 USD (novo padrão BM) separadas (INC001/INC031); novas linhas INC032 (cobertura do Kwenda) e INC033 (segurados inscritos no INSS, milhões). Continuam inelegíveis por cobertura temporal — documentadas para incorporação futura.",
         "  Correcções: séries 'Compilação interna BDA' de dívida e saldo orçamental substituídas pelo FMI WEO Abr-2026 (marcador de fonte nacional mantido: produtor primário MINFIN); mortalidade materna 2024-2025 sem suporte na série MMEIG removida (a estimativa do IIMS 2023-24 fica em SAU029 como validação cruzada); valores em cache das células (v7, herdados da v6) eliminados e caches dos gráficos regeneradas com os resultados v8 — o livro recalcula integralmente ao abrir.",

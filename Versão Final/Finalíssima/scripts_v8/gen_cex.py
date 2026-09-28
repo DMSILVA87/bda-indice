@@ -85,6 +85,9 @@ def main(src, out):
     if sh is not None:
         paras = [p.text for p in sh.text_frame.paragraphs]
         paras = [p.replace("catálogo de 331 indicadores candidatos", f"catálogo de {cov['n_rows']} indicadores candidatos (331 na v7 + {cov['n_rows'] - 331} na v8)") for p in paras]
+        fontes_nac = " ".join(str(i["fonte"]) for i in ind if i["nacional"] == 1)
+        inst = [k for k in ("INE", "BNA", "MINFIN", "MINSA", "MINEA", "MEP", "MINTRANS") if k in fontes_nac]
+        paras = [p.replace("(INE, BNA, MINFIN, MINSA, MINEA, MINTRANS)", "(" + ", ".join(inst) + "; inclui estimativas internacionais construídas sobre dados nacionais)") for p in paras]
         set_text_preserve(sh, paras)
 
     # ---- slide 7 ----
@@ -230,9 +233,10 @@ def main(src, out):
 
     # ---- slide 15 ----
     s = S[14]
+    n_cumpr = sum(1 for d in A["metas_cumpridas"] if d["no_ultimo"])
     set_text_preserve(find_shape(s, shape_id=261), ["Próximos passos (v8 → v9)",
-        "•  Concluído (v8): metas 2027 alinhadas com o PDN (directas, transpostas, convertidas) e documentadas; séries de dívida/saldo com fonte oficial (FMI WEO, dados MINFIN); leitura INE do emprego (folha 12)",
-        "•  Rever as metas já cumpridas na última observação (9 dos 41 indicadores, sobretudo metas operacionais herdadas)",
+        "•  Concluído (v8): séries de dívida/saldo com fonte oficial (FMI WEO, dados MINFIN); leitura INE do emprego (folha 12). Parcialmente concluído: metas 2027 alinhadas com o PDN (directas, transpostas, convertidas) e documentadas",
+        f"•  Rever as metas já cumpridas na última observação ({n_cumpr} dos {cov['n_sel']} indicadores, sobretudo metas operacionais herdadas)",
         "•  Actualizar emprego quando a OIT incorporar o IEA 2025 (Nov-2026); a partir de 2028 avaliar séries INE no índice",
         "•  Inclusão: obter série anual INSS 2015-2025 e próximo inquérito de despesas (pobreza)",
         "•  Substituir a escolaridade obrigatória (variável legal) por um indicador de resultado; rever 2024–2025 com dados definitivos; análise de sensibilidade (passo 7 OCDE/JRC)"])
@@ -259,18 +263,21 @@ def main(src, out):
         tshape = new.shapes.add_textbox(Emu(559886), Emu(98690), Emu(11684286), Emu(474489))
         tshape.text_frame.text = "x"; r = tshape.text_frame.paragraphs[0].runs[0]; r.font.size = Pt(24); r.font.bold = True; r.font.color.rgb = RGBColor(0x1F, 0x38, 0x64)
     set_text_preserve(tshape, ["3 – CRUZAMENTO COM O PDN 2023-2027 _2023 – 2025   "])
-    tb = new.shapes.add_textbox(Emu(559886), Emu(700000), Emu(11100000), Emu(600000)); tf = tb.text_frame; tf.word_wrap = True
-    p = tf.paragraphs[0]; p.text = ("Em seis das oito dimensões o IGDA e o Balanço do PDN contam a mesma história — uma validação externa da construção. Nos dois pilares do PDN as leituras divergem: "
-                                   "o capital humano avança devagar e a segurança alimentar regride nos indicadores de processo antes de as metas de mortalidade o reflectirem.")
-    p.runs[0].font.size = Pt(12); p.runs[0].font.color.rgb = RGBColor(0x1F, 0x38, 0x64)
     rows = [("Governança", "IPC 33 → 34; percentis WGI +4 a +7 p.p.", f"{f1(d23['Governança'], sign=True)} p.p.; estabilidade política {dd('GOV004')}", "Consistente"),
             ("Macroeconomia", f"Dívida PDN 66 → 60% (perímetro MINFIN) = 57,4 → {fmt(tr['MAC004']['meta'], 1)}% na série FMI (51,3% em 2025); inflação 15,7% Dez-25; défice 4,1%", f"{f1(d23['Macroeconomia'], sign=True)} p.p.; dívida {dd('MAC004')}, inflação {dd('MAC003')}, saldo {dd('MAC005')}", "Consistente"),
-            ("Capital Humano", "Esperança de vida 62 → 63; educação 11,8% da despesa", f"{f1(d23['Capital Humano'], sign=True)} p.p.; despesa em educação em queda (OGE 1,7% PIB 2026)", "Consistente, alerta"),
+            ("Capital Humano", "Esperança de vida 62 → 63; educação 10,0% → 11,8% da despesa total (PDN p.22)", f"{f1(d23['Capital Humano'], sign=True)} p.p.; despesa em educação em queda (OGE 1,7% PIB 2026)", "Consistente, alerta"),
             ("Inclusão Social", "Pobreza 31 → 28%; Kwenda 1,35 M agregados (meta 1,8 M)", f"{f1(d23['Inclusão Social'], sign=True)} p.p., só por representação política ({dd('INC06')})", "Parcial — não mede pobreza"),
             ("Infraestruturas", "Electrificação 43 → 49% (48% em 2025); PIP paralisado", f"{f1(d23['Infraestruturas'], sign=True)} p.p., lento", "Consistente"),
             ("Mercado de Trabalho", "Desemprego 30 → 25%: 28,3% (2025, IEA); 20,1% nova metodologia", f"{f1(d23['Mercado Trabalho'], sign=True)} p.p.; leitura INE melhora — desfasamento OIT", "Inconsistente — vintage + produtividade"),
-            ("Saúde e Seg. Alimentar", "Mortalidade <5 69 → 51; materna 199 → 165; vacinação 76% vs 80%", f"{f1(d23['Saúde/Alimentar'], sign=True)} p.p.; vacinal {dd('SAU006')} e malária {dd('SAU020')} pesam; desnutrição sem dados pós-2023 ({f1(ind_by['SAU002']['d_15_25'], sign=True)} na década)", "Consistente — alerta principal"),
+            ("Saúde e Seg. Alimentar", "Mortalidade <5 69 → 51; materna 199 → 165; vacinação MINSA 76% vs 80% (WUENIC 53% em 2024)", f"{f1(d23['Saúde/Alimentar'], sign=True)} p.p.; vacinal {dd('SAU006')} e malária {dd('SAU020')} pesam; desnutrição sem dados pós-2023 ({f1(ind_by['SAU002']['d_15_25'], sign=True)} na década)", "Consistente — alerta principal"),
             ("Diversificação", "Não petrolífero 4,6%/ano (5,4% em 2025); IDE e exportações aquém", f"{f1(d23['Diversificação'], sign=True)} p.p.; PIB n.p. {dd('DIV017')}; crédito {dd('DIV015')}", "Parcial")]
+    n_cons = sum(1 for r_ in rows if r_[3].startswith("Consistente")); n_alert = sum(1 for r_ in rows if r_[3].startswith("Consistente") and "alerta" in r_[3])
+    n_parc = sum(1 for r_ in rows if r_[3].startswith("Parcial")); n_inc = sum(1 for r_ in rows if r_[3].startswith("Inconsistente"))
+    NUM = {1: "uma", 2: "duas", 3: "três", 4: "quatro", 5: "cinco", 6: "seis", 7: "sete", 8: "oito"}
+    tb = new.shapes.add_textbox(Emu(559886), Emu(700000), Emu(11100000), Emu(600000)); tf = tb.text_frame; tf.word_wrap = True
+    p = tf.paragraphs[0]; p.text = (f"Em {NUM[n_cons]} das oito dimensões o IGDA e o Balanço do PDN contam a mesma história — uma validação externa da construção —, {NUM[n_alert]} delas com alerta (o capital humano avança devagar; "
+                                   f"a segurança alimentar regride nos indicadores de processo antes de as metas de mortalidade o reflectirem). Em {NUM[n_parc]} a leitura é parcial (Inclusão Social, Diversificação) e em {NUM[n_inc]} é inconsistente (Mercado de Trabalho: desfasamento de vintage das séries OIT e produtividade em queda).")
+    p.runs[0].font.size = Pt(12); p.runs[0].font.color.rgb = RGBColor(0x1F, 0x38, 0x64)
     gt = new.shapes.add_table(len(rows) + 1, 4, Emu(559886), Emu(1400000), Emu(11100000), Emu(4200000)).table
     widths = [Emu(2000000), Emu(3900000), Emu(3400000), Emu(1800000)]
     for j, w in enumerate(widths): gt.columns[j].width = w

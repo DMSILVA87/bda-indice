@@ -68,7 +68,9 @@ def justify(row, cols, years, meta_cat):
     elif "ano" in u and "%" not in u:
         base = f"O intervalo {sl} a {sh} usa limites substantivos plausíveis para variáveis medidas em anos; evita pisos irreais e mantém a normalização comparável."
     elif sent == "-":
-        if any(k in u for k in ("por 1", "por 100", "‰", "número", "nv")):
+        if isinstance(lo, (int, float)) and lo > 0:
+            base = f"O intervalo {sl} a {sh} delimita a amplitude operacional de uma variável de incidência ou contagem que não parte de zero no caso observado; o mínimo é o melhor patamar plausível e o máximo o patamar adverso de truncagem (candidato fora do índice, a rever se for incorporado)."
+        elif any(k in u for k in ("por 1", "por 100", "‰", "número", "nv")):
             base = f"O mínimo {sl} corresponde ao melhor caso teórico ou incidência nula. O máximo {sh} é um limite adverso plausível para transformar taxas de incidência em pontuação sem premiar diferenças para além de patamares críticos."
         else:
             base = f"O mínimo {sl} representa ausência do problema ou risco medido. O máximo {sh} é um tecto operacional de penalização antes de truncagem na escala normalizada."
@@ -128,8 +130,9 @@ def build(xlsx_path, template_path, out_path, results_path, version="v8", date="
         ["Variáveis monetárias/contagens", "O mínimo é normalmente zero; o máximo é tecto operacional baseado em ordem de grandeza, meta, série observada e comparabilidade."],
         ["Fronteiras de amplitude histórica", "Não são usadas em nenhum indicador que integre o índice (revisão v7). Candidatos fora do índice que ainda as usam mantêm os parâmetros para eventual revisão quando forem incorporados."],
         ["Variáveis +/−", "São variáveis de equilíbrio ou composição; o intervalo delimita a zona de leitura útil para normalização."],
-        ["Metas 2027 (v8)", "Alinhadas com o PDN 2023-2027 por cinco vias: valor directo (base do PDN coincide com a série); transposição à base da série quando a base 2022 do PDN difere (variação aditiva para níveis/proporções, relativa para mortalidade, desemprego e dívida); "
-                            "conversão de escala (percentis WGI → estimativas; % do PIB não petrolífero → % do PIB); meta anual 2025 do MINPLAN como proxy; meta operacional da v7 mantida quando não há correspondência. Sem meta quando o conceito do PDN difere do da série. A coluna Meta 2027 não entra em nenhuma fórmula."],
+        ["Metas 2027 (v8)", "Alinhadas com o PDN 2023-2027 em seis categorias: valor directo (base do PDN coincide com a série, indicador do próprio PDN ou base não confrontável); transposição à base da série quando a base 2022 do PDN difere — fonte, definição ou vintage distintos — "
+                            "(variação aditiva para níveis/proporções, relativa para mortalidade, desemprego e dívida; observação mais próxima quando a série não tem 2022; emprego informal = 100 − formalização; metas em % do PIB não petrolífero convertidas ×0,8 antes de transpor); "
+                            "conversão de escala (percentis WGI → estimativas); meta anual 2025 do MINPLAN como proxy, transposta à série do índice; meta operacional da v7 mantida ou ajustada quando não há correspondência; sem meta quando o conceito do PDN difere do da série. A coluna Meta 2027 não entra em nenhuma fórmula."],
     ], col_widths=[Cm(4.5), Cm(20)])
     b.h1("Justificação linha a linha")
     for dim in DIMS:
