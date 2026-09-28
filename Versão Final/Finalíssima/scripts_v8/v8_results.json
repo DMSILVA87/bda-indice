@@ -1,0 +1,861 @@
+{
+ "log": [
+  {
+   "tipo": "estrutura",
+   "id": "",
+   "descricao": "Intervalos da Base_Potencial alargados de $5:$335 para $5:$342 (3248 fórmulas actualizadas)"
+  },
+  {
+   "tipo": "estrutura",
+   "id": "",
+   "descricao": "Nova coluna 'Origem da Meta 2027' (AT) na Base_Potencial, documentando a fonte de cada meta"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC014",
+   "descricao": "v8: série recalculada a partir da última publicação trimestral do INE (inclui IV trim 2025 e revisões); diferenças ≤0,2 p.p. face à v7. Alterações: 2015: -3.6888→-3.719; 2016: 0.9275→0.792; 2017: 3.9201→3.862; 2018: 3.1939→3.119; 2019: 1.2479→1.263; 2020: -4.7728→-4.809; 2021: 5.3133→5.471; 2022: 3.1457→3.368; 2023: 2.3972→2.539; 2024: 5.3951→5.313; 2025: 5.3793→5.247"
+  },
+  {
+   "tipo": "série",
+   "id": "DIV017",
+   "descricao": "v8: série recalculada a partir da última publicação trimestral do INE (inclui IV trim 2025 e revisões). Alterações: 2015: -3.6888→-3.719; 2016: 0.9275→0.792; 2017: 3.9201→3.862; 2018: 3.1939→3.119; 2019: 1.2479→1.263; 2020: -4.7728→-4.809; 2021: 5.3133→5.471; 2022: 3.1457→3.368; 2023: 2.3972→2.539; 2024: 5.3951→5.313; 2025: 5.3793→5.247"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC004",
+   "descricao": "v8: substitui a série 'Compilação interna BDA' (valores arredondados, sem rastreabilidade) pela série oficial do FMI WEO Abr-2026 (2025: 51,3%). Alinha-se com a leitura do PDN (134% em 2020 → 65% em 2022) e do Banco Mundial (~52% em 2025). Alterações: 2015: 50→50.39; 2016: 67→65.69; 2017: 60→59.61; 2018: 83→81.64; 2019: 101→100.8; 2020: 119→119.84; 2021: 74→75.5; 2022: 56→57.43; 2023: 72→75.74; 2024: 60→57.11; 2025: 63→51.31"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC005",
+   "descricao": "v8: substitui a série 'Compilação interna BDA' (ex.: 2017 = +1,5 quando o saldo oficial foi −5,7) pela série FMI WEO Abr-2026. Alterações: 2015: -2→-2.58; 2016: -3→-3.93; 2017: 1.5→-5.68; 2018: -0.5→2.0; 2019: 0.5→-0.2; 2020: -5→-3.05; 2021: 1.5→1.35; 2022: 0.7→1.78; 2023: -1.9→-2.49; 2024: -1.5→-1.19; 2025: -1.65→-4.07"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC016",
+   "descricao": "v8: vintage Abr-2026 (2025: 51,3%). Alterações: 2015: 50.385819→50.39; 2016: 65.691623→65.69; 2017: 59.607197→59.61; 2018: 81.635503→81.64; 2019: 100.79929→100.8; 2020: 119.838606→119.84; 2021: 75.502733→75.5; 2022: 57.427174→57.43; 2023: 75.739104→75.74; 2024: 57.106858→57.11; 2025: 51.310898→51.31"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC019",
+   "descricao": "v8: vintage Abr-2026. Alterações: 2015: -2.582085→-2.58; 2016: -3.934178→-3.93; 2017: -5.682721→-5.68; 2018: 1.998796→2.0; 2019: -0.19541→-0.2; 2020: -3.046261→-3.05; 2021: 1.352043→1.35; 2022: 1.779136→1.78; 2023: -2.4918→-2.49; 2024: -1.192327→-1.19; 2025: -4.070237→-4.07"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC020",
+   "descricao": "v8: vintage Abr-2026. Alterações: 2015: -1.010223→-1.01; 2016: -1.466382→-1.47; 2017: -2.567522→-2.57; 2018: 6.083505→6.08; 2019: 4.453149→4.45; 2020: 2.747432→2.75; 2021: 5.785409→5.79; 2022: 5.22853→5.23; 2023: 2.445→2.44; 2024: 3.401119→3.4; 2025: -0.38511→-0.39"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC003",
+   "descricao": "v8: validado com o IPCN do INE (2025: média anual 20,16%; homóloga de Dezembro 15,70%). (sem alteração de valores)"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC027",
+   "descricao": "v8: 2025 = 15,70% (Dez/2025). Alterações: 2015: None→12.09"
+  },
+  {
+   "tipo": "série",
+   "id": "MAC001",
+   "descricao": "v8: 2025 confirmado pelas Contas Nacionais Anuais Preliminares do INE (+3,13%; sector petrolífero −5,23%). Coincide com o FMI (Art. IV 2026: 3,1%) e com o WDI. Alterações: 2025: 3.133535424500081→3.13"
+  },
+  {
+   "tipo": "série",
+   "id": "LAB004",
+   "descricao": "v8: 2025 = 78,8% (Anuário IEA 2025, valor anual; a v7 usava o III trim). Quebra de série a partir do IV trim 2025 (nova metodologia: 78,6%). Alterações: 2025: 77.1208424846374→78.8"
+  },
+  {
+   "tipo": "série",
+   "id": "LAB005",
+   "descricao": "v8: 2025 = 21,2% (complemento da taxa de emprego informal anual 78,8%, Anuário IEA 2025). Alterações: 2025: 22.8791575153626→21.2"
+  },
+  {
+   "tipo": "série",
+   "id": "SAU003",
+   "descricao": "v8: correcção — a v7 registava 185 (2024) e 170 (2025) sem suporte documental; o IIMS 2023-24 (Quadro 17.4) estima a RMM em 170 por 100 mil (IC 99-242) para os 7 anos anteriores ao inquérito, colocada em 2024; 2025 passa a carry-forward. Alterações: 2024: 185→170; 2025: 170→None"
+  },
+  {
+   "tipo": "série",
+   "id": "HUM010",
+   "descricao": "v8: sem observação UIS para 2024-2025. As dotações do OGE confirmam a trajectória descendente sinalizada no feedback: 2,0% do PIB (OGE 2024), 1,8% (OGE 2025), 1,7% (OGE 2026), 6,4-6,9% da despesa total (UNICEF, Budget Briefs). (sem alteração de valores)"
+  },
+  {
+   "tipo": "série",
+   "id": "SAU004",
+   "descricao": "v8: sem observação GHED para 2024-2025. Dotações OGE para a saúde: 5,5% do OGE (2024), 5,7-6,3% (2025), 6,32% do OGE e 1,5% do PIB (2026) — UNICEF Budget Briefs. (sem alteração de valores)"
+  },
+  {
+   "tipo": "série",
+   "id": "INC001",
+   "descricao": "v8: sem novo inquérito de despesas desde o IDREA 2018-19; o PDN toma 31% (2022*) como base. (sem alteração de valores)"
+  },
+  {
+   "tipo": "metadados",
+   "id": "INC001",
+   "descricao": "v8: a linha de 2,15 USD (PPC 2017) é a referência do PDN (31% em 2022; 28% em 2027). Valor 2018 (IDREA 2018-19) = 31,1% (Banco Mundial/PIP). A nova linha de 3,00 USD (PPC 2021) consta em INC031."
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV004",
+   "descricao": "Meta 2027: 0 → -0.38. PDN p.30: Estabilidade Política percentil 20,8% (2022) → 25,8% (2027); convertido para estimativa WGI a partir de −0,54 (2022)"
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV02",
+   "descricao": "Meta 2027: 0 → -0.99. PDN p.30: Estado de Direito percentil 17,3% → 22,0%; convertido a partir de −1,16 (2022)"
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV03",
+   "descricao": "Meta 2027: 0 → -0.64. PDN p.30: Eficiência do Governo percentil 13,0% → 17,5%; convertido a partir de −0,83 (2022)"
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV05",
+   "descricao": "Meta 2027: 0 → -0.69. PDN p.30: Qualidade Regulatória percentil 27,4% → 33,5%; convertido a partir de −0,86 (2022)"
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV06",
+   "descricao": "Meta 2027: 0 → -0.39. PDN p.30: Controlo da Corrupção percentil 27,9% → 35,3%; convertido a partir de −0,60 (2022)"
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV008",
+   "descricao": "Meta 2027: 0 → -0.9. PDN p.30: Voz e Participação percentil 24,7% → 29,5%; convertido a partir de −1,05 (2022)"
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV01",
+   "descricao": "Meta 2027: 35 → 34. PDN p.32: classificação no ranking da Transparência Internacional (0-100) 33 (2022) → 34 (2027) → 42 (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "GOV027",
+   "descricao": "Meta 2027: 65 → None. PDN p.32 fixa meta em posição do ranking RSF (125 → 99), não no score; sem meta comparável"
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC001",
+   "descricao": "Meta 2027: 5 → 3.0. PDN p.13: crescimento real anual médio do PIB de 3,0% em 2023-2027 (trajectória média, não meta anual)"
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC028",
+   "descricao": "Meta 2027: 5 → 3.0. PDN p.13: crescimento real anual médio do PIB de 3,0% em 2023-2027"
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC014",
+   "descricao": "Meta 2027: 5 → 4.6. PDN p.13: crescimento médio anual do PIB não petrolífero de 4,6% em 2023-2027"
+  },
+  {
+   "tipo": "meta",
+   "id": "DIV017",
+   "descricao": "Meta 2027: 5 → 4.6. PDN p.13: crescimento médio anual do PIB não petrolífero de 4,6% em 2023-2027"
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC006",
+   "descricao": "Meta 2027: 3 → 7. PDN p.163: IDE não petrolífero <1% → 9% do PIB não petrolífero (2027); convertido para ≈7% do PIB (peso não petrolífero ≈80%)"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM002",
+   "descricao": "Meta 2027: 65 → 63. PDN p.74: esperança média de vida 62 (2022) → 63 (2027) → 68 (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM006",
+   "descricao": "Meta 2027: 40 → 37. PDN p.74: taxa de mortalidade de menores de 1 ano 47‰ (2022) → 37‰ (2027) → 14‰ (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM003",
+   "descricao": "Meta 2027: 75 → 78. PDN p.55: taxa de alfabetização (≥15 anos) 76% (2022) → 78% (2027) → 90% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM018",
+   "descricao": "Meta 2027: 75 → 78. PDN p.55: alfabetização ≥15 anos 78% (2027); aplicado à alfabetização feminina como referência"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM004",
+   "descricao": "Meta 2027: 95 → 70. PDN p.55: taxa líquida de escolarização no ensino primário 64% (2022) → 70% (2027) → 90% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM024",
+   "descricao": "Meta 2027: 60 → 57. PDN p.74: esperança de vida saudável (HALE) 56 (2022) → 57 (2027) → 60 (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM030",
+   "descricao": "Meta 2027: 9 → 10. Sem meta no PDN; variável de política (duração legal) — manutenção dos 10 anos"
+  },
+  {
+   "tipo": "meta",
+   "id": "HUM025",
+   "descricao": "Meta 2027: 25 → 51. PDN p.74: mortalidade de menores de 5 anos 69‰ (2022) → 51‰ (2027) → 17‰ (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "SAU04",
+   "descricao": "Meta 2027: 50 → 51. PDN p.74: mortalidade de menores de 5 anos 69‰ (2022) → 51‰ (2027) → 17‰ (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "INC001",
+   "descricao": "Meta 2027: 30 → 28. PDN p.92: população abaixo do limiar de pobreza (<2,15 USD/dia PPC 2017) 31% (2022) → 28% (2027) → 18% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "INC006",
+   "descricao": "Meta 2027: 30 → 28. PDN p.92: pobreza 31% → 28% (2027); aplicado à linha nacional como referência"
+  },
+  {
+   "tipo": "meta",
+   "id": "INF001",
+   "descricao": "Meta 2027: 60 → 49. PDN p.104: taxa de electrificação 43% (2022) → 49% (2027) → 72% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "INF002",
+   "descricao": "Meta 2027: 70 → 61. PDN p.125: população que utiliza serviços básicos de água potável 57% (2022) → 61% (2027) → 89% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "INF003",
+   "descricao": "Meta 2027: 60 → 55. PDN p.125: população que utiliza serviços básicos de saneamento 52% (2022) → 55% (2027) → 66% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "INF016",
+   "descricao": "Meta 2027: 70 → 73. PDN p.104: produção de energias renováveis 64% → 73% da capacidade instalada (2027)"
+  },
+  {
+   "tipo": "meta",
+   "id": "LAB002",
+   "descricao": "Meta 2027: 20 → 25. PDN p.13: taxa de desemprego 30% (2022) → 25% (2027). Nota: a meta refere-se à definição INE/IEA (alargada); a série OIT modelada usa a definição estrita"
+  },
+  {
+   "tipo": "meta",
+   "id": "LAB018",
+   "descricao": "Meta 2027: 20 → 25. PDN p.13: taxa de desemprego 30% → 25% (definição INE); esta série (harmonizada OIT, definição estrita) não é directamente comparável"
+  },
+  {
+   "tipo": "meta",
+   "id": "LAB005",
+   "descricao": "Meta 2027: 40 → 31. PDN p.163: taxa de formalização 22% (2022) → 31% (2027) → 55% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "LAB004",
+   "descricao": "Meta 2027: 50 → 69. PDN p.163: formalização 22% → 31% (2027) implica emprego informal ≈69%; derivada"
+  },
+  {
+   "tipo": "meta",
+   "id": "SAU003",
+   "descricao": "Meta 2027: 300 → 165. PDN p.74: taxa de mortalidade materna 199 (2022) → 165 (2027) → 70 (2050) por 100 mil nascimentos"
+  },
+  {
+   "tipo": "meta",
+   "id": "SAU029",
+   "descricao": "Meta 2027: 70 → 165. PDN p.74: mortalidade materna 199 → 165 (2027)"
+  },
+  {
+   "tipo": "meta",
+   "id": "SAU004",
+   "descricao": "Meta 2027: 5 → 4. PDN p.74: gastos correntes com a saúde 3% (2022) → 4% do PIB (2027) → 7% (2050)"
+  },
+  {
+   "tipo": "meta",
+   "id": "SAU020",
+   "descricao": "Meta 2027: 100 → 215. MINPLAN, Balanço PDN 2025: meta anual de incidência da malária 215 por 1 000 habitantes; PDN sem meta 2027 explícita"
+  },
+  {
+   "tipo": "meta",
+   "id": "DIV015",
+   "descricao": "Meta 2027: 35 → 10. PDN p.163: stock de crédito ao sector privado 10,9% → 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)"
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC013",
+   "descricao": "Meta 2027: 35 → 10. PDN p.163: crédito ao sector privado 12,5% do PIB não petrolífero (2027) ≈ 10% do PIB"
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC010",
+   "descricao": "Meta 2027: 5 → 10. PDN p.193: IDE 6 → 14 mil milhões USD/ano (2027) ≈ 10% do PIB; derivada"
+  },
+  {
+   "tipo": "meta",
+   "id": "MAC033",
+   "descricao": "Meta 2027: 5 → 10. PDN p.193: IDE 6 → 14 mil milhões USD/ano (2027) ≈ 10% do PIB; derivada"
+  },
+  {
+   "tipo": "novo indicador",
+   "id": "LAB028",
+   "descricao": "Taxa de emprego 15+ (INE/IEA, harmonizada OIT) — OIT ILOSTAT — estimativa nacional (Inquérito sobre o Emprego em Angola, INE), harmonizada. v8: série INE/IEA harmonizada pela OIT (definição internacional). Inelegível por cobertura (IEA existe desde 2019); usada na leitura complementar 12_Emprego_INE."
+  },
+  {
+   "tipo": "novo indicador",
+   "id": "LAB029",
+   "descricao": "Desemprego jovem 15-24 (INE/IEA, harmonizada OIT) — OIT ILOSTAT — estimativa nacional (IEA/INE), harmonizada. v8: série INE/IEA harmonizada pela OIT. Inelegível por cobertura; usada em 12_Emprego_INE."
+  },
+  {
+   "tipo": "novo indicador",
+   "id": "LAB030",
+   "descricao": "Taxa de desemprego 15+ (INE/IEA, 13.ª CIET, definição nacional alargada) — INE — séries cronológicas IEA (antiga metodologia, 13.ª CIET); média dos trimestres disponíveis por ano. v8: definição alargada (inclui desencorajados) — nível ~2x superior à definição estrita OIT. 2019 = média II-IV trim; 2023 = apenas IV trim publicado; 2025 = 28,3% (Anuário IEA 2025, Abril 2026). A série termina em 2025 com a mudança de metodologia. Inelegível por cobertura; usada em 12_Emprego_INE."
+  },
+  {
+   "tipo": "novo indicador",
+   "id": "LAB031",
+   "descricao": "Taxa de desemprego 15+ (INE/IEA, 19.ª-21.ª CIET, nova metodologia) — INE — IEA IV trimestre 2025 (primeira publicação com as resoluções da 19.ª, 20.ª e 21.ª CIET). v8: quebra de série — nova metodologia desde o IV trim 2025 (20,1%; emprego 39,6%; informalidade 78,6%; desemprego jovem 43,3%). Série a acumular a partir de 2026."
+  },
+  {
+   "tipo": "novo indicador",
+   "id": "INC031",
+   "descricao": "Taxa de pobreza (< 3,00 USD/dia, PPC 2021) — Banco Mundial — WDI (actualização Abr-2026): linha internacional de pobreza revista para 3,00 USD/dia (PPC 2021). v8: novo padrão do Banco Mundial (Junho 2025). A meta do PDN (28%) refere-se à linha antiga de 2,15 USD (PPC 2017), mantida em INC001. Sem série anual: um inquérito (IDREA 2018-19) no período."
+  },
+  {
+   "tipo": "novo indicador",
+   "id": "INC032",
+   "descricao": "Cobertura do Kwenda (agregados beneficiários acumulados, % dos agregados familiares) — MINPLAN — painel 'Implementation - Key Indicators by Domain' (beneficiários de transferências sociais monetárias, cumulativo) ÷ agregados familiares do Censo 2024 (9 110 616). v8: novo indicador de protecção social não contributiva (feedback ponto 2). Denominador fixo (Censo 2024) para isolar a expansão do programa. Meta 2027 = 1,8 milhões de agregados (meta anual MINPLAN 2025) ÷ 9,11 M. Inelegível por cobertura (programa iniciado em 2020); documentado para incorporação futura. 2021 ≈ 300 mil agregados pagos (FAS/IDL); 2022-2025 = painel MINPLAN (610 832; 951 203; 1 070 037; 1 350 850)."
+  },
+  {
+   "tipo": "novo indicador",
+   "id": "INC033",
+   "descricao": "Segurados inscritos na protecção social obrigatória (INSS, milhões) — INSS/MAPTSS: 2024 = 3 004 238 (Balanço 2024); 2025 = 3 341 475 (Boletim Anual 2025); 2020 = 1,97 M e Fev-2022 = 2,13 M (INSS via Expansão). v8: indicador de protecção social contributiva (PDN, Programa 22: segurados 2,5 → 4,3 milhões). Stock acumulado de inscritos (inclui inactivos); 2022 refere-se a Fevereiro. Inelegível por cobertura (4 observações); série anual completa a obter junto do INSS."
+  }
+ ],
+ "meta_changes": [
+  [
+   "GOV004",
+   0,
+   -0.38,
+   "PDN p.30: Estabilidade Política percentil 20,8% (2022) → 25,8% (2027); convertido para estimativa WGI a partir de −0,54 (2022)"
+  ],
+  [
+   "GOV02",
+   0,
+   -0.99,
+   "PDN p.30: Estado de Direito percentil 17,3% → 22,0%; convertido a partir de −1,16 (2022)"
+  ],
+  [
+   "GOV03",
+   0,
+   -0.64,
+   "PDN p.30: Eficiência do Governo percentil 13,0% → 17,5%; convertido a partir de −0,83 (2022)"
+  ],
+  [
+   "GOV05",
+   0,
+   -0.69,
+   "PDN p.30: Qualidade Regulatória percentil 27,4% → 33,5%; convertido a partir de −0,86 (2022)"
+  ],
+  [
+   "GOV06",
+   0,
+   -0.39,
+   "PDN p.30: Controlo da Corrupção percentil 27,9% → 35,3%; convertido a partir de −0,60 (2022)"
+  ],
+  [
+   "GOV008",
+   0,
+   -0.9,
+   "PDN p.30: Voz e Participação percentil 24,7% → 29,5%; convertido a partir de −1,05 (2022)"
+  ],
+  [
+   "GOV01",
+   35,
+   34,
+   "PDN p.32: classificação no ranking da Transparência Internacional (0-100) 33 (2022) → 34 (2027) → 42 (2050)"
+  ],
+  [
+   "GOV027",
+   65,
+   null,
+   "PDN p.32 fixa meta em posição do ranking RSF (125 → 99), não no score; sem meta comparável"
+  ],
+  [
+   "MAC001",
+   5,
+   3.0,
+   "PDN p.13: crescimento real anual médio do PIB de 3,0% em 2023-2027 (trajectória média, não meta anual)"
+  ],
+  [
+   "MAC028",
+   5,
+   3.0,
+   "PDN p.13: crescimento real anual médio do PIB de 3,0% em 2023-2027"
+  ],
+  [
+   "MAC014",
+   5,
+   4.6,
+   "PDN p.13: crescimento médio anual do PIB não petrolífero de 4,6% em 2023-2027"
+  ],
+  [
+   "DIV017",
+   5,
+   4.6,
+   "PDN p.13: crescimento médio anual do PIB não petrolífero de 4,6% em 2023-2027"
+  ],
+  [
+   "MAC006",
+   3,
+   7,
+   "PDN p.163: IDE não petrolífero <1% → 9% do PIB não petrolífero (2027); convertido para ≈7% do PIB (peso não petrolífero ≈80%)"
+  ],
+  [
+   "HUM002",
+   65,
+   63,
+   "PDN p.74: esperança média de vida 62 (2022) → 63 (2027) → 68 (2050)"
+  ],
+  [
+   "HUM006",
+   40,
+   37,
+   "PDN p.74: taxa de mortalidade de menores de 1 ano 47‰ (2022) → 37‰ (2027) → 14‰ (2050)"
+  ],
+  [
+   "HUM003",
+   75,
+   78,
+   "PDN p.55: taxa de alfabetização (≥15 anos) 76% (2022) → 78% (2027) → 90% (2050)"
+  ],
+  [
+   "HUM018",
+   75,
+   78,
+   "PDN p.55: alfabetização ≥15 anos 78% (2027); aplicado à alfabetização feminina como referência"
+  ],
+  [
+   "HUM004",
+   95,
+   70,
+   "PDN p.55: taxa líquida de escolarização no ensino primário 64% (2022) → 70% (2027) → 90% (2050)"
+  ],
+  [
+   "HUM024",
+   60,
+   57,
+   "PDN p.74: esperança de vida saudável (HALE) 56 (2022) → 57 (2027) → 60 (2050)"
+  ],
+  [
+   "HUM030",
+   9,
+   10,
+   "Sem meta no PDN; variável de política (duração legal) — manutenção dos 10 anos"
+  ],
+  [
+   "HUM025",
+   25,
+   51,
+   "PDN p.74: mortalidade de menores de 5 anos 69‰ (2022) → 51‰ (2027) → 17‰ (2050)"
+  ],
+  [
+   "SAU04",
+   50,
+   51,
+   "PDN p.74: mortalidade de menores de 5 anos 69‰ (2022) → 51‰ (2027) → 17‰ (2050)"
+  ],
+  [
+   "INC001",
+   30,
+   28,
+   "PDN p.92: população abaixo do limiar de pobreza (<2,15 USD/dia PPC 2017) 31% (2022) → 28% (2027) → 18% (2050)"
+  ],
+  [
+   "INC006",
+   30,
+   28,
+   "PDN p.92: pobreza 31% → 28% (2027); aplicado à linha nacional como referência"
+  ],
+  [
+   "INF001",
+   60,
+   49,
+   "PDN p.104: taxa de electrificação 43% (2022) → 49% (2027) → 72% (2050)"
+  ],
+  [
+   "INF002",
+   70,
+   61,
+   "PDN p.125: população que utiliza serviços básicos de água potável 57% (2022) → 61% (2027) → 89% (2050)"
+  ],
+  [
+   "INF003",
+   60,
+   55,
+   "PDN p.125: população que utiliza serviços básicos de saneamento 52% (2022) → 55% (2027) → 66% (2050)"
+  ],
+  [
+   "INF016",
+   70,
+   73,
+   "PDN p.104: produção de energias renováveis 64% → 73% da capacidade instalada (2027)"
+  ],
+  [
+   "LAB002",
+   20,
+   25,
+   "PDN p.13: taxa de desemprego 30% (2022) → 25% (2027). Nota: a meta refere-se à definição INE/IEA (alargada); a série OIT modelada usa a definição estrita"
+  ],
+  [
+   "LAB018",
+   20,
+   25,
+   "PDN p.13: taxa de desemprego 30% → 25% (definição INE); esta série (harmonizada OIT, definição estrita) não é directamente comparável"
+  ],
+  [
+   "LAB005",
+   40,
+   31,
+   "PDN p.163: taxa de formalização 22% (2022) → 31% (2027) → 55% (2050)"
+  ],
+  [
+   "LAB004",
+   50,
+   69,
+   "PDN p.163: formalização 22% → 31% (2027) implica emprego informal ≈69%; derivada"
+  ],
+  [
+   "SAU003",
+   300,
+   165,
+   "PDN p.74: taxa de mortalidade materna 199 (2022) → 165 (2027) → 70 (2050) por 100 mil nascimentos"
+  ],
+  [
+   "SAU029",
+   70,
+   165,
+   "PDN p.74: mortalidade materna 199 → 165 (2027)"
+  ],
+  [
+   "SAU004",
+   5,
+   4,
+   "PDN p.74: gastos correntes com a saúde 3% (2022) → 4% do PIB (2027) → 7% (2050)"
+  ],
+  [
+   "SAU020",
+   100,
+   215,
+   "MINPLAN, Balanço PDN 2025: meta anual de incidência da malária 215 por 1 000 habitantes; PDN sem meta 2027 explícita"
+  ],
+  [
+   "DIV015",
+   35,
+   10,
+   "PDN p.163: stock de crédito ao sector privado 10,9% → 12,5% do PIB não petrolífero (2027); convertido para ≈10% do PIB (peso não petrolífero ≈80%)"
+  ],
+  [
+   "MAC013",
+   35,
+   10,
+   "PDN p.163: crédito ao sector privado 12,5% do PIB não petrolífero (2027) ≈ 10% do PIB"
+  ],
+  [
+   "MAC010",
+   5,
+   10,
+   "PDN p.193: IDE 6 → 14 mil milhões USD/ano (2027) ≈ 10% do PIB; derivada"
+  ],
+  [
+   "MAC033",
+   5,
+   10,
+   "PDN p.193: IDE 6 → 14 mil milhões USD/ano (2027) ≈ 10% do PIB; derivada"
+  ]
+ ],
+ "v7": {
+  "dims": {
+   "Governança": [
+    27.415798000000002,
+    28.027149599999994,
+    27.731903199999998,
+    29.570946399999997,
+    31.678183999999998,
+    30.8179624,
+    31.100242,
+    33.0063816,
+    33.6373872,
+    33.1938076,
+    33.1938076
+   ],
+   "Macroeconomia": [
+    49.13376810773604,
+    44.47629175831217,
+    46.55733850259937,
+    45.10833095894948,
+    44.09503431873424,
+    33.062574046126485,
+    48.69560259923419,
+    49.630240065091314,
+    47.26338141540513,
+    48.59628957120886,
+    49.659758493545056
+   ],
+   "Capital Humano": [
+    50.4790343816302,
+    56.861999734226245,
+    56.57129959172471,
+    56.25732948220388,
+    56.30287462975375,
+    57.924943128556905,
+    56.99487257971136,
+    58.04750002451839,
+    58.68872192477497,
+    58.94316636921941,
+    59.051499702552746
+   ],
+   "Inclusão Social": [
+    50.76833855799372,
+    47.54305120167188,
+    42.71229536746781,
+    42.1571229536747,
+    42.72241379310345,
+    42.11494252873563,
+    41.67046325322185,
+    44.06847788227097,
+    45.496064089167525,
+    49.63866248693832,
+    49.40912574016022
+   ],
+   "Infraestruturas": [
+    46.19012624015354,
+    43.42905240371038,
+    46.180449108757486,
+    45.53573148109375,
+    46.92695554079468,
+    46.137179442064095,
+    47.32122487722034,
+    48.239705463956,
+    48.93227171843661,
+    49.90842844484224,
+    49.90842844484224
+   ],
+   "Mercado Trabalho": [
+    54.259352000000014,
+    53.956936000000006,
+    53.91272,
+    53.87541600000001,
+    53.993488,
+    52.470431999999995,
+    54.939015999999995,
+    56.76009599999999,
+    56.425528,
+    56.53384000000001,
+    56.183528
+   ],
+   "Saúde/Alimentar": [
+    59.24485122952381,
+    58.28185484238095,
+    57.759990908571424,
+    58.24864269571429,
+    58.239980912380965,
+    58.15015419904762,
+    56.50379295809523,
+    56.375636221904756,
+    58.25554966095238,
+    56.80754966095238,
+    57.0218353752381
+   ],
+   "Diversificação": [
+    19.988441072755187,
+    23.478583209191974,
+    24.641193541811887,
+    23.183337006898377,
+    21.83522342287647,
+    17.201785256447533,
+    24.55190943479478,
+    22.852555767836172,
+    23.132466989087224,
+    24.84501895430645,
+    24.85907584683132
+   ]
+  },
+  "igda": [
+   42.2977513938102,
+   42.58005280980218,
+   42.70162402945052,
+   42.41769806853039,
+   42.59021844640217,
+   39.57688058936091,
+   43.56394185858729,
+   44.28087898910242,
+   44.64915288756954,
+   45.6304955997152,
+   45.727357622873235
+  ]
+ },
+ "v8": {
+  "dims": {
+   "Governança": [
+    27.415798000000002,
+    28.027149599999994,
+    27.731903199999998,
+    29.570946399999997,
+    31.678183999999998,
+    30.8179624,
+    31.100242,
+    33.0063816,
+    33.6373872,
+    33.1938076,
+    33.1938076
+   ],
+   "Macroeconomia": [
+    48.74793953630748,
+    43.99219652021693,
+    42.458424216885085,
+    46.62362619704472,
+    43.72271050921044,
+    34.07617404612649,
+    48.55714545637705,
+    50.23822101747226,
+    46.65107665350037,
+    49.00175623787552,
+    49.312614441449774
+   ],
+   "Capital Humano": [
+    50.4790343816302,
+    56.861999734226245,
+    56.57129959172471,
+    56.25732948220388,
+    56.30287462975375,
+    57.924943128556905,
+    56.99487257971136,
+    58.04750002451839,
+    58.68872192477497,
+    58.94316636921941,
+    59.051499702552746
+   ],
+   "Inclusão Social": [
+    50.76833855799372,
+    47.54305120167188,
+    42.71229536746781,
+    42.1571229536747,
+    42.72241379310345,
+    42.11494252873563,
+    41.67046325322185,
+    44.06847788227097,
+    45.496064089167525,
+    49.63866248693832,
+    49.40912574016022
+   ],
+   "Infraestruturas": [
+    46.19012624015354,
+    43.42905240371038,
+    46.180449108757486,
+    45.53573148109375,
+    46.92695554079468,
+    46.137179442064095,
+    47.32122487722034,
+    48.239705463956,
+    48.93227171843661,
+    49.90842844484224,
+    49.90842844484224
+   ],
+   "Mercado Trabalho": [
+    54.259352000000014,
+    53.956936000000006,
+    53.91272,
+    53.87541600000001,
+    53.993488,
+    52.470431999999995,
+    54.939015999999995,
+    56.76009599999999,
+    56.425528,
+    56.53384000000001,
+    56.183528
+   ],
+   "Saúde/Alimentar": [
+    59.24485122952381,
+    58.28185484238095,
+    57.759990908571424,
+    58.24864269571429,
+    58.239980912380965,
+    58.15015419904762,
+    56.50379295809523,
+    56.375636221904756,
+    58.25554966095238,
+    57.0218353752381,
+    57.0218353752381
+   ],
+   "Diversificação": [
+    19.964281072755185,
+    23.370183209191975,
+    24.594713541811885,
+    23.123417006898375,
+    21.847303422876468,
+    17.17282525644753,
+    24.67806943479478,
+    23.030395767836172,
+    23.24590698908722,
+    24.77933895430645,
+    24.75323584683132
+   ]
+  },
+  "igda": [
+   42.2497018188394,
+   42.49725307006943,
+   42.202566399358226,
+   42.57947139399472,
+   42.548040766467416,
+   39.718181850384276,
+   43.57634831773558,
+   44.39131861815153,
+   44.60370161705667,
+   45.684296593548,
+   45.662917854175184
+  ]
+ },
+ "selected_v8": [
+  "GOV004",
+  "GOV01",
+  "GOV02",
+  "GOV03",
+  "GOV05",
+  "MAC001",
+  "MAC002",
+  "MAC003",
+  "MAC004",
+  "MAC005",
+  "MAC007",
+  "MAC014",
+  "HUM002",
+  "HUM006",
+  "HUM010",
+  "HUM030",
+  "INC005",
+  "INC04",
+  "INC06",
+  "INF002",
+  "INF001",
+  "INF006",
+  "INF05",
+  "INF024",
+  "LAB001",
+  "LAB002",
+  "LAB003",
+  "LAB016",
+  "LAB025",
+  "SAU002",
+  "SAU003",
+  "SAU004",
+  "SAU006",
+  "SAU017",
+  "SAU020",
+  "SAU04",
+  "DIV017",
+  "DIV001",
+  "DIV007",
+  "DIV010",
+  "DIV015"
+ ]
+}
