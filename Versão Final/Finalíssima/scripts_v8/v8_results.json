@@ -1125,7 +1125,8 @@
    "modo": "add",
    "conceito": "esperança média de vida",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "vintage do mesmo conceito (UN WPP revisto)"
   },
   "HUM006": {
    "meta": 26.5,
@@ -1136,7 +1137,8 @@
    "modo": "rel",
    "conceito": "mortalidade de menores de 1 ano (‰)",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "vintage do mesmo conceito (IGME revisto)"
   },
   "HUM003": {
    "meta": 70.2,
@@ -1147,7 +1149,8 @@
    "modo": "add",
    "conceito": "taxa de alfabetização ≥15 anos (%)",
    "cat": "transposta",
-   "pagina": "PDN p.55"
+   "pagina": "PDN p.55",
+   "motivo": "fonte distinta (UNESCO-UIS vs Censo/INE)"
   },
   "HUM024": {
    "meta": 55.7,
@@ -1158,7 +1161,8 @@
    "modo": "add",
    "conceito": "esperança de vida saudável, HALE (anos)",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "fonte distinta (OMS GHO)"
   },
   "HUM025": {
    "meta": 38.4,
@@ -1169,7 +1173,8 @@
    "modo": "rel",
    "conceito": "mortalidade de menores de 5 anos (‰)",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "vintage e método (estimativa directa do IIMS)"
   },
   "SAU04": {
    "meta": 38.4,
@@ -1180,7 +1185,8 @@
    "modo": "rel",
    "conceito": "mortalidade de menores de 5 anos (‰)",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "vintage do mesmo conceito (IGME revisto)"
   },
   "INC006": {
    "meta": 29.3,
@@ -1191,7 +1197,8 @@
    "modo": "add",
    "conceito": "pobreza <2,15 USD/dia (%)",
    "cat": "transposta",
-   "pagina": "PDN p.92"
+   "pagina": "PDN p.92",
+   "motivo": "definição distinta (linha nacional vs 2,15 USD)"
   },
   "INF001": {
    "meta": 54.5,
@@ -1202,7 +1209,8 @@
    "modo": "add",
    "conceito": "taxa de electrificação (%)",
    "cat": "transposta",
-   "pagina": "PDN p.104"
+   "pagina": "PDN p.104",
+   "motivo": "definição distinta (acesso por qualquer fonte vs rede)"
   },
   "INF002": {
    "meta": 70.5,
@@ -1213,7 +1221,8 @@
    "modo": "add",
    "conceito": "população que utiliza serviços básicos de água potável (%)",
    "cat": "transposta",
-   "pagina": "PDN p.125"
+   "pagina": "PDN p.125",
+   "motivo": "fonte distinta (JMP vs registo nacional)"
   },
   "INF003": {
    "meta": 53.3,
@@ -1224,7 +1233,8 @@
    "modo": "add",
    "conceito": "população que utiliza serviços básicos de saneamento (%)",
    "cat": "transposta",
-   "pagina": "PDN p.125"
+   "pagina": "PDN p.125",
+   "motivo": "fonte distinta (JMP vs registo nacional)"
   },
   "LAB002": {
    "meta": 11.8,
@@ -1235,7 +1245,8 @@
    "modo": "rel",
    "conceito": "taxa de desemprego, definição INE/IEA alargada (%)",
    "cat": "transposta",
-   "pagina": "PDN p.13"
+   "pagina": "PDN p.13",
+   "motivo": "definição distinta (estrita OIT vs alargada INE)"
   },
   "LAB018": {
    "meta": 11.7,
@@ -1246,7 +1257,8 @@
    "modo": "rel",
    "conceito": "taxa de desemprego, definição INE/IEA alargada (%)",
    "cat": "transposta",
-   "pagina": "PDN p.13"
+   "pagina": "PDN p.13",
+   "motivo": "definição distinta (estrita OIT vs alargada INE)"
   },
   "LAB005": {
    "meta": 29.1,
@@ -1257,7 +1269,8 @@
    "modo": "add",
    "conceito": "taxa de formalização do emprego (%)",
    "cat": "transposta",
-   "pagina": "PDN p.163"
+   "pagina": "PDN p.163",
+   "motivo": "fonte e ano de referência (INE anual vs PDN)"
   },
   "SAU003": {
    "meta": 153,
@@ -1268,7 +1281,8 @@
    "modo": "rel",
    "conceito": "razão de mortalidade materna (por 100 mil nascimentos)",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "vintage do mesmo conceito (MMEIG revisto)"
   },
   "SAU029": {
    "meta": 141,
@@ -1279,7 +1293,8 @@
    "modo": "rel",
    "conceito": "razão de mortalidade materna (por 100 mil nascimentos)",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "vintage e método (estimativa directa do IIMS)"
   },
   "SAU004": {
    "meta": 3.6,
@@ -1290,7 +1305,8 @@
    "modo": "add",
    "conceito": "despesa corrente em saúde (% do PIB)",
    "cat": "transposta",
-   "pagina": "PDN p.74"
+   "pagina": "PDN p.74",
+   "motivo": "fonte distinta (GHED vs OGE)"
   },
   "MAC004": {
    "meta": 52.2,
@@ -1301,7 +1317,8 @@
    "modo": "rel",
    "conceito": "dívida pública (% do PIB), perímetro MINFIN 'dívida pública' e PIB pré-rebasing",
    "cat": "transposta",
-   "pagina": "PDN p.24 (Quadro Visão 2027; p.14/16: 134% em 2020 → 65% em 2022)"
+   "pagina": "PDN p.24 (Quadro Visão 2027; p.14/16: 134% em 2020 → 65% em 2022)",
+   "motivo": "perímetro e base do PIB distintos"
   },
   "MAC016": {
    "meta": 52.2,
@@ -1312,7 +1329,8 @@
    "modo": "rel",
    "conceito": "dívida pública (% do PIB), perímetro MINFIN e PIB pré-rebasing",
    "cat": "transposta",
-   "pagina": "PDN p.24 (Quadro Visão 2027)"
+   "pagina": "PDN p.24 (Quadro Visão 2027)",
+   "motivo": "perímetro e base do PIB distintos"
   },
   "DIV015": {
    "meta": 8.3,
@@ -1323,7 +1341,8 @@
    "modo": "add",
    "conceito": "crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80%",
    "cat": "transposta",
-   "pagina": "PDN p.163"
+   "pagina": "PDN p.163",
+   "motivo": "unidade convertida (% do PIB não petrolífero → % do PIB)"
   },
   "MAC013": {
    "meta": 8.3,
@@ -1334,7 +1353,8 @@
    "modo": "add",
    "conceito": "crédito ao sector privado (% do PIB), convertido de % do PIB não petrolífero (10,9% → 12,5%) com peso não petrolífero ≈80%",
    "cat": "transposta",
-   "pagina": "PDN p.163"
+   "pagina": "PDN p.163",
+   "motivo": "unidade convertida (% do PIB não petrolífero → % do PIB)"
   },
   "SAU006": {
    "meta": 64,
@@ -1345,7 +1365,8 @@
    "modo": "add",
    "conceito": "cobertura vacinal contra o sarampo (%)",
    "cat": "minplan",
-   "pagina": "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de vacinação contra o sarampo', registo administrativo)"
+   "pagina": "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de vacinação contra o sarampo', registo administrativo)",
+   "motivo": "sistema de medição distinto (administrativo MINSA vs WUENIC)"
   },
   "SAU020": {
    "meta": 219,
@@ -1356,7 +1377,8 @@
    "modo": "rel",
    "conceito": "incidência da malária",
    "cat": "minplan",
-   "pagina": "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de incidência da malária', por 1 000 habitantes)"
+   "pagina": "MINPLAN, Balanço PDN 2025 (indicador MINSA 'Taxa de incidência da malária', por 1 000 habitantes)",
+   "motivo": "denominador distinto (população total vs em risco)"
   },
   "LAB004": {
    "meta": 70.9,

@@ -153,6 +153,17 @@ TRANSPOR = {
                    extra="o PDN não fixa meta 2027 explícita; denominadores distintos (população total no MINSA; população em risco na OMS)"),
 }
 
+# Natureza da diferença entre a base do PDN e a série (usada na Nota para qualificar as metas transpostas)
+TRANSPOR_MOTIVO = {
+    "HUM002": "vintage do mesmo conceito (UN WPP revisto)", "HUM006": "vintage do mesmo conceito (IGME revisto)", "SAU04": "vintage do mesmo conceito (IGME revisto)",
+    "HUM025": "vintage e método (estimativa directa do IIMS)", "SAU003": "vintage do mesmo conceito (MMEIG revisto)", "SAU029": "vintage e método (estimativa directa do IIMS)",
+    "HUM003": "fonte distinta (UNESCO-UIS vs Censo/INE)", "HUM024": "fonte distinta (OMS GHO)", "INF002": "fonte distinta (JMP vs registo nacional)", "INF003": "fonte distinta (JMP vs registo nacional)",
+    "SAU004": "fonte distinta (GHED vs OGE)", "LAB005": "fonte e ano de referência (INE anual vs PDN)",
+    "INF001": "definição distinta (acesso por qualquer fonte vs rede)", "LAB002": "definição distinta (estrita OIT vs alargada INE)", "LAB018": "definição distinta (estrita OIT vs alargada INE)",
+    "INC006": "definição distinta (linha nacional vs 2,15 USD)", "MAC004": "perímetro e base do PIB distintos", "MAC016": "perímetro e base do PIB distintos",
+    "DIV015": "unidade convertida (% do PIB não petrolífero → % do PIB)", "MAC013": "unidade convertida (% do PIB não petrolífero → % do PIB)",
+    "SAU006": "sistema de medição distinto (administrativo MINSA vs WUENIC)", "SAU020": "denominador distinto (população total vs em risco)",
+}
 META_CAT_LABEL = {"pdn": "PDN (valor directo)", "transposta": "PDN (transposta à base da série)", "convertida": "PDN (convertida de escala/unidade)",
                   "minplan": "MINPLAN (meta anual 2025, proxy)", "operacional": "Operacional (mantida/ajustada)", "sem_meta": "Sem meta comparável"}
 

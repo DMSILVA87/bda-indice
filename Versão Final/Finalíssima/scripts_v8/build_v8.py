@@ -178,7 +178,8 @@ def build(out_path: str, version_label="v8", data_label="Setembro de 2026"):
         r = find_row_by_id(ws, ind_id)
         m, txt, year, v = transpor(spec, read_series(r))
         set_meta(ind_id, m, txt, spec.get("cat", "transposta"))
-        transposicoes[ind_id] = dict(meta=m, ano=year, valor=v, base=spec["base"], meta_pdn=spec["meta"], modo=spec["modo"], conceito=spec["conceito"], cat=spec.get("cat", "transposta"), pagina=spec["pagina"])
+        transposicoes[ind_id] = dict(meta=m, ano=year, valor=v, base=spec["base"], meta_pdn=spec["meta"], modo=spec["modo"], conceito=spec["conceito"], cat=spec.get("cat", "transposta"), pagina=spec["pagina"],
+                                     motivo=P.TRANSPOR_MOTIVO.get(ind_id, ""))
     for ind_id, spec in complementos:
         ref = P.TRANSPOR[spec["ref"]]
         m_ref = transposicoes[spec["ref"]]["meta"]
@@ -223,6 +224,7 @@ def build(out_path: str, version_label="v8", data_label="Setembro de 2026"):
         if ws.cell(br, cols["Código/API"]).value:
             wf.cell(fr, 5).value = ws.cell(br, cols["Código/API"]).value
         wf.cell(fr, 8).value = ws.cell(br, cols["Origem"]).value
+        wf.cell(fr, 6).value = "Sim" if ws.cell(br, cols["Fonte nacional"]).value == 1 else None
         spec = series.get(ind_id) or rename.get(ind_id)
         if spec.get("url"):
             wf.cell(fr, 7).value = spec["url"]
